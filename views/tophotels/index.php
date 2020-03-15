@@ -8,9 +8,9 @@ $this->title = 'Tophotels';
 <div class="tour-selection-box">
     <div class="tabs-block">
         <div class="tabs-bar   tabs-bar--responsive js-768-tabs">
-            <div id="step1" class="tab">Подобрать тур</div>
+            <!--<div id="step1" class="tab">Подобрать тур</div>
             <div id="step3" class="tab">П1</div>
-            <div id="step2" class="tab">Ш2</div>
+            <div id="step2" class="tab">Ш2</div>-->
             <div id="form" class="tab active">Нестандартный запрос</div>
             <!--<div id="formStep2" class="tab">Рега</div>-->
             <div class="line" style="width: 130px"></div>
