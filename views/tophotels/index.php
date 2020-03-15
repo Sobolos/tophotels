@@ -9,23 +9,17 @@ $this->title = 'Tophotels';
     <div class="tabs-block">
         <div class="tabs-bar   tabs-bar--responsive js-768-tabs">
             <div id="step1" class="tab">Подобрать тур</div>
-            <!--<div id="step3" class="tab">П1</div>
-            <div id="step2" class="tab">Ш2</div>-->
             <div id="form" class="tab active">Нестандартный запрос</div>
-            <!--<div id="formStep2" class="tab">Рега</div>-->
             <div class="line" style="width: 130px"></div>
         </div>
-
+        <!--Подбор тура Ш1-->
         <div class="panel" id="step1Panel">
             <div class="bth__cnt uppercase">Пожалуйста, укажите параметры вашей поездки</div>
-
-
             <div class="tour-selection-wrap">
                 <div class="tour-selection-wrap-in tour-selection-wrap-flex">
                     <div class="tour-selection-field tour-selection-field--250">
                         <div class="js-lsfw-ppdb bth__inp-block">
                             <label for="field1" class="bth__inp-lbl ">Период дат вылетов</label>
-
                             <span class="bth__inp"></span>
                         </div>
 
@@ -36,18 +30,15 @@ $this->title = 'Tophotels';
                                     <div class="formDirections__top-tab super-grey ">
                                         Период дат вылета
                                     </div>
-
                                 </div>
 
                                 <div class="formDirections__bottom">
                                     <div class="hidden " id="mtIdxDateHelp1"></div>
-
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
+
                     <div class="tour-selection-field tour-selection-field--180">
                         <div class="bth__inp-block js-show-formDirections">
                             <span class="bth__inp-lbl ">Пребывание</span>
@@ -513,7 +504,6 @@ $this->title = 'Tophotels';
 
                 </div>
                 <div class="tour-selection-wrap-in">
-
                     <div class="rbt-block mt0 mb0 ">
                         <input type="radio" name="types" class="rbt " id="type1" checked="">
                         <label class=" js-type1 label-rbt" for="type1">
@@ -527,8 +517,6 @@ $this->title = 'Tophotels';
                             <span class="rbt-cnt uppercase">Конкретный отель</span>
                         </label>
                     </div>
-
-
                 </div>
 
                 <div class=" js-types-search-tours-blocks">
@@ -538,22 +526,14 @@ $this->title = 'Tophotels';
                                 <span class="bth__inp-lbl ">Страна поездки</span>
                                 <div class="bth__inp tour-selection__country  js-show-formDirections">
                                 </div>
-
-
                                 <div class="formDirections w100p" style="display: none;">
                                     <div class="formDirections__wrap w100p">
-
                                         <div class="formDirections__top  formDirections__top-line">
-
                                             <i class="formDirections__bottom-close"></i>
                                             <div class="formDirections__top-tab super-grey ">Страна поездки</div>
                                         </div>
-
                                         <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
-
                                             <select id="sumo-direction">
-
-
                                                 <option>Россия</option>
                                                 <option>Украина</option>
                                                 <option>Беларуссия</option>
@@ -561,44 +541,14 @@ $this->title = 'Tophotels';
                                                 <option>Доминикана</option>
                                                 <option>Турция</option>
                                                 <option>Египет</option>
-
-                                                <option>Россия</option>
-                                                <option>Украина</option>
-                                                <option>Беларуссия</option>
-                                                <option>Казахстан</option>
-                                                <option>Доминикана</option>
-                                                <option>Турция</option>
-                                                <option>Египет</option>
-
-                                                <option>Россия</option>
-                                                <option>Украина</option>
-                                                <option>Беларуссия</option>
-                                                <option>Казахстан</option>
-                                                <option>Доминикана</option>
-                                                <option>Турция</option>
-                                                <option>Египет</option>
-
-                                                <option>Россия</option>
-                                                <option>Украина</option>
-                                                <option>Беларуссия</option>
-                                                <option>Казахстан</option>
-                                                <option>Доминикана</option>
-                                                <option>Турция</option>
-                                                <option>Египет</option>
-
-
-                                            </select>
+\                                            </select>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                         <div class="tour-selection-field tour-selection-field--180">
                             <div class="bth__inp-block js-show-formDirections">
-
                                 <span class="bth__inp-lbl ">Города</span>
                                 <span class="bth__inp  uppercase "></span>
                             </div>
@@ -606,44 +556,19 @@ $this->title = 'Tophotels';
 
                             <div class="formDirections w100p" style="display: none;">
                                 <div class="formDirections__wrap w100p">
-
                                     <div class="formDirections__top  formDirections__top-line">
-
                                         <i class="formDirections__bottom-close"></i>
                                         <div class="formDirections__top-tab super-grey ">Страна поездки</div>
                                     </div>
 
                                     <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
-
                                         <select id="sumo-direction-city">
-
-
                                             <option>Анапа</option>
                                             <option>Билек</option>
                                             <option>Сиде</option>
                                             <option>Сочи</option>
                                             <option>Севастополь</option>
                                             <option>Симферополь</option>
-                                            <option>Анапа</option>
-                                            <option>Билек</option>
-                                            <option>Сиде</option>
-                                            <option>Сочи</option>
-                                            <option>Севастополь</option>
-                                            <option>Симферополь</option>
-                                            <option>Анапа</option>
-                                            <option>Билек</option>
-                                            <option>Сиде</option>
-                                            <option>Сочи</option>
-                                            <option>Севастополь</option>
-                                            <option>Симферополь</option>
-                                            <option>Анапа</option>
-                                            <option>Билек</option>
-                                            <option>Сиде</option>
-                                            <option>Сочи</option>
-                                            <option>Севастополь</option>
-                                            <option>Симферополь</option>
-
-
                                         </select>
                                     </div>
 
@@ -682,25 +607,11 @@ $this->title = 'Tophotels';
                                             <option>Абакан</option>
                                             <option>Агзу</option>
                                             <option>Москва</option>
-                                            <option>Санкт-Петербург</option>
-                                            <option>Абакан</option>
-                                            <option>Агзу</option>
-                                            <option>Абакан</option>
-                                            <option>Агзу</option>
-                                            <option>Абакан</option>
-                                            <option>Агзу</option>
-                                            <option>Абакан</option>
-                                            <option>Агзу</option>
-
                                         </select>
                                     </div>
-
                                 </div>
                             </div>
-
-
                         </div>
-
 
                         <div class="tour-selection-field tour-selection-field--180">
                             <div class="bth__inp-block js-show-formDirections js-formDirections--big-mobile">
@@ -708,49 +619,35 @@ $this->title = 'Tophotels';
                                 <span class="bth__inp"></span>
                             </div>
 
-                            <div class="formDirections   formDirections--big-mobile formDirections--char">
-
+                            <div class="formDirections formDirections--big-mobile formDirections--char">
                                 <div class="formDirections__top  formDirections__top-line">
                                     <i class="formDirections__bottom-close"></i>
                                     <div class="formDirections__top-tab super-grey">Параметры отеля</div>
                                 </div>
-
-
                                 <div class="formDirections__wrap formDirections__row">
-
                                     <div class="formDirections__wrap-flex">
                                         <div class="formDirections__top  formDirections__top-line">
-
-
                                             <div class="formDirections__top-tab active js-act-stars">
                                                 Категория
                                             </div>
-
                                             <div class="formDirections__top-tab js-act-rating">
-
                                                 Рейтинг
                                             </div>
                                             <div class="formDirections__top-tab js-act-hotels">
-
                                                 Питание
                                             </div>
                                             <div class="formDirections__top-tab js-act-country">
-
                                                 Расположение
                                             </div>
                                             <div class="formDirections__top-tab js-act-kid">
-
                                                 Для детей
                                             </div>
                                             <div class="formDirections__top-tab js-act-other">
-
                                                 Прочее
                                             </div>
-
                                         </div>
                                         <div class="formDirections__wrap-flex-right">
                                             <div class="formDirections__bottom js-search-country" style="display: none">
-
                                                 <div class="formDirections__bottom-blocks">
                                                     <div class="form-dropdown-stars__item">
                                                         <div class="cbx-block   cbx-block--16 ">
@@ -759,7 +656,6 @@ $this->title = 'Tophotels';
                                                             <label class="label-cbx" for="catalog-positionckd">
                                                                 <span class="cbx-cnt">Любой тип</span>
                                                             </label>
-
                                                         </div>
                                                     </div>
 
@@ -770,28 +666,24 @@ $this->title = 'Tophotels';
                                                             <label class="label-cbx" for="catalog-position1">
                                                                 <span class="cbx-cnt">1-я линия от моря</span>
                                                             </label>
-
                                                         </div>
                                                         <div class="cbx-block  cbx-block--16   ">
                                                             <input type="checkbox" class="cbx" id="catalog-position2">
                                                             <label class="label-cbx" for="catalog-position2">
                                                                 <span class="cbx-cnt">2-я линия от моря </span>
                                                             </label>
-
                                                         </div>
                                                         <div class="cbx-block   cbx-block--16  ">
                                                             <input type="checkbox" class="cbx" id="catalog-position3">
                                                             <label class="label-cbx" for="catalog-position3">
                                                                 <span class="cbx-cnt"> 3-я линия от моря</span>
                                                             </label>
-
                                                         </div>
                                                         <div class="cbx-block   cbx-block--16  ">
                                                             <input type="checkbox" class="cbx" id="catalog-position4">
                                                             <label class="label-cbx" for="catalog-position4">
                                                                 <span class="cbx-cnt">Через дорогу </span>
                                                             </label>
-
                                                         </div>
                                                     </div>
 
@@ -802,21 +694,18 @@ $this->title = 'Tophotels';
                                                             <label class="label-cbx" for="catalog-position5">
                                                                 <span class="cbx-cnt">Близко</span>
                                                             </label>
-
                                                         </div>
                                                         <div class="cbx-block  cbx-block--16  ">
                                                             <input type="checkbox" class="cbx" id="catalog-position6">
                                                             <label class="label-cbx" for="catalog-position6">
                                                                 <span class="cbx-cnt">Далеко </span>
                                                             </label>
-
                                                         </div>
                                                         <div class="cbx-block  cbx-block--16  ">
                                                             <input type="checkbox" class="cbx" id="catalog-position7">
                                                             <label class="label-cbx" for="catalog-position7">
                                                                 <span class="cbx-cnt"> Рядом</span>
                                                             </label>
-
                                                         </div>
                                                     </div>
 
@@ -827,21 +716,18 @@ $this->title = 'Tophotels';
                                                             <label class="label-cbx" for="catalog-position8">
                                                                 <span class="cbx-cnt">Близко</span>
                                                             </label>
-
                                                         </div>
                                                         <div class="cbx-block  cbx-block--16  ">
                                                             <input type="checkbox" class="cbx" id="catalog-position9">
                                                             <label class="label-cbx" for="catalog-position9">
                                                                 <span class="cbx-cnt">Далеко </span>
                                                             </label>
-
                                                         </div>
                                                         <div class="cbx-block  cbx-block--16  ">
                                                             <input type="checkbox" class="cbx" id="catalog-position10">
                                                             <label class="label-cbx" for="catalog-position10">
                                                                 <span class="cbx-cnt"> Рядом</span>
                                                             </label>
-
                                                         </div>
                                                     </div>
 
@@ -852,31 +738,24 @@ $this->title = 'Tophotels';
                                                             <label class="label-cbx" for="catalog-position11">
                                                                 <span class="cbx-cnt">Близко к центру</span>
                                                             </label>
-
                                                         </div>
                                                         <div class="cbx-block  cbx-block--16  ">
                                                             <input type="checkbox" class="cbx" id="catalog-position12">
                                                             <label class="label-cbx" for="catalog-position12">
                                                                 <span class="cbx-cnt">Окраина </span>
                                                             </label>
-
                                                         </div>
                                                         <div class="cbx-block  cbx-block--16  ">
                                                             <input type="checkbox" class="cbx" id="catalog-position13">
                                                             <label class="label-cbx" for="catalog-position13">
                                                                 <span class="cbx-cnt"> Центр</span>
                                                             </label>
-
                                                         </div>
                                                     </div>
-
-
                                                 </div>
                                             </div>
                                             <div class="formDirections__bottom js-search-hotels" style="display: none">
-
                                                 <div class="formDirections__bottom-blocks">
-
                                                     <div class="form-dropdown-stars__item ">
                                                         <div class="cbx-block    cbx-block--16 ">
                                                             <input type="checkbox" class="cbx" id="333eat2-typeckd"
@@ -884,7 +763,6 @@ $this->title = 'Tophotels';
                                                             <label class="label-cbx" for="333eat2-typeckd">
                                                                 <span class="cbx-cnt">Любое питание</span>
                                                             </label>
-
                                                         </div>
                                                     </div>
                                                     <div class="form-dropdown-stars__item ">
@@ -893,7 +771,6 @@ $this->title = 'Tophotels';
                                                             <label class="label-cbx" for="333eat2-type1">
                                                                 <span class="cbx-cnt">AI Все включено</span>
                                                             </label>
-
                                                         </div>
                                                     </div>
                                                     <div class="form-dropdown-stars__item ">
@@ -902,7 +779,6 @@ $this->title = 'Tophotels';
                                                             <label class="label-cbx" for="333eat2-type2">
                                                                 <span class="cbx-cnt">FB  Завтрак + обед + ужин</span>
                                                             </label>
-
                                                         </div>
                                                     </div>
                                                     <div class="form-dropdown-stars__item ">
@@ -911,7 +787,6 @@ $this->title = 'Tophotels';
                                                             <label class="label-cbx" for="333eat2-type3">
                                                                 <span class="cbx-cnt">HB  Завтрак +  ужин</span>
                                                             </label>
-
                                                         </div>
                                                     </div>
                                                     <div class="form-dropdown-stars__item ">
@@ -920,7 +795,6 @@ $this->title = 'Tophotels';
                                                             <label class="label-cbx" for="333eat2-type4">
                                                                 <span class="cbx-cnt"> BB Завтрак</span>
                                                             </label>
-
                                                         </div>
                                                     </div>
                                                     <div class="form-dropdown-stars__item ">
@@ -929,26 +803,20 @@ $this->title = 'Tophotels';
                                                             <label class="label-cbx" for="333eat2-type5">
                                                                 <span class="cbx-cnt">RO Без питания</span>
                                                             </label>
-
                                                         </div>
                                                     </div>
-
-
                                                 </div>
 
                                             </div>
                                             <div class="formDirections__bottom js-search-stars">
-
                                                 <div class="formDirections__bottom-blocks">
                                                     <div class="form-dropdown-stars__item ">
                                                         <div class="cbx-block  cbx-block--16  ">
-                                                            <input type="checkbox" class="cbx" id="333stars-ckd"
-                                                                   checked>
+                                                            <input type="checkbox" class="cbx" id="333stars-ckd" checked>
                                                             <label class="label-cbx " for="333stars-ckd">
                                                                 <span class="cbx-cnt">Любая категория</span>
                                                             </label>
                                                         </div>
-
                                                     </div>
                                                     <div class="form-dropdown-stars__item ">
                                                         <div class="cbx-block  cbx-block--16  ">
@@ -961,7 +829,6 @@ $this->title = 'Tophotels';
                                                                 <i class="fa fa-star"></i>
                                                             </label>
                                                         </div>
-
                                                     </div>
                                                     <div class="form-dropdown-stars__item">
                                                         <div class="cbx-block    cbx-block--16">
@@ -1027,10 +894,7 @@ $this->title = 'Tophotels';
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="formDirections__bottom-blocks js-search-rating"
-                                                 style="display: none">
-
-
+                                            <div class="formDirections__bottom-blocks js-search-rating" style="display: none">
                                                 <div class="form-dropdown-stars__item ">
                                                     <div class="rbt-block  ">
                                                         <input type="radio" name="333rating" class="rbt "
@@ -1123,19 +987,15 @@ $this->title = 'Tophotels';
 
 
                                             <div class="formDirections__bottom js-search-kid" style="display: none">
-
                                                 <div class="formDirections__bottom-blocks">
-
                                                     <div class="form-dropdown-stars__item ">
                                                         <div class="cbx-block   cbx-block--16  ">
                                                             <input type="checkbox" class="cbx" id="333kid1">
                                                             <label class="label-cbx" for="333kid1">
                                                                 <span class="cbx-cnt">ДЕТСКИЙ ГОРШОК</span>
                                                             </label>
-
                                                         </div>
                                                     </div>
-
 
                                                     <div class="form-dropdown-stars__item ">
                                                         <div class="cbx-block    cbx-block--16 ">
@@ -1143,7 +1003,6 @@ $this->title = 'Tophotels';
                                                             <label class="label-cbx" for="333kid2">
                                                                 <span class="cbx-cnt">  ДЕТСКИЕ БЛЮДА</span>
                                                             </label>
-
                                                         </div>
                                                     </div>
 
@@ -1154,7 +1013,6 @@ $this->title = 'Tophotels';
                                                             <label class="label-cbx" for="333kid3">
                                                                 <span class="cbx-cnt">ПЕЛЕНАЛЬНЫЙ СТОЛИК</span>
                                                             </label>
-
                                                         </div>
                                                     </div>
 
@@ -1164,25 +1022,19 @@ $this->title = 'Tophotels';
                                                             <label class="label-cbx" for="333kid4">
                                                                 <span class="cbx-cnt">AНИМАЦИЯ</span>
                                                             </label>
-
                                                         </div>
                                                     </div>
-
-
                                                 </div>
 
                                             </div>
                                             <div class="formDirections__bottom js-search-other" style="display: none">
-
                                                 <div class="formDirections__bottom-blocks">
-
                                                     <div class="form-dropdown-stars__item ">
                                                         <div class="cbx-block   cbx-block--16  ">
                                                             <input type="checkbox" class="cbx" id="333other1">
                                                             <label class="label-cbx" for="333other1">
                                                                 <span class="cbx-cnt">ВЕСЕЛАЯ АНИМАЦИЯ</span>
                                                             </label>
-
                                                         </div>
                                                     </div>
 
@@ -1193,50 +1045,34 @@ $this->title = 'Tophotels';
                                                             <label class="label-cbx" for="333other2">
                                                                 <span class="cbx-cnt">  ТУСОВКИ РЯДОМ С ОТЕЛЕМ </span>
                                                             </label>
-
                                                         </div>
                                                     </div>
-
-
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="formDirections__btn-orange js-close-formDirections">Применить</div>
                             </div>
-
-
                         </div>
                         <span class=" tour-selection-plus  hide-1023 js-add-field">
                             <i class="fas fa-plus"></i>
                         </span>
                     </div>
-                    <div class="tour-selection-wrap-in tour-selection-wrap-flex js-show-added-field"
-                         style="display: none">
+
+                    <div class="tour-selection-wrap-in tour-selection-wrap-flex js-show-added-field" style="display: none">
                         <div class="tour-selection-field tour-selection-field--250 ">
                             <div class="bth__inp-block">
                                 <span class="bth__inp-lbl ">Страна поездки</span>
-                                <div class="bth__inp tour-selection__country  js-show-formDirections">
-                                </div>
-
-
+                                <div class="bth__inp tour-selection__country  js-show-formDirections"></div>
                                 <div class="formDirections w100p" style="display: none;">
                                     <div class="formDirections__wrap w100p">
-
                                         <div class="formDirections__top  formDirections__top-line">
-
                                             <i class="formDirections__bottom-close"></i>
                                             <div class="formDirections__top-tab super-grey ">Страна поездки</div>
                                         </div>
-
                                         <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
-
                                             <select id="sumo-direction">
-
-
                                                 <option>Россия</option>
                                                 <option>Украина</option>
                                                 <option>Беларуссия</option>
@@ -2290,6 +2126,7 @@ $this->title = 'Tophotels';
             </div>
 
         </div>
+        <!--Подбор тура Ш1 заполненный-->
         <div class="panel" id="step3Panel" style="display: none">
             <div class="bth__cnt uppercase">Пожалуйста, укажите параметры вашей поездки</div>
 
@@ -4574,6 +4411,7 @@ $this->title = 'Tophotels';
                 </div>
             </div>
         </div>
+        <!--Кастомный тур-->
         <div class="panel" id="formPanel" style="display: none">
             <?php $form = ActiveForm::begin([
                 'method' => 'post',
@@ -4652,15 +4490,15 @@ $this->title = 'Tophotels';
                 </div>
             </div>
             <?php ActiveForm::end() ?>
-        </div><!--Кастомный тур-->
+        </div>
+        <!--Спасибо-->
         <div class="panel" id="formStep2" style="display: none">
             <div class="bth__cnt fz18 bold">Спасибо, Ваша заявка отправлена и будет обработана в ближайшее время.</div>
         </div>
+        <!--Подбор тура Ш2-->
         <div class="panel" id="step2Panel" style="display: none">
             <div class="tour-selection-wrap">
-
                 <div class="tour-selection-wrap-in mt0 tour-selection-wrap-flex">
-
                     <div class="tour-selection-field tour-selection-field--270">
                         <div class="js-add-error bth__inp-block  ">
                             <input type="text" value="Саша" class="bth__inp js-label" id="name3">
@@ -4675,10 +4513,8 @@ $this->title = 'Tophotels';
                     </div>
 
                     <div class="tour-selection-field tour-selection-field--270">
-
                         <div class="js-add-error bth__inp-block ">
-                            <input value="+79532453351" type="text" class="bth__inp js-label" id="phone3"
-                                   placeholder="">
+                            <input value="+79532453351" type="text" class="bth__inp js-label" id="phone3" placeholder="">
                             <label for="phone3" class="bth__inp-lbl">Телефон</label>
                             <div class="hint-block hint-block--abs">
                                 <i class="fa fa-question-circle question-error" aria-hidden="true"></i>
@@ -4690,14 +4526,11 @@ $this->title = 'Tophotels';
                     </div>
 
                     <div class="tour-selection-field tour-selection-field--270">
-
                         <div class="bth__inp-block  ">
                             <input type="text" value="smerekovska1976@gmail.com" class="bth__inp js-label " id="mail2">
                             <label for="mail2" class="bth__inp-lbl">Email (не обязательно)</label>
-
                         </div>
                     </div>
-
                 </div>
                 <div class="bth__cnt uppercase mt20 ">Уточните удобные координаты для выбора турагенства</div>
                 <div class="tour-selection-wrap-in   tour-selection-wrap-flex ">
@@ -4716,13 +4549,10 @@ $this->title = 'Tophotels';
                         </div>
                         <div class="formDirections w100p">
                             <div class="formDirections__wrap w100p">
-
                                 <div class="formDirections__top  formDirections__top-line">
-
                                     <i class="formDirections__bottom-close"></i>
                                     <div class="formDirections__top-tab super-grey ">Города</div>
                                 </div>
-
                                 <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
                                     <select id="sumo-list-city">
                                         <option>Москва</option>
@@ -4733,17 +4563,11 @@ $this->title = 'Tophotels';
                                         <option>Санкт-Петербург</option>
                                         <option>Москва</option>
                                         <option>Санкт-Петербург</option>
-
                                     </select>
                                 </div>
-
                             </div>
                         </div>
                     </div>
-
-                    <a href="#js-subway-modal"
-                       class=" js-subway-pp tour-selection-plus  tour-selection-plus--subway ml15 "></a>
-                    <a href="#map-modal" class="map-modal tour-selection-plus  tour-selection-plus--map ml15"></a>
                 </div>
 
                 <div class="tour-selection-wrap-in ">

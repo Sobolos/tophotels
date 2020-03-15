@@ -13,6 +13,7 @@ class Leads extends ActiveRecord
         return self::find()->orderBy('leadId')
             ->offset($pagination->offset)
             ->limit($pagination->limit)
+            ->orderBy('leadId DESC')
             ->all();
     }
 }

@@ -1,5 +1,5 @@
 jQuery(document).ready(function () {
-    $('#parametrs').val('');
+    $('#parametrs').val(''); //очистка формы с пожеалниями при загрузке
 
     function validateEmail(emailVal) {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -11,7 +11,7 @@ jQuery(document).ready(function () {
         return re.test(phoneVal);
     }
 
-    $('#CustomTourForm').on('beforeSubmit', function (event) {
+    $('#CustomTourForm').on('beforeSubmit', function (event) { //отлавливаем нажатие на кнопку формы
         var btnLoader = $('.bth__loader');
         var nameVal = $('#nameInput').val();
         var phoneVal = $('#phoneInput').val();
