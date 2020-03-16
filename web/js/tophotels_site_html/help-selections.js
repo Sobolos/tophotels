@@ -36,11 +36,11 @@ $(document).ready(function () {
     sumoDepartment.parent().addClass('open');
     sumoDepartment.next().next().css('top', '0').css('position', 'relative');
 
-    ////////
+    /*
     var formDateHelp1 = new mytour.searchTours.formDate({
         pickerBlockId: 'js-mt-filter-dtHelp1',
         popupBlockId: 'mtIdxFormDatePPHelp1',
         popupBlock: $('#mtIdxFormDatePPHelp1'),
         datepicker: $('#mtIdxDateHelp1')
-    }, mytour.searchTours.main.request);
+    }, mytour.searchTours.main.request);*/
 });

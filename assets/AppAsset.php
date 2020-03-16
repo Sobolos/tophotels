@@ -65,7 +65,7 @@ class AppAsset extends AssetBundle
 
         "js/custom_tour.js",
         "js/tour.js",
-        "js/tourOOP.js",
+        //"js/tourOOP.js",
         "js/formHints.js",
         "js/tabs.js"
     ];

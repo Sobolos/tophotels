@@ -65,7 +65,7 @@ mytour.searchTours.formDate = function(params, searchReq) {
         return range_to.getFullYear() + '-' + (range_to.getMonth()+1) + '-' + range_to.getDate();
     };
 
-    req.dt = this.makeRange();
+    console.log(self);
 
     /**
      * РЎРѕР·РґР°РЅРёРµ РєР°Р»РµРЅРґР°СЂСЏ
