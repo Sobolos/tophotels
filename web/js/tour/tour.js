@@ -62,6 +62,17 @@ mytour.searchTours.formDate = function(params, searchReq) {
         }
     }
 
+<<<<<<< HEAD:web/js/tour/tour.js
+=======
+    this.makeRange = function(){
+        var range_to = new Date(this.dateToday.getFullYear(), this.dateToday.getMonth(), this.dateToday.getDate()+21);
+
+        return range_to.getFullYear() + '-' + (range_to.getMonth()+1) + '-' + range_to.getDate();
+    };
+
+    console.log(self);
+
+>>>>>>> task4:web/js/tourOOP.js
     /**
      * Создание календаря
      */
