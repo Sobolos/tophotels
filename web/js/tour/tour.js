@@ -1,3 +1,15 @@
+function makeRange() {
+    var today = new Date();
+
+    var year = today.getFullYear();
+    var mounth = today.getMonth();
+    var day = today.getDate();
+
+    var from = new Date(year, mounth + 1, day + 14);
+    var to = new Date(year, mounth + 1, day + 21);
+
+    return from.getFullYear() + '-' + from.getMonth() + '-' + from.getDate() + ' - ' + to.getFullYear() + '-' + to.getMonth() + '-' + to.getDate();
+}
 "use strict";
 
 if (typeof mytour === "undefined") {
@@ -9,7 +21,7 @@ if (typeof mytour.searchTours === "undefined") {
 }
 
 /**
- * РњРѕРґСѓР»СЊ РєР°Р»РµРЅРґР°СЂСЏ
+ * Модуль календаря
  * @param params
  * @param searchReq
  */
@@ -32,25 +44,16 @@ mytour.searchTours.formDate = function(params, searchReq) {
 
     this.textDateTitle = $('.date-title');
     this.textLabel = $('.date-text');
-    this.textCounter = $('.dc_val');
     this.datepicker = $('#datePicker');
-    this.monthBtn = '.js-calendar-month';
-    this.diffSelect = $('select[name="calendarDiff"]');
-    this.calendarPagePrev = '.gmi-date-range-picker__btn--prev-month';
-    this.calendarPageNext = '.gmi-date-range-picker__btn--next-month';
-    this.monthBtnList = null;
-
-    //
-    this.dateToday = new Date();
+    this.monthBtn = '.js-tour-month';
     this.pickerBlock = null;
-    this.pickerObj = null;
 
-    // С„Р»Р°Рі С‚РѕРіРѕ С‡С‚Рѕ РјС‹ С‰Р°СЃ РІС‹Р±РёСЂР°РµРј РїСЂРѕРјРµР¶СѓС‚РѕРє РґР°С‚
+    // флаг того что мы щас выбираем промежуток дат
     this.inSelectionState = false;
     this.simpleFilterDateLabelDate = '.f-dfdt';
     this.simpleFilterDateLabelDiff = '.filter-adday';
 
-    // Р—Р°РіСЂСѓР·РєР° РїР°СЂР°РјРµС‚СЂРѕРІ
+    // Загрузка параметров
     if (typeof params !== 'undefined') {
         for (var p in params) {
             if (params.hasOwnProperty(p)) {
@@ -59,16 +62,8 @@ mytour.searchTours.formDate = function(params, searchReq) {
         }
     }
 
-    this.makeRange = function(){
-        var range_to = new Date(this.dateToday.getFullYear(), this.dateToday.getMonth(), this.dateToday.getDate()+21);
-
-        return range_to.getFullYear() + '-' + (range_to.getMonth()+1) + '-' + range_to.getDate();
-    };
-
-    req.dt = this.makeRange();
-
     /**
-     * РЎРѕР·РґР°РЅРёРµ РєР°Р»РµРЅРґР°СЂСЏ
+     * Создание календаря
      */
     self.pickerObj = self.datepicker.datepicker({
         type: self.pickerType,
@@ -76,7 +71,7 @@ mytour.searchTours.formDate = function(params, searchReq) {
         align: 'left',
         lang: 'ru-RU',
         weekStart: 1,
-        defaultValue: req.df + ' - ' + req.dt,
+        defaultValue: makeRange(),
         startDate: new Date(),
         endDate: (new Date()).addMonths(12),
         pickerBlockId: self.pickerBlockId,
@@ -88,13 +83,19 @@ mytour.searchTours.formDate = function(params, searchReq) {
 
             self.popupBlock.removeClass('d-ib');
             self.popupLabel.removeClass('focus');
+            //self.reload();
         }
     });
-
     self.pickerObj.show();
     self.pickerBlock = $('#' + self.pickerBlockId);
     self.pickerBlock.appendTo(self.datepicker.parent()).find('.gmi-picker-panel').show();
     self.datepicker.appendTo(self.datepicker.parent());
+
+    setTimeout(function() {
+        //self.reload();
+        self.init = true;
+    }, 150);
+
     //
     $(document).mouseup(function (e) {
         var target = $(e.target || e.srcElement);

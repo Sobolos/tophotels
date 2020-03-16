@@ -5,12 +5,10 @@ jQuery(document).ready(function () {
         $(this).next('.bth__inp-lbl').hide();
     });
 
-
     $('.bth__inp.js-stop-label').on('blur', function () {
         if ($(this).val().trim() !== '') {
             $(this).next('.bth__inp-lbl').hide();
         } else {
-
             $(this).next('.bth__inp-lbl').show();
         }
     });
@@ -43,26 +41,10 @@ jQuery(document).ready(function () {
     $('.bth__inp-block.long textarea').on('blur', function () {
         $(this).closest('.bth__inp-block.long').removeClass('active');
     });
-
-    //поля подбора тура
-    $('.js-add-field').on('click', function () {
-        $('.js-show-added-field').show();
-    });
-    $('.js-del-field').on('click', function () {
-        $('.js-show-added-field').hide();
-    });
-
-    $('.js-add-hotel ').on('click', function () {
-        $('.js-show-add-hotel').show();
-    });
-
-    $('.js-del-hotel ').on('click', function () {
-        $('.js-show-add-hotel').hide();
-    });
 });
 
-//закрытие модалки
 $(document).on('click', '.js-modal-close', function (e) {
+    "use strict";
     e.preventDefault();
     $.magnificPopup.close();
 });

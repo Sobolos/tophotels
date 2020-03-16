@@ -6,6 +6,7 @@ $(document).ready(function () {
     $('.formDirections__SumoSelect ').on('click', 'li.opt', function () {
         $(this).closest('.formDirections').hide();
     });
+
     /*контрол готсей*/
     $('.formDirections__guest-btn .formDirections__guest-btn-icon').hover(function () {
             $(this).prevAll().addClass('hover-active');
@@ -13,13 +14,10 @@ $(document).ready(function () {
             $(this).addClass('hover-active');
         }
     );
+
     $('.formDirections__guest-btn').hover(function () {
-
-        },
-        function () {
-
+        }, function () {
             $('.formDirections__guest-btn-icon').removeClass('hover-active');
-
         }
     );
 
@@ -34,28 +32,41 @@ $(document).ready(function () {
         }
 
     });
+
     $('.js-added-show1 ').on('click', function () {
         $('.js-added-show2 ').removeClass('hidden');
     });
+
     $('.js-added-show2 ').on('click', function () {
         $('.js-added-show3 ').removeClass('hidden');
     });
+
     $('.js-add-more-adults ').on('click', function () {
         $('.js-hide-adults ').hide();
         $('.js-show-adults ').show();
     });
+
     $('.js-show-ages  ').on('click', function () {
         $(this).closest('.formDirections__bottom-item ').hide();
         $('.js-ages').show();
     });
+
     $('.formDirections__price-currency--sm').on('click', function () {
         $(this).closest('.formDirections').find('.formDirections__bottom-item ').show();
         $('.js-ages').hide();
     });
 
+    $('.js-type2').on('click', function () {
+        $('.js-types-search-tours-blocks').hide();
+        $('.js-types-search-hotel-blocks').show();
+    });
 
+    $('.js-type1').on('click', function () {
+        $('.js-types-search-tours-blocks').show();
+        $('.js-types-search-hotel-blocks').hide();
+    });
 
-    /*контрол параетров*/
+    /*контрол параметров*/
     $('.js-show-currencys').on('click', function () {
         $(this).closest('.formDirections').find('.js-hide-price-inputs').hide();
         $(this).closest('.formDirections').find('.js-act-currencys').show();
@@ -83,6 +94,7 @@ $(document).ready(function () {
         $(this).closest('.formDirections').find('.formDirections__top-tab').removeClass('active');
         $(this).addClass('active');
     });
+
     $('.formDirections  .js-act-city').on('click', function () {
         $(this).closest('.formDirections').find('.js-search-country').hide();
         $(this).closest('.formDirections').find('.js-search-city').show();
@@ -94,6 +106,7 @@ $(document).ready(function () {
         $(this).closest('.formDirections').find('.formDirections__top-tab').removeClass('active');
         $(this).addClass('active');
     });
+
     $('.formDirections  .js-act-hotels').on('click', function () {
         $(this).closest('.formDirections').find('.js-search-country').hide();
         $(this).closest('.formDirections').find('.js-search-city').hide();
@@ -105,6 +118,7 @@ $(document).ready(function () {
         $(this).closest('.formDirections').find('.formDirections__top-tab').removeClass('active');
         $(this).addClass('active');
     });
+
     $('.formDirections  .js-act-stars').on('click', function () {
         $(this).closest('.formDirections').find('.js-search-country').hide();
         $(this).closest('.formDirections').find('.js-search-city').hide();
@@ -116,6 +130,7 @@ $(document).ready(function () {
         $(this).closest('.formDirections').find('.formDirections__top-tab').removeClass('active');
         $(this).addClass('active');
     });
+
     $('.formDirections  .js-act-rating').on('click', function () {
         $(this).closest('.formDirections').find('.js-search-country').hide();
         $(this).closest('.formDirections').find('.js-search-city').hide();
@@ -127,6 +142,7 @@ $(document).ready(function () {
         $(this).closest('.formDirections').find('.formDirections__top-tab').removeClass('active');
         $(this).addClass('active');
     });
+
     $('.formDirections  .js-act-kid').on('click', function () {
         $(this).closest('.formDirections').find('.js-search-country').hide();
         $(this).closest('.formDirections').find('.js-search-city').hide();
@@ -138,6 +154,7 @@ $(document).ready(function () {
         $(this).closest('.formDirections').find('.formDirections__top-tab').removeClass('active');
         $(this).addClass('active');
     });
+
     $('.formDirections  .js-act-other').on('click', function () {
         $(this).closest('.formDirections').find('.js-search-country').hide();
         $(this).closest('.formDirections').find('.js-search-city').hide();
@@ -150,36 +167,44 @@ $(document).ready(function () {
         $(this).addClass('active');
     });
 
-
     $('.formDirections .formDirections__arr').on('click', function () {
         $(this).closest('.formDirections__city').find('.formDirections__drop-city').toggle();
         $(this).toggleClass('active')
     });
 
-
     $('.js-show-formDirections').on('click', function () {
-
         $('.form-date + div').addClass('hidden');
         $(this).closest('html').find('.formDirections').hide();
         $(this).next('.formDirections').slideDown();
-
     });
 
 
     $('.bth__inp-block .form-date').on('click', function () {
         $('.formDirections').hide();
         $('.bth__sumo-currency .SumoSelect').removeClass('open');
-
     });
 
+    //Добавляем и удаляем контролы
+    $('.js-add-field').on('click', function () {
+        $('.js-show-added-field').show();
+    });
+    $('.js-del-field').on('click', function () {
+        $('.js-show-added-field').hide();
+    });
+
+    $('.js-add-hotel ').on('click', function () {
+        $('.js-show-add-hotel').show();
+    });
+
+    $('.js-del-hotel ').on('click', function () {
+        $('.js-show-add-hotel').hide();
+    });
 
 
     // Большие контролы
 
     var windowWidth = Math.max($(window).width(), window.innerWidth);
     if (windowWidth <= 509) {
-
-
         // При открытии закрыть табы
         $('.js-formDirections--big-mobile').on('click', function () {
             $('html, body').css('overflow', 'hidden')
@@ -187,8 +212,6 @@ $(document).ready(function () {
         $('.formDirections--big-mobile  .formDirections__top .formDirections__bottom-close, .js-close-formDirections').on('click', function () {
             $('html, body').css('overflow', 'auto')
         });
-
-
     }
     $('.bth__ta-resizable').focus(function () {
         $('.bth__ta-resizable-hint').addClass('active');
@@ -204,6 +227,66 @@ $(document).ready(function () {
         $(this).toggleClass('active');
         $(this).closest('.formDirections__bottom-item').next().toggle()
     });
+
+    $(document).on('click', '.js-lsfw-pp', function(){
+        $(this).next().addClass('hidden');
+    });
+
+    $(document).on('click', '.js-lsfw-ppdb', function(){
+        $(this).next().addClass('d-ib');
+    });
+
+    $(document).on('click', '.js-lsfw-pp-close', function(){
+        $(this).closest('.formDirections').removeClass('d-ib');
+    });
+
+    $(document).on('click', '.js-lsfw-ppdb-close', function(){
+        $(this).closest('.formDirections').removeClass('d-ib');
+    });
+
+    //Направление города
+    var sumoDirectionCity= $('select[id="sumo-direction-city"]');
+    sumoDirectionCity.SumoSelect({
+        search: true,
+        forceCustomRendering: true
+    });
+    sumoDirectionCity.parent().addClass('open');
+    sumoDirectionCity.next().next().css('top', '0').css('position', 'relative');
+
+    //Направление
+    var sumoDirection= $('select[id="sumo-direction"]');
+    sumoDirection.SumoSelect({
+        search: true,
+        forceCustomRendering: true
+    });
+    sumoDirection.parent().addClass('open');
+    sumoDirection.next().next().css('top', '0').css('position', 'relative');
+
+    //Список городов вылета
+    var sumoListCity = $('select[id="sumo-list-city"]');
+    sumoListCity.SumoSelect({
+        search: true,
+        forceCustomRendering: true
+    });
+    sumoListCity.parent().addClass('open');
+    sumoListCity.next().next().css('top', '0').css('position', 'relative');
+
+
+    //Город вылета
+    var sumoDepartment = $('select[id="sumo-department"]');
+    sumoDepartment.SumoSelect({
+        search: true,
+        forceCustomRendering: true
+    });
+    sumoDepartment.parent().addClass('open');
+    sumoDepartment.next().next().css('top', '0').css('position', 'relative');
+
+    var formDateHelp1 = new mytour.searchTours.formDate({
+        pickerBlockId: 'js-mt-filter-dtHelp1',
+        popupBlockId: 'mtIdxFormDatePPHelp1',
+        popupBlock: $('#mtIdxFormDatePPHelp1'),
+        datepicker: $('#mtIdxDateHelp1')
+    }, mytour.searchTours.main.request);
 });
 $(document).on('click', function (e) {
     var $target = $(e.target);

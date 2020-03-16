@@ -363,7 +363,7 @@
                 onShow: null,
                 onHide: null,
                 pickerBlockId: 'picker_' + Math.random(),
-                monthBtn: '.js-calendar-month',
+                monthBtn: '.js-tour-month',
             },
 
             _init: function () {
@@ -414,7 +414,7 @@
                     $self.next().addClass('active');
 
                     if (m === 11) {
-                        $('.js-calendar-month[data-id="10"]').click();
+                        $('.js-tour-month[data-id="10"]').click();
                         return;
                     }
                 }
@@ -1063,7 +1063,7 @@
                             'data-id="'+ i +'" ' +
                             'data-mon="'+ d.getMonth() +'" ' +
                             'data-year="'+ d.getFullYear() +'" ' +
-                            'class="js-calendar-month form-popup__month-item">' + d.format('monShort') +
+                            'class="js-tour-month form-popup__month-item">' + d.format('monShort') +
                             '</li>';
                         d = d.addMonths(1);
                     }
@@ -1119,7 +1119,7 @@
                             'data-id="'+ i +'" ' +
                             'data-mon="'+ d.getMonth() +'" ' +
                             'data-year="'+ d.getFullYear() +'" ' +
-                            'class="js-calendar-month form-popup__month-item">' + d.format('monShort') +
+                            'class="js-tour-month form-popup__month-item">' + d.format('monShort') +
                             '</li>';
                         d = d.addMonths(1);
                     }
@@ -1798,8 +1798,8 @@
                         }
 
                         core._prevMonthState--;
-                        $('.js-calendar-month').removeClass('active');
-                        $('.js-calendar-month[data-id="'+ core._prevMonthState +'"]').addClass('active');
+                        $('.js-tour-month').removeClass('active');
+                        $('.js-tour-month[data-id="'+ core._prevMonthState +'"]').addClass('active');
 
                         core._setNewDateDOM($delegateTarget, year, month);
                         datepicker.yearLabel = year;
@@ -1837,8 +1837,8 @@
                         }
 
                         core._prevMonthState++;
-                        $('.js-calendar-month').removeClass('active');
-                        $('.js-calendar-month[data-id="'+ core._prevMonthState +'"]').addClass('active');
+                        $('.js-tour-month').removeClass('active');
+                        $('.js-tour-month[data-id="'+ core._prevMonthState +'"]').addClass('active');
 
                         core._setNewDateDOM($delegateTarget, year, month);
                         datepicker.yearLabel = year;
@@ -2015,9 +2015,9 @@
 
                     // подсветка
                     if (datepicker.type === 'date-range') {
-                        $('.js-calendar-month').removeClass('active');
-                        core._prevMonthState = parseInt($('.js-calendar-month[data-mon="' + leftDate.getMonth() + '"]').addClass('active').attr('data-id'));
-                        $('.js-calendar-month[data-mon="' + rightDate.getMonth() + '"]').addClass('active');
+                        $('.js-tour-month').removeClass('active');
+                        core._prevMonthState = parseInt($('.js-tour-month[data-mon="' + leftDate.getMonth() + '"]').addClass('active').attr('data-id'));
+                        $('.js-tour-month[data-mon="' + rightDate.getMonth() + '"]').addClass('active');
                     }
                 }
                 datepicker.limitStartDate = leftDate;

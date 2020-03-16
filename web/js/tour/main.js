@@ -1,5 +1,12 @@
 "use strict";
-var __tkv_config = {        defaultCity: 1000,        defaultCountry: 1,        defaultDeparture: '2018-10-20',        defaultNightFrom: 7,        defaultNightTo: 14    };
+var __tkv_config = {
+    defaultCity: 1000,
+    defaultCountry: 1,
+    defaultDeparture: '2018-10-20',
+    defaultNightFrom: 7,
+    defaultNightTo: 14
+};
+
 if (typeof mytour === "undefined") {
     var mytour = {};
 }
@@ -78,8 +85,8 @@ mytour.searchTours.main = new (function() {
         op: [],
         ad: 2,
         ch: 0,
-        df: (new Date()).addDays((__tkv_config.defaultDeparture > 0) ? __tkv_config.defaultDeparture : 14).format('Y-m-d'),
-        dt: (new Date()).addDays((__tkv_config.defaultDeparture > 0) ? __tkv_config.defaultDeparture : 14).format('Y-m-d'),
+        df: new Date(),
+        dt: new Date(),
         nf: __tkv_config.defaultNightFrom,
         nt: __tkv_config.defaultNightTo,
         re: [],
