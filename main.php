@@ -48,7 +48,7 @@ AppAsset::register($this);
                     <div class="headerMobile__key"></div>
                 </div>
                 <a href="#" class="headerMobile__user js-show-key-block">
-                    <?=Html::img('@web/i/user-ava-cat.jpg', ["height" => "50px"])?>
+                    <?=Html::img('@web/i/user-ava-cat.jpg')?>
                 </a>
                 <div class="headerMobile__bth mr5">
                     <div class="headerMobile__burger"></div>
@@ -277,7 +277,7 @@ AppAsset::register($this);
 
             <div class="header-profile auth " style="display:none;">
                 <a href="#">
-                    <?=Html::img('@web/i/user-ava-cat.jpg', ["height" => "50px"])?>
+                    <?=Html::img('@web/i/user-ava-cat.jpg')?>
                 </a>
                 <span class="header-profile__msgs">
                 <span>989</span>

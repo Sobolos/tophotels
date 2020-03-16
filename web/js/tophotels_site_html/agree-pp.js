@@ -67,5 +67,4 @@ $(function () {
     $('.p-agreement-pp.site-role').on('click', function () {
         $('#siteRole').click();
     });
-
 });
