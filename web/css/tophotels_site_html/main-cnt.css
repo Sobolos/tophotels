@@ -681,7 +681,7 @@ a.bth__ttl-h2:hover {
 }
 
 .bth__inp-arrr {
-    background-image: url(/i/down-filterArrow.svg);
+    background-image: url(i/down-filterArrow.svg);
     width: 17px;
     height: 15px;
     display: inline-block;
@@ -1297,7 +1297,7 @@ a.bth__ttl-h2:hover {
 }
 
 .bth__inp-block-eye {
-    background-image: url(/i/closed-eye-fine.png);
+    background-image: url(i/closed-eye-fine.png);
     background-repeat: no-repeat;
     height: 11px;
     top: 22px;
@@ -1310,7 +1310,7 @@ a.bth__ttl-h2:hover {
 }
 
 .bth__inp-block-eye.active {
-    background-image: url(/i/tourvision/opened-eye-fine.png);
+    background-image: url(i/tourvision/opened-eye-fine.png);
 }
 
 .bth__inp-block-loc-q {
@@ -1478,7 +1478,7 @@ a.section__bubble .fa-cog:hover {
     left: 7px;
     width: 15px;
     height: 15px;
-    background: url(/i/checkmark.svg) no-repeat;
+    background: url(i/checkmark.svg) no-repeat;
     cursor: pointer;
 }
 
@@ -1748,14 +1748,14 @@ a.section__bubble .fa-cog:hover {
     width: 30px;
     cursor: pointer;
     height: 30px;
-    background-image: url(/i/tophotels/cross-thin-grey.svg);
+    background-image: url(i/tophotels/cross-thin-grey.svg);
     background-repeat: no-repeat;
     background-size: cover;
     display: block;
 }
 
 .section-cross:hover {
-    background-image: url(/i/tophotels/cross-thin.svg);
+    background-image: url(i/tophotels/cross-thin.svg);
 }
 
 .bth__ttl-h2--18 {
@@ -1820,11 +1820,11 @@ a.bth__ttl-h2-23:hover {
     right: 10px;
     top: 10px;
     cursor: pointer;
-    background: url(/i/tourvision/close-12x12.png);
+    background: url(i/tourvision/close-12x12.png);
 }
 
 .full-modal__close:hover {
-    background: url(/i/tourvision/close-12x12-red.png);
+    background: url(i/tourvision/close-12x12-red.png);
 }
 
 /**/
@@ -1852,7 +1852,7 @@ a.bth__ttl-h2-23:hover {
 }
 
 .bth__file-bubble .file-upload-icon {
-    background-image: url(/i/file-upload-orange.svg);
+    background-image: url(i/file-upload-orange.svg);
     background-repeat: no-repeat;
     width: 28px;
     height: 30px;
@@ -1860,7 +1860,7 @@ a.bth__ttl-h2-23:hover {
 }
 
 .bth__file-bubble:hover .file-upload-icon {
-    background-image: url(/i/file-upload-dark-orange.svg);
+    background-image: url(i/file-upload-dark-orange.svg);
 }
 
 .bth__file-bubble:hover span,
@@ -2190,7 +2190,7 @@ a.bth__ttl-h2-23:hover {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    background-image: url(/i/tophotels/cross-thin.svg);
+    background-image: url(i/tophotels/cross-thin.svg);
     background-repeat: no-repeat;
     background-position: center;
     background-color: #ffffff73;
