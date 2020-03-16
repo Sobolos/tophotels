@@ -65,14 +65,10 @@ class AppAsset extends AssetBundle
         "js/custom_tour/custom_tour.js",
         "js/custom_tour/formHints.js",
 
-<<<<<<< HEAD
         "js/legal-agreement.js",
-=======
         "js/custom_tour.js",
         "js/tour.js",
-        //"js/tourOOP.js",
         "js/formHints.js",
->>>>>>> task4
         "js/tabs.js"
     ];
     public $depends = [
