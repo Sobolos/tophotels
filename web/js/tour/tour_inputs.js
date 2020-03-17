@@ -7,55 +7,6 @@ $(document).ready(function () {
         $(this).closest('.formDirections').hide();
     });
 
-    /*контрол готсей*/
-    $('.formDirections__guest-btn .formDirections__guest-btn-icon').hover(function () {
-            $(this).prevAll().addClass('hover-active');
-            $(this).nextAll().removeClass('hover-active');
-            $(this).addClass('hover-active');
-        }
-    );
-
-    $('.formDirections__guest-btn').hover(function () {
-        }, function () {
-            $('.formDirections__guest-btn-icon').removeClass('hover-active');
-        }
-    );
-
-    $('.formDirections__guest-btn-icon').on('click', function () {
-        $(this).prevAll().addClass('selected');
-        $(this).nextAll().removeClass('selected');
-
-        if ($(this).index() === 0 && $(this).is('.selected')) {
-            $(this).removeClass('selected');
-        } else {
-            $(this).addClass('selected');
-        }
-
-    });
-
-    $('.js-added-show1 ').on('click', function () {
-        $('.js-added-show2 ').removeClass('hidden');
-    });
-
-    $('.js-added-show2 ').on('click', function () {
-        $('.js-added-show3 ').removeClass('hidden');
-    });
-
-    $('.js-add-more-adults ').on('click', function () {
-        $('.js-hide-adults ').hide();
-        $('.js-show-adults ').show();
-    });
-
-    $('.js-show-ages  ').on('click', function () {
-        $(this).closest('.formDirections__bottom-item ').hide();
-        $('.js-ages').show();
-    });
-
-    $('.formDirections__price-currency--sm').on('click', function () {
-        $(this).closest('.formDirections').find('.formDirections__bottom-item ').show();
-        $('.js-ages').hide();
-    });
-
     $('.js-type2').on('click', function () {
         $('.js-types-search-tours-blocks').hide();
         $('.js-types-search-hotel-blocks').show();
@@ -287,6 +238,9 @@ $(document).ready(function () {
         popupBlock: $('#mtIdxFormDatePPHelp1'),
         datepicker: $('#mtIdxDateHelp1')
     }, mytour.searchTours.main.request);
+
+    var formNights = new mytour.searchTours.formNights();
+    var formGuests = new mytour.searchTours.formGuests();
 });
 $(document).on('click', function (e) {
     var $target = $(e.target);

@@ -60,15 +60,16 @@ class AppAsset extends AssetBundle
         "js/tour/date-function.js",
         "js/tour/main.js",
         "js/tour/tour.js",
+        "js/tour/departiation.js",
+        "js/tour/guests.js",
+        "js/tour/price.js",
+        "js/tour/nights.js",
         "js/tour/tour_inputs.js",
 
         "js/custom_tour/custom_tour.js",
         "js/custom_tour/formHints.js",
 
         "js/legal-agreement.js",
-        "js/custom_tour.js",
-        "js/tour.js",
-        "js/formHints.js",
         "js/tabs.js"
     ];
     public $depends = [
