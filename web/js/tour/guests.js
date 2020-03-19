@@ -17,18 +17,34 @@ mytour.searchTours.formGuests = function() {
     this.child1Age = null;
     this.child2Age = null;
     this.child3Age = null;
-    this.adultsBlocks = $('i.adult');
+    this.setAgeBlok = $("label[data-action]");
 
     var self = this;
 
     this.initGuests = function () {
-        this.childrenAmount = $('.guestChild.selected').length;
+        self.adultsAmount = $('.adult.selected').length;
+        self.childrenAmount = $('.guestChild.selected').length;
 
-        for(var i = 0; i < this.adultsAmount; i ++)
-            this.adultsBlocks[i].classList.add('selected');
+        if(self.childrenAmount === 2) self.child3Age = null;
+        if(self.childrenAmount === 1){
+            self.child3Age = null;
+            self.child2Age = null;
+        }
+        if(self.childrenAmount === 0){
+            self.child3Age = null;
+            self.child2Age = null;
+            self.child1Age = null;
+        }
 
         $('#adultsAmount-inpt').val(self.adultsAmount);
         $('#childrenAmount-inpt').val(self.childrenAmount);
+        $('#child1Age-inpt').val(self.child1Age);
+        $('#child2Age-inpt').val(self.child2Age);
+        $('#child3Age-inpt').val(self.child3Age);
+
+        $('#adultsAmount-spn').text(self.adultsAmount + " взрослых");
+        $('#guests-lbl').addClass('active');
+        $('#guests-spn').text(self.adultsAmount + " взрослых " + self.childrenAmount + " детей");
     };
 
     this.showPeople = function(){
@@ -53,7 +69,7 @@ mytour.searchTours.formGuests = function() {
         $(this).prevAll().addClass('selected');
         $(this).nextAll().removeClass('selected');
 
-        if ($(this).index() === 0 && $(this).is('.selected')) {
+        if ($(this).is('.selected')) {
             $(this).removeClass('selected');
         } else {
             $(this).addClass('selected');
@@ -65,24 +81,40 @@ mytour.searchTours.formGuests = function() {
         $('#childrenAmount-inpt').val(self.childrenAmount);
     });
 
-    //показ детей
-    $('.js-added-show1 ').on('click', function () {
-        $('.js-added-show2 ').removeClass('hidden');
+    var child = null;
+
+    $('.test').on('click', '.showAges', function () {
+        child = $(this).attr('data-child');
+
+        if($(this).prev().hasClass('selected')){
+            $(this).closest('.formDirections__bottom-item ').hide();
+            $('.childAges').show();
+        }
     });
 
-    $('.js-added-show2 ').on('click', function () {
-        $('.js-added-show3 ').removeClass('hidden');
+    this.setAgeBlok.on('click', function () {
+        $('.childAges').hide();
+        $('.guests').show();
+       var childAge = $(this).text();
+       if(child === "1"){
+           $('.js-added-show2 ').removeClass('hidden');
+           self.child1Age = parseInt(childAge);
+           $('#chid1Age-spn').text(self.child1Age);
+       }
+       else if(child === "2"){
+           $('.js-added-show3 ').removeClass('hidden');
+           self.child2Age = parseInt(childAge);
+           $('#chid2Age-spn').text(self.child2Age);
+       }
+       else if(child === "3") {
+           self.child3Age = parseInt(childAge);
+           $('#chid3Age-spn').text(self.child3Age);
+       }
     });
 
-    //показать возрасты
-    $('.js-show-ages1').on('click', function () {
-        $(this).closest('.formDirections__bottom-item ').hide();
-        $(this).prev().addClass('selected');
+    $('.guestsSubmit').on('click', self.initGuests);
 
-        $('.childAges').show();
-    });
-
-    $('#showMorePeople').click(self.showPeople);
+    $('#showMorePeople').on('click', self.showPeople);
 
     //начальная инициалищация
     this.initGuests();

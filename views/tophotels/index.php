@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+
 $this->title = 'Tophotels';
 ?>
 <div class="tour-selection-box">
@@ -15,6 +16,11 @@ $this->title = 'Tophotels';
         <div>
             <!--Подбор тура Ш1-->
             <div class="panel" id="step1Panel">
+                <?php $tourform = ActiveForm::begin([
+                    'method' => 'post',
+                    //'action' => ['tophotels/help-selection#form'],
+                    'id' => 'TourForm'
+                ]) ?>
                 <div class="bth__cnt uppercase">Пожалуйста, укажите параметры вашей поездки</div>
                 <div class="tour-selection-wrap">
                     <div class="tour-selection-wrap-in tour-selection-wrap-flex">
@@ -38,7 +44,8 @@ $this->title = 'Tophotels';
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="departDates">
+
+                            <?= Html::activeHiddenInput ($tourForm, 'departDates', ['id'=>'departDates'])?>
                         </div>
                         <div class="tour-selection-field tour-selection-field--180">
                             <div class="bth__inp-block js-show-formDirections">
@@ -185,7 +192,7 @@ $this->title = 'Tophotels';
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="hidden" id="nightsAmount">
+                                        <?= Html::activeHiddenInput ($tourForm, 'nightsAmount', ['id'=>'nightsAmount'])?>
                                     </div>
                                 </div>
                             </div>
@@ -199,7 +206,7 @@ $this->title = 'Tophotels';
                             <div class="formDirections formDirections--guest" style="display: none;">
                                 <div class="formDirections__wrap">
                                     <div class="formDirections__top formDirections__top--white">
-                                        <i class="formDirections__bottom-close"></i>
+                                        <i class="guestsSubmit formDirections__bottom-close"></i>
                                         <div class="formDirections__top-tab super-grey">
                                             Человек в номере
                                         </div>
@@ -208,10 +215,10 @@ $this->title = 'Tophotels';
                                     <div class="guests formDirections__bottom-item no-border">
                                         <div>
                                             <div class="js-hide-adults formDirections__guest-wrap">
-                                                <span class="formDirections__lb-uppercase bold">2 взрослых</span>
+                                                <span id="adultsAmount-spn" class="formDirections__lb-uppercase bold">2 взрослых</span>
                                                 <div class="formDirections__guest-btn">
-                                                    <i class="formDirections__guest-btn-icon adult"></i>
-                                                    <i class="formDirections__guest-btn-icon adult"></i>
+                                                    <i class="formDirections__guest-btn-icon selected adult"></i>
+                                                    <i class="formDirections__guest-btn-icon selected adult"></i>
                                                     <i class="formDirections__guest-btn-icon adult"></i>
                                                     <i class="formDirections__guest-btn-icon adult"></i>
                                                     <span id="showMorePeople" class="js-add-more-adults formDirections__guest-plus">
@@ -229,24 +236,24 @@ $this->title = 'Tophotels';
                                             </div>
                                             <div class="formDirections__guest-wrap">
                                                 <span class="formDirections__lb-uppercase bold">добавить детей</span>
-                                                <div class="formDirections__guest-btn">
+                                                <div class="test formDirections__guest-btn">
                                                     <i class="guestChild js-added-show1 formDirections__guest-btn-icon formDirections__guest-btn-icon--sm"></i>
-                                                    <div class="js-added-show1 js-show-ages1 formDirections__inp-block ">
-                                                        <span class="bth__inp ">лет</span>
+                                                    <div data-child="1" class="js-added-show1 showAges formDirections__inp-block ">
+                                                        <span id="chid1Age-spn" class="bth__inp ">лет</span>
                                                     </div>
 
                                                     <i class="guestChild js-added-show2 hidden formDirections__guest-btn-icon formDirections__guest-btn-icon--sm "></i>
-                                                    <div class="js-added-show2 hidden js-show-ages2 formDirections__inp-block ">
-                                                        <span class="bth__inp normal">лет</span>
+                                                    <div data-child="2" class="js-added-show2 showAges hidden formDirections__inp-block ">
+                                                        <span id="chid2Age-spn" class="bth__inp normal">лет</span>
                                                     </div>
 
                                                     <i class="guestChild js-added-show3 hidden formDirections__guest-btn-icon formDirections__guest-btn-icon--sm "></i>
-                                                    <div class="js-added-show3 hidden js-show-ages3 formDirections__inp-block ">
-                                                        <span class="bth__inp normal">лет</span>
+                                                    <div data-child="3" class="js-added-show3 showAges hidden formDirections__inp-block ">
+                                                        <span id="chid3Age-spn" class="bth__inp normal">лет</span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="ml0 mb0 formDirections__static-btn formDirections__static-btn--sm js-close-formDirections">
+                                            <div class="guestsSubmit ml0 mb0 formDirections__static-btn formDirections__static-btn--sm js-close-formDirections">
                                                 Применить
                                             </div>
                                         </div>
@@ -256,97 +263,99 @@ $this->title = 'Tophotels';
                                         <div>
                                             <span class="formDirections__lb-uppercase bold">Возраст ребенка</span>
                                             <div class="formDirections__price-currencys formDirections__price-currencys--justify">
-                                                <div class="setChildAge1 formDirections__price-currency formDirections__price-currency--sm">
+                                                <div class="formDirections__price-currency formDirections__price-currency--sm">
                                                     <input id="child-age0" name="child-age" type="radio" class="hidden">
-                                                    <label for="child-age0" class="formDirections__price-currency-lb">0</label>
+                                                    <label for="child-age0" data-action="setAge" class="formDirections__price-currency-lb">0</label>
                                                 </div>
-                                                <div class="setChildAge1 formDirections__price-currency formDirections__price-currency--sm">
+                                                <div class="formDirections__price-currency formDirections__price-currency--sm">
                                                     <input id="child-age1" name="child-age" type="radio" class="hidden">
-                                                    <label for="child-age1" class="formDirections__price-currency-lb">1</label>
+                                                    <label for="child-age1" data-action="setAge"  data-action="setAge" class="formDirections__price-currency-lb">1</label>
                                                 </div>
-                                                <div class="setChildAge1 formDirections__price-currency formDirections__price-currency--sm">
+                                                <div class="formDirections__price-currency formDirections__price-currency--sm">
                                                     <input id="child-age2" name="child-age" type="radio" class="hidden">
-                                                    <label for="child-age2" class="formDirections__price-currency-lb">2</label>
+                                                    <label for="child-age2"  data-action="setAge" class="formDirections__price-currency-lb">2</label>
                                                 </div>
-                                                <div class="setChildAge1 formDirections__price-currency formDirections__price-currency--sm">
+                                                <div class="formDirections__price-currency formDirections__price-currency--sm">
                                                     <input id="child-age3" name="child-age" type="radio" class="hidden">
-                                                    <label for="child-age3" class="formDirections__price-currency-lb">3</label>
+                                                    <label for="child-age3"  data-action="setAge" class="formDirections__price-currency-lb">3</label>
                                                 </div>
-                                                <div class="setChildAge1 formDirections__price-currency formDirections__price-currency--sm">
+                                                <div class="formDirections__price-currency formDirections__price-currency--sm">
                                                     <input id="child-age4" name="child-age" type="radio" class="hidden">
-                                                    <label for="child-age4" class="formDirections__price-currency-lb">4</label>
+                                                    <label for="child-age4"  data-action="setAge" class="formDirections__price-currency-lb">4</label>
                                                 </div>
-                                                <div class="setChildAge1 formDirections__price-currency formDirections__price-currency--sm">
+                                                <div class=" formDirections__price-currency formDirections__price-currency--sm">
                                                     <input id="child-age5" name="child-age" type="radio" class="hidden">
-                                                    <label for="child-age5" class="formDirections__price-currency-lb">5</label>
+                                                    <label for="child-age5"  data-action="setAge" class="formDirections__price-currency-lb">5</label>
                                                 </div>
-                                                <div class="setChildAge1 formDirections__price-currency formDirections__price-currency--sm">
+                                                <div class=" formDirections__price-currency formDirections__price-currency--sm">
                                                     <input id="child-age6" name="child-age" type="radio" class="hidden">
-                                                    <label for="child-age6" class="formDirections__price-currency-lb">6</label>
+                                                    <label for="child-age6"  data-action="setAge" class="formDirections__price-currency-lb">6</label>
                                                 </div>
-                                                <div class="setChildAge1 formDirections__price-currency formDirections__price-currency--sm">
+                                                <div class=" formDirections__price-currency formDirections__price-currency--sm">
                                                     <input id="child-age7" name="child-age" type="radio" class="hidden">
-                                                    <label for="child-age7" class="formDirections__price-currency-lb">7</label>
+                                                    <label for="child-age7"  data-action="setAge" class="formDirections__price-currency-lb">7</label>
                                                 </div>
-                                                <div class="setChildAge1 formDirections__price-currency formDirections__price-currency--sm">
+                                                <div class=" formDirections__price-currency formDirections__price-currency--sm">
                                                     <input id="child-age8" name="child-age" type="radio" class="hidden">
-                                                    <label for="child-age8" class="formDirections__price-currency-lb">8</label>
+                                                    <label for="child-age8"  data-action="setAge" class="formDirections__price-currency-lb">8</label>
                                                 </div>
-                                                <div class="setChildAge1 formDirections__price-currency formDirections__price-currency--sm">
+                                                <div class=" formDirections__price-currency formDirections__price-currency--sm">
                                                     <input id="child-age9" name="child-age" type="radio" class="hidden">
-                                                    <label for="child-age9" class="formDirections__price-currency-lb">9</label>
+                                                    <label for="child-age9"  data-action="setAge" class="formDirections__price-currency-lb">9</label>
                                                 </div>
-                                                <div class="setChildAge1 formDirections__price-currency formDirections__price-currency--sm">
+                                                <div class=" formDirections__price-currency formDirections__price-currency--sm">
                                                     <input id="child-age10" name="child-age" type="radio" class="hidden">
-                                                    <label for="child-age10" class="formDirections__price-currency-lb">10</label>
+                                                    <label for="child-age10"  data-action="setAge" class="formDirections__price-currency-lb">10</label>
                                                 </div>
-                                                <div class="setChildAge1 formDirections__price-currency formDirections__price-currency--sm">
+                                                <div class=" formDirections__price-currency formDirections__price-currency--sm">
                                                     <input id="child-age11" name="child-age" type="radio" class="hidden">
-                                                    <label for="child-age11" class="formDirections__price-currency-lb">11</label>
+                                                    <label for="child-age11"  data-action="setAge" class="formDirections__price-currency-lb">11</label>
                                                 </div>
-                                                <div class="setChildAge1 formDirections__price-currency formDirections__price-currency--sm">
+                                                <div class=" formDirections__price-currency formDirections__price-currency--sm">
                                                     <input id="child-age12" name="child-age" type="radio" class="hidden">
-                                                    <label for="child-age12" class="formDirections__price-currency-lb">12</label>
+                                                    <label for="child-age12"  data-action="setAge" class="formDirections__price-currency-lb">12</label>
                                                 </div>
-                                                <div class="setChildAge1 formDirections__price-currency formDirections__price-currency--sm">
+                                                <div class=" formDirections__price-currency formDirections__price-currency--sm">
                                                     <input id="child-age13" name="child-age" type="radio" class="hidden">
-                                                    <label for="child-age13" class="formDirections__price-currency-lb">13</label>
+                                                    <label for="child-age13"  data-action="setAge" class="formDirections__price-currency-lb">13</label>
                                                 </div>
-                                                <div class="setChildAge1 formDirections__price-currency formDirections__price-currency--sm">
+                                                <div class=" formDirections__price-currency formDirections__price-currency--sm">
                                                     <input id="child-age14" name="child-age" type="radio" class="hidden">
-                                                    <label for="child-age14" class="formDirections__price-currency-lb">14</label>
+                                                    <label for="child-age14"  data-action="setAge" class="formDirections__price-currency-lb">14</label>
                                                 </div>
-                                                <div class="setChildAge1 formDirections__price-currency formDirections__price-currency--sm">
+                                                <div class=" formDirections__price-currency formDirections__price-currency--sm">
                                                     <input id="child-age15" name="child-age" type="radio" class="hidden">
-                                                    <label for="child-age15" class="formDirections__price-currency-lb">15</label>
+                                                    <label for="child-age15"  data-action="setAge" class="formDirections__price-currency-lb">15</label>
                                                 </div>
-                                                <div class="setChildAge1 formDirections__price-currency formDirections__price-currency--sm">
+                                                <div class=" formDirections__price-currency formDirections__price-currency--sm">
                                                     <input id="child-age16" name="child-age" type="radio" class="hidden">
-                                                    <label for="child-age16" class="formDirections__price-currency-lb">16</label>
+                                                    <label for="child-age16"  data-action="setAge" class="formDirections__price-currency-lb">16</label>
                                                 </div>
-                                                <div class="setChildAge1 formDirections__price-currency formDirections__price-currency--sm">
+                                                <div class=" formDirections__price-currency formDirections__price-currency--sm">
                                                     <input id="child-age17" name="child-age" type="radio" class="hidden">
-                                                    <label for="child-age17" class="formDirections__price-currency-lb">17</label>
+                                                    <label for="child-age17"  data-action="setAge" class="formDirections__price-currency-lb">17</label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="adultsAmount-inpt">
-                            <input type="hidden" id="child1Age-inpt">
-                            <input type="hidden" id="child2Age-inpt">
-                            <input type="hidden" id="child3Age-inpt">
+
+                            <?= Html::activeHiddenInput ($tourForm, 'adultsAmount', ['id'=>'adultsAmount-inpt'])?>
+                            <?= Html::activeHiddenInput ($tourForm, 'childrenAmount', ['id'=>'childrenAmount-inpt'])?>
+                            <?= Html::activeHiddenInput ($tourForm, 'child1Age', ['id'=>'child1Age-inpt'])?>
+                            <?= Html::activeHiddenInput ($tourForm, 'child2Age', ['id'=>'child2Age-inpt'])?>
+                            <?= Html::activeHiddenInput ($tourForm, 'child3Age', ['id'=>'child3Age-inpt'])?>
                         </div>
                         <div class="tour-selection-field tour-selection-field--price">
                             <div class="bth__inp-block js-show-formDirections">
-                                <span class="bth__inp-lbl ">Цена не более</span>
-                                <span class="bth__inp  "></span>
+                                <span class="bth__inp-lbl active bold">Цена не более</span>
+                                <span class="tourPrice-spn bth__inp  ">не важно</span>
                             </div>
                             <div class="formDirections formDirections--price formDirections--left ">
                                 <div class="formDirections__wrap">
                                     <div class="formDirections__top formDirections__top--white">
-                                        <i class="formDirections__bottom-close"></i>
+                                        <i class="setPrice formDirections__bottom-close"></i>
                                         <div class="formDirections__top-tab super-grey">Стоимость тура</div>
                                     </div>
                                     <div class="formDirections__price-wrap js-act-currencys" style="display: none">
@@ -354,8 +363,7 @@ $this->title = 'Tophotels';
                                             <span class="formDirections__price-lb bold">Выберите валюту</span>
                                             <div class="formDirections__price-currencys">
                                                 <div class="formDirections__price-currency">
-                                                    <input id="currency1-2" name="currency-2" type="radio" class="hidden"
-                                                           checked="">
+                                                    <input id="currency1-2" name="currency-2" type="radio" class="hidden" checked="">
                                                     <label for="currency1-2" class="formDirections__price-currency-lb">
                                                         <span class="formDirections__price-currency-sign"> ₽</span>
                                                         <span class="fz13">Рубль</span>
@@ -374,7 +382,6 @@ $this->title = 'Tophotels';
                                                         <span class="formDirections__price-currency-sign"> $</span>
                                                         <span class="fz13">Доллар</span>
                                                     </label>
-
                                                 </div>
                                                 <div class="formDirections__price-currency">
                                                     <input id="currency4-2" name="currency-2" type="radio" class="hidden">
@@ -382,7 +389,6 @@ $this->title = 'Tophotels';
                                                         <span class="formDirections__price-currency-sign"> ₸ </span>
                                                         <span class="fz13">Тенге</span>
                                                     </label>
-
                                                 </div>
                                                 <div class="formDirections__price-currency">
                                                     <input id="currency5-2" name="currency-2" type="radio" class="hidden">
@@ -396,7 +402,6 @@ $this->title = 'Tophotels';
                                                     <input id="currency6-2" name="currency-2" type="radio" class="hidden">
                                                     <label for="currency6-2" class="formDirections__price-currency-lb">
                                                         <span class="formDirections__price-currency-sign">₴</span>
-
                                                         <span class="fz13">Гривна</span>
                                                     </label>
                                                 </div>
@@ -406,51 +411,34 @@ $this->title = 'Tophotels';
 
                                     <div class="formDirections__price-wrap js-hide-price-inputs">
                                         <div class="formDirections__price-inputs">
-
                                             <div>
-                                                <label for="opt-price2" class="formDirections__price-lb bold">
-                                                    Комфортный бюджет
-                                                </label>
+                                                <label for="opt-price2" class="formDirections__price-lb active">Комфортный бюджет</label>
                                                 <div class="formDirections__price">
-                                                    <input class="bth__inp" id="opt-price2" type="text" value="100 000 ">
-                                                    <div class="formDirections__price-input-bbl js-show-currencys">
-                                                        ₽
-                                                    </div>
+                                                    <?= Html::activeTextInput($tourForm, 'optPrice', ['class'=>'opt-price bth__inp', 'value'=>'не важно'])?>
+                                                    <div class="formDirections__price-input-bbl js-show-currencys">₽</div>
                                                 </div>
                                                 <div class="bth__inp-range-block">
-                                                    <input class="bth__inp-range" step="1000" type="range" value="0" min="0"
-                                                           max="1000000" name="priceBudgetRangeMin">
+                                                    <input class="opt-price bth__inp-range" step="1000" type="range" value="0" min="0" max="1000000" name="priceBudgetRangeMin">
                                                 </div>
                                             </div>
                                             <div>
-                                                <label for="max-price2" class="formDirections__price-lb bold">
-                                                    Максимальный бюджет
-                                                </label>
+                                                <label for="max-price2" class="formDirections__price-lb active">Максимальный бюджет</label>
                                                 <div class="formDirections__price">
-                                                    <input class="bth__inp" id="max-price2" type="text" value="1 000 000 ">
-                                                    <div class="formDirections__price-input-bbl js-show-currencys">
-                                                        ₽
-                                                    </div>
+                                                    <?= Html::activeTextInput($tourForm, 'maxPrice', ['class'=>'max-price bth__inp', 'id'=>'max-price2', 'value'=>'не важно'])?>
+                                                    <div class="formDirections__price-input-bbl js-show-currencys">₽</div>
                                                 </div>
                                                 <div class="bth__inp-range-block">
-                                                    <input class="bth__inp-range" step="1000" type="range" value="0" min="0"
-                                                           max="1000000" name="priceBudgetRangeMax">
+                                                    <input class="max-price bth__inp-range" step="1000" type="range" value="0" min="0" max="1000000" name="priceBudgetRangeMax">
                                                 </div>
                                             </div>
-
                                         </div>
-
-
-                                        <div class="formDirections__static-btn formDirections__static-btn--sm js-close-formDirections">
+                                        <?= Html::activeHiddenInput($tourForm, 'currency', ['id'=>'priceCurrency', 'value'=>'₽'])?>
+                                        <div class="setPrice formDirections__static-btn formDirections__static-btn--sm js-close-formDirections">
                                             Применить
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
 
@@ -469,12 +457,15 @@ $this->title = 'Tophotels';
                             </label>
                         </div>
                     </div>
+
                     <div class=" js-types-search-tours-blocks">
                         <div class="tour-selection-wrap-in tour-selection-wrap-flex">
                             <div class="tour-selection-field tour-selection-field--250 ">
                                 <div class="bth__inp-block">
-                                    <span class="bth__inp-lbl ">Страна поездки</span>
+                                    <span class="bth__inp-lbl bth__inp-lbl--center active">Страна поездки</span>
                                     <div class="bth__inp tour-selection__country  js-show-formDirections">
+                                        <div class="tour-selection__flag lsfw-flag"></div>
+                                        Не важно
                                     </div>
                                     <div class="formDirections w100p" style="display: none;">
                                         <div class="formDirections__wrap w100p">
@@ -483,36 +474,34 @@ $this->title = 'Tophotels';
                                                 <div class="formDirections__top-tab super-grey ">Страна поездки</div>
                                             </div>
                                             <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
-                                                <select id="sumo-direction">
+                                                <select class="sumo-direction">
                                                     <option>Россия</option>
                                                     <option>Украина</option>
-                                                    <option>Беларуссия</option>
+                                                    <option data-id="158">Беларуссия</option>
                                                     <option>Казахстан</option>
                                                     <option>Доминикана</option>
                                                     <option>Турция</option>
                                                     <option>Египет</option>
-                                                    \                                            </select>
+                                                 </select>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="tour-selection-field tour-selection-field--180">
                                 <div class="bth__inp-block js-show-formDirections">
                                     <span class="bth__inp-lbl ">Города</span>
                                     <span class="bth__inp  uppercase "></span>
                                 </div>
-
-
                                 <div class="formDirections w100p" style="display: none;">
                                     <div class="formDirections__wrap w100p">
                                         <div class="formDirections__top  formDirections__top-line">
                                             <i class="formDirections__bottom-close"></i>
-                                            <div class="formDirections__top-tab super-grey ">Страна поездки</div>
+                                            <div class="formDirections__top-tab super-grey ">Город поездки</div>
                                         </div>
-
                                         <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
-                                            <select id="sumo-direction-city">
+                                            <select class="sumo-direction-city">
                                                 <option>Анапа</option>
                                                 <option>Билек</option>
                                                 <option>Сиде</option>
@@ -521,31 +510,23 @@ $this->title = 'Tophotels';
                                                 <option>Симферополь</option>
                                             </select>
                                         </div>
-
                                     </div>
                                 </div>
-
-
                             </div>
                             <div class="tour-selection-field tour-selection-field--200">
                                 <div class="bth__inp-block js-show-formDirections ">
                                     <span class="bth__inp-lbl ">Город вылета</span>
                                     <span class="bth__inp uppercase"></span>
                                 </div>
-
-
                                 <div class="formDirections w100p" style="display: none;">
                                     <div class="formDirections__wrap w100p">
-
                                         <div class="formDirections__top  formDirections__top-line">
-
                                             <i class="formDirections__bottom-close"></i>
                                             <div class="formDirections__top-tab super-grey ">Город вылета</div>
                                         </div>
 
                                         <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
-                                            <select id="sumo-department">
-
+                                            <select class="sumo-department">
                                                 <option>Москва</option>
                                                 <option>Санкт-Петербург</option>
                                                 <option>Абакан</option>
@@ -562,7 +543,6 @@ $this->title = 'Tophotels';
                                     </div>
                                 </div>
                             </div>
-
                             <div class="tour-selection-field tour-selection-field--180">
                                 <div class="bth__inp-block js-show-formDirections js-formDirections--big-mobile">
                                     <span class="bth__inp-lbl ">Параметры отеля</span>
@@ -901,7 +881,6 @@ $this->title = 'Tophotels';
                                                         </div>
                                                     </div>
 
-
                                                     <div class="form-dropdown-stars__item ">
                                                         <div class="rbt-block  ">
                                                             <input type="radio" name="333rating" class="rbt "
@@ -911,7 +890,6 @@ $this->title = 'Tophotels';
                                                             </label>
                                                         </div>
                                                     </div>
-
 
                                                     <div class="form-dropdown-stars__item ">
                                                         <div class="rbt-block  ">
@@ -923,7 +901,6 @@ $this->title = 'Tophotels';
                                                         </div>
                                                     </div>
 
-
                                                     <div class="form-dropdown-stars__item ">
                                                         <div class="rbt-block  ">
                                                             <input type="radio" name="333rating" class="rbt "
@@ -934,7 +911,6 @@ $this->title = 'Tophotels';
                                                         </div>
                                                     </div>
                                                 </div>
-
 
                                                 <div class="formDirections__bottom js-search-kid" style="display: none">
                                                     <div class="formDirections__bottom-blocks">
@@ -956,7 +932,6 @@ $this->title = 'Tophotels';
                                                             </div>
                                                         </div>
 
-
                                                         <div class="form-dropdown-stars__item ">
                                                             <div class="cbx-block   cbx-block--16  ">
                                                                 <input type="checkbox" class="cbx" id="333kid3">
@@ -975,7 +950,6 @@ $this->title = 'Tophotels';
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
                                                 <div class="formDirections__bottom js-search-other" style="display: none">
                                                     <div class="formDirections__bottom-blocks">
@@ -987,8 +961,6 @@ $this->title = 'Tophotels';
                                                                 </label>
                                                             </div>
                                                         </div>
-
-
                                                         <div class="form-dropdown-stars__item ">
                                                             <div class="cbx-block    cbx-block--16 ">
                                                                 <input type="checkbox" class="cbx" id="333other2">
@@ -1006,8 +978,8 @@ $this->title = 'Tophotels';
                                 </div>
                             </div>
                             <span class=" tour-selection-plus  hide-1023 js-add-field">
-                            <i class="fas fa-plus"></i>
-                        </span>
+                                <i class="fas fa-plus"></i>
+                            </span>
                         </div>
 
                         <div class="tour-selection-wrap-in tour-selection-wrap-flex js-show-added-field" style="display: none">
@@ -1022,7 +994,7 @@ $this->title = 'Tophotels';
                                                 <div class="formDirections__top-tab super-grey ">Страна поездки</div>
                                             </div>
                                             <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
-                                                <select id="sumo-direction">
+                                                <select class="sumo-direction">
                                                     <option>Россия</option>
                                                     <option>Украина</option>
                                                     <option>Беларуссия</option>
@@ -1030,63 +1002,27 @@ $this->title = 'Tophotels';
                                                     <option>Доминикана</option>
                                                     <option>Турция</option>
                                                     <option>Египет</option>
-
-                                                    <option>Россия</option>
-                                                    <option>Украина</option>
-                                                    <option>Беларуссия</option>
-                                                    <option>Казахстан</option>
-                                                    <option>Доминикана</option>
-                                                    <option>Турция</option>
-                                                    <option>Египет</option>
-
-                                                    <option>Россия</option>
-                                                    <option>Украина</option>
-                                                    <option>Беларуссия</option>
-                                                    <option>Казахстан</option>
-                                                    <option>Доминикана</option>
-                                                    <option>Турция</option>
-                                                    <option>Египет</option>
-
-                                                    <option>Россия</option>
-                                                    <option>Украина</option>
-                                                    <option>Беларуссия</option>
-                                                    <option>Казахстан</option>
-                                                    <option>Доминикана</option>
-                                                    <option>Турция</option>
-                                                    <option>Египет</option>
-
-
                                                 </select>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                             <div class="tour-selection-field tour-selection-field--180">
                                 <div class="bth__inp-block js-show-formDirections">
-
                                     <span class="bth__inp-lbl ">Города</span>
                                     <span class="bth__inp  uppercase "></span>
                                 </div>
 
-
                                 <div class="formDirections w100p" style="display: none;">
                                     <div class="formDirections__wrap w100p">
-
                                         <div class="formDirections__top  formDirections__top-line">
-
                                             <i class="formDirections__bottom-close"></i>
                                             <div class="formDirections__top-tab super-grey ">Страна поездки</div>
                                         </div>
 
                                         <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
-
-                                            <select id="sumo-direction-city">
-
-
+                                            <select class="sumo-direction-city">
                                                 <option>Анапа</option>
                                                 <option>Билек</option>
                                                 <option>Сиде</option>
@@ -1111,34 +1047,25 @@ $this->title = 'Tophotels';
                                                 <option>Сочи</option>
                                                 <option>Севастополь</option>
                                                 <option>Симферополь</option>
-
-
                                             </select>
                                         </div>
-
                                     </div>
                                 </div>
-
-
                             </div>
                             <div class="tour-selection-field tour-selection-field--200">
                                 <div class="bth__inp-block js-show-formDirections ">
                                     <span class="bth__inp-lbl ">Город вылета</span>
                                     <span class="bth__inp uppercase"></span>
                                 </div>
-
-
                                 <div class="formDirections w100p" style="display: none;">
                                     <div class="formDirections__wrap w100p">
-
                                         <div class="formDirections__top  formDirections__top-line">
-
                                             <i class="formDirections__bottom-close"></i>
                                             <div class="formDirections__top-tab super-grey ">Город вылета</div>
                                         </div>
 
                                         <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
-                                            <select id="sumo-department">
+                                            <select class="sumo-department">
 
                                                 <option>Москва</option>
                                                 <option>Санкт-Петербург</option>
@@ -1160,64 +1087,45 @@ $this->title = 'Tophotels';
                                                 <option>Агзу</option>
                                                 <option>Абакан</option>
                                                 <option>Агзу</option>
-
                                             </select>
                                         </div>
-
                                     </div>
                                 </div>
-
-
                             </div>
                             <div class="tour-selection-field tour-selection-field--180">
                                 <div class="bth__inp-block js-show-formDirections js-formDirections--big-mobile">
                                     <span class="bth__inp-lbl ">Параметры отеля</span>
                                     <span class="bth__inp"></span>
                                 </div>
-
                                 <div class="formDirections   formDirections--big-mobile formDirections--char">
-
                                     <div class="formDirections__top  formDirections__top-line">
                                         <i class="formDirections__bottom-close"></i>
                                         <div class="formDirections__top-tab super-grey">Параметры отеля</div>
                                     </div>
-
-
                                     <div class="formDirections__wrap formDirections__row">
-
                                         <div class="formDirections__wrap-flex">
                                             <div class="formDirections__top  formDirections__top-line">
-
-
                                                 <div class="formDirections__top-tab active js-act-stars">
                                                     Категория
                                                 </div>
-
                                                 <div class="formDirections__top-tab js-act-rating">
-
                                                     Рейтинг
                                                 </div>
                                                 <div class="formDirections__top-tab js-act-hotels">
-
                                                     Питание
                                                 </div>
                                                 <div class="formDirections__top-tab js-act-country">
-
                                                     Расположение
                                                 </div>
                                                 <div class="formDirections__top-tab js-act-kid">
-
                                                     Для детей
                                                 </div>
                                                 <div class="formDirections__top-tab js-act-other">
-
                                                     Прочее
                                                 </div>
-
                                             </div>
                                             <div class="formDirections__wrap-flex-right">
                                                 <div class="formDirections__bottom js-search-country" style="display: none">
-
                                                     <div class="formDirections__bottom-blocks">
                                                         <div class="form-dropdown-stars__item">
                                                             <div class="cbx-block   cbx-block--16 ">
@@ -1226,7 +1134,6 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-catalog-positionckd">
                                                                     <span class="cbx-cnt">Любой тип</span>
                                                                 </label>
-
                                                             </div>
                                                         </div>
 
@@ -1238,7 +1145,6 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-catalog-position1">
                                                                     <span class="cbx-cnt">1-я линия от моря</span>
                                                                 </label>
-
                                                             </div>
                                                             <div class="cbx-block  cbx-block--16   ">
                                                                 <input type="checkbox" class="cbx"
@@ -1246,7 +1152,6 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-catalog-position2">
                                                                     <span class="cbx-cnt">2-я линия от моря </span>
                                                                 </label>
-
                                                             </div>
                                                             <div class="cbx-block   cbx-block--16  ">
                                                                 <input type="checkbox" class="cbx"
@@ -1254,7 +1159,6 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-catalog-position3">
                                                                     <span class="cbx-cnt"> 3-я линия от моря</span>
                                                                 </label>
-
                                                             </div>
                                                             <div class="cbx-block   cbx-block--16  ">
                                                                 <input type="checkbox" class="cbx"
@@ -1262,7 +1166,6 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-catalog-position4">
                                                                     <span class="cbx-cnt">Через дорогу </span>
                                                                 </label>
-
                                                             </div>
                                                         </div>
 
@@ -1274,7 +1177,6 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-catalog-position5">
                                                                     <span class="cbx-cnt">Близко</span>
                                                                 </label>
-
                                                             </div>
                                                             <div class="cbx-block  cbx-block--16  ">
                                                                 <input type="checkbox" class="cbx"
@@ -1282,7 +1184,6 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-catalog-position6">
                                                                     <span class="cbx-cnt">Далеко </span>
                                                                 </label>
-
                                                             </div>
                                                             <div class="cbx-block  cbx-block--16  ">
                                                                 <input type="checkbox" class="cbx"
@@ -1290,7 +1191,6 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-catalog-position7">
                                                                     <span class="cbx-cnt"> Рядом</span>
                                                                 </label>
-
                                                             </div>
                                                         </div>
 
@@ -1302,7 +1202,6 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-catalog-position8">
                                                                     <span class="cbx-cnt">Близко</span>
                                                                 </label>
-
                                                             </div>
                                                             <div class="cbx-block  cbx-block--16  ">
                                                                 <input type="checkbox" class="cbx"
@@ -1310,7 +1209,6 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-catalog-position9">
                                                                     <span class="cbx-cnt">Далеко </span>
                                                                 </label>
-
                                                             </div>
                                                             <div class="cbx-block  cbx-block--16  ">
                                                                 <input type="checkbox" class="cbx"
@@ -1318,7 +1216,6 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-catalog-position10">
                                                                     <span class="cbx-cnt"> Рядом</span>
                                                                 </label>
-
                                                             </div>
                                                         </div>
 
@@ -1330,7 +1227,6 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-catalog-position11">
                                                                     <span class="cbx-cnt">Близко к центру</span>
                                                                 </label>
-
                                                             </div>
                                                             <div class="cbx-block  cbx-block--16  ">
                                                                 <input type="checkbox" class="cbx"
@@ -1338,7 +1234,6 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-catalog-position12">
                                                                     <span class="cbx-cnt">Окраина </span>
                                                                 </label>
-
                                                             </div>
                                                             <div class="cbx-block  cbx-block--16  ">
                                                                 <input type="checkbox" class="cbx"
@@ -1346,17 +1241,12 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-catalog-position13">
                                                                     <span class="cbx-cnt"> Центр</span>
                                                                 </label>
-
                                                             </div>
                                                         </div>
-
-
                                                     </div>
                                                 </div>
                                                 <div class="formDirections__bottom js-search-hotels" style="display: none">
-
                                                     <div class="formDirections__bottom-blocks">
-
                                                         <div class="form-dropdown-stars__item ">
                                                             <div class="cbx-block    cbx-block--16 ">
                                                                 <input type="checkbox" class="cbx" id="added-food-typeckd"
@@ -1364,7 +1254,6 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-food-typeckd">
                                                                     <span class="cbx-cnt">Любое питание</span>
                                                                 </label>
-
                                                             </div>
                                                         </div>
                                                         <div class="form-dropdown-stars__item ">
@@ -1373,7 +1262,6 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-food-type1">
                                                                     <span class="cbx-cnt">AI Все включено</span>
                                                                 </label>
-
                                                             </div>
                                                         </div>
                                                         <div class="form-dropdown-stars__item ">
@@ -1382,7 +1270,6 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-food-type2">
                                                                     <span class="cbx-cnt">FB  Завтрак + обед + ужин</span>
                                                                 </label>
-
                                                             </div>
                                                         </div>
                                                         <div class="form-dropdown-stars__item ">
@@ -1391,7 +1278,6 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-food-type3">
                                                                     <span class="cbx-cnt">HB  Завтрак +  ужин</span>
                                                                 </label>
-
                                                             </div>
                                                         </div>
                                                         <div class="form-dropdown-stars__item ">
@@ -1400,7 +1286,6 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-food-type4">
                                                                     <span class="cbx-cnt"> BB Завтрак</span>
                                                                 </label>
-
                                                             </div>
                                                         </div>
                                                         <div class="form-dropdown-stars__item ">
@@ -1409,16 +1294,11 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-food-type5">
                                                                     <span class="cbx-cnt">RO Без питания</span>
                                                                 </label>
-
                                                             </div>
                                                         </div>
-
-
                                                     </div>
-
                                                 </div>
                                                 <div class="formDirections__bottom js-search-stars">
-
                                                     <div class="formDirections__bottom-blocks">
                                                         <div class="form-dropdown-stars__item ">
                                                             <div class="cbx-block  cbx-block--16  ">
@@ -1428,7 +1308,6 @@ $this->title = 'Tophotels';
                                                                     <span class="cbx-cnt">Любая категория</span>
                                                                 </label>
                                                             </div>
-
                                                         </div>
                                                         <div class="form-dropdown-stars__item ">
                                                             <div class="cbx-block  cbx-block--16  ">
@@ -1441,7 +1320,6 @@ $this->title = 'Tophotels';
                                                                     <i class="fa fa-star"></i>
                                                                 </label>
                                                             </div>
-
                                                         </div>
                                                         <div class="form-dropdown-stars__item">
                                                             <div class="cbx-block    cbx-block--16">
@@ -1507,10 +1385,7 @@ $this->title = 'Tophotels';
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="formDirections__bottom-blocks js-search-rating"
-                                                     style="display: none">
-
-
+                                                <div class="formDirections__bottom-blocks js-search-rating" style="display: none">
                                                     <div class="form-dropdown-stars__item ">
                                                         <div class="rbt-block  ">
                                                             <input type="radio" name="added-333rating" class="rbt "
@@ -1567,7 +1442,6 @@ $this->title = 'Tophotels';
                                                         </div>
                                                     </div>
 
-
                                                     <div class="form-dropdown-stars__item ">
                                                         <div class="rbt-block  ">
                                                             <input type="radio" name="added-333rating" class="rbt "
@@ -1578,7 +1452,6 @@ $this->title = 'Tophotels';
                                                         </div>
                                                     </div>
 
-
                                                     <div class="form-dropdown-stars__item ">
                                                         <div class="rbt-block  ">
                                                             <input type="radio" name="added-333rating" class="rbt "
@@ -1588,7 +1461,6 @@ $this->title = 'Tophotels';
                                                             </label>
                                                         </div>
                                                     </div>
-
 
                                                     <div class="form-dropdown-stars__item ">
                                                         <div class="rbt-block  ">
@@ -1601,38 +1473,29 @@ $this->title = 'Tophotels';
                                                     </div>
                                                 </div>
                                                 <div class="formDirections__bottom js-search-kid" style="display: none">
-
                                                     <div class="formDirections__bottom-blocks">
-
                                                         <div class="form-dropdown-stars__item ">
                                                             <div class="cbx-block   cbx-block--16  ">
                                                                 <input type="checkbox" class="cbx" id="added-chl1">
                                                                 <label class="label-cbx" for="added-chl1">
                                                                     <span class="cbx-cnt">ДЕТСКИЙ ГОРШОК</span>
                                                                 </label>
-
                                                             </div>
                                                         </div>
-
-
                                                         <div class="form-dropdown-stars__item ">
                                                             <div class="cbx-block    cbx-block--16 ">
                                                                 <input type="checkbox" class="cbx" id="added-chl2">
                                                                 <label class="label-cbx" for="added-chl2">
                                                                     <span class="cbx-cnt">  ДЕТСКИЕ БЛЮДА</span>
                                                                 </label>
-
                                                             </div>
                                                         </div>
-
-
                                                         <div class="form-dropdown-stars__item ">
                                                             <div class="cbx-block   cbx-block--16  ">
                                                                 <input type="checkbox" class="cbx" id="added-chl3">
                                                                 <label class="label-cbx" for="added-chl3">
                                                                     <span class="cbx-cnt">ПЕЛЕНАЛЬНЫЙ СТОЛИК</span>
                                                                 </label>
-
                                                             </div>
                                                         </div>
 
@@ -1642,28 +1505,20 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-chl4">
                                                                     <span class="cbx-cnt">AНИМАЦИЯ</span>
                                                                 </label>
-
                                                             </div>
                                                         </div>
-
-
                                                     </div>
-
                                                 </div>
                                                 <div class="formDirections__bottom js-search-other" style="display: none">
-
                                                     <div class="formDirections__bottom-blocks">
-
                                                         <div class="form-dropdown-stars__item ">
                                                             <div class="cbx-block   cbx-block--16  ">
                                                                 <input type="checkbox" class="cbx" id="added-other1">
                                                                 <label class="label-cbx" for="added-other1">
                                                                     <span class="cbx-cnt">ВЕСЕЛАЯ АНИМАЦИЯ</span>
                                                                 </label>
-
                                                             </div>
                                                         </div>
-
 
                                                         <div class="form-dropdown-stars__item ">
                                                             <div class="cbx-block    cbx-block--16 ">
@@ -1671,22 +1526,15 @@ $this->title = 'Tophotels';
                                                                 <label class="label-cbx" for="added-other2">
                                                                     <span class="cbx-cnt">  ТУСОВКИ РЯДОМ С ОТЕЛЕМ </span>
                                                                 </label>
-
                                                             </div>
                                                         </div>
-
-
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="formDirections__btn-orange js-close-formDirections">Применить</div>
                                 </div>
-
-
                             </div>
                             <span class=" tour-selection-plus js-del-field"><i class="fas fa-minus"></i></span>
                         </div>
@@ -1702,16 +1550,12 @@ $this->title = 'Tophotels';
 
                                 <div class="formDirections w100p" style="display: none;">
                                     <div class="formDirections__wrap w100p">
-
                                         <div class="formDirections__top  formDirections__top-line">
-
                                             <i class="formDirections__bottom-close"></i>
                                             <div class="formDirections__top-tab super-grey ">Город вылета</div>
                                         </div>
-
                                         <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
-                                            <select id="sumo-department">
-
+                                            <select class="sumo-department">
                                                 <option>Москва</option>
                                                 <option>Санкт-Петербург</option>
                                                 <option>Абакан</option>
@@ -1732,44 +1576,34 @@ $this->title = 'Tophotels';
                                                 <option>Агзу</option>
                                                 <option>Абакан</option>
                                                 <option>Агзу</option>
-
                                             </select>
                                         </div>
-
                                     </div>
                                 </div>
 
                             </div>
                             <div class="tour-selection-field tour-selection-field--250">
                                 <div class="bth__inp-block js-show-formDirections">
-
                                     <span class="bth__inp-lbl ">Питание</span>
                                     <span class="bth__inp">
                                 </span>
                                 </div>
                                 <div class="formDirections">
-
                                     <div class="formDirections__top  formDirections__top-line">
                                         <i class="formDirections__bottom-close"></i>
                                         <div class="formDirections__top-tab super-grey">
                                             Питание
                                         </div>
                                     </div>
-
-
                                     <div class="formDirections__wrap">
-
                                         <div class="formDirections__bottom ">
-
                                             <div class="formDirections__bottom-blocks">
-
                                                 <div class="form-dropdown-stars__item ">
                                                     <div class="cbx-block    cbx-block--16 ">
                                                         <input type="checkbox" class="cbx" id="8eat2-type1">
                                                         <label class="label-cbx" for="8eat2-type1">
                                                             <span class="cbx-cnt">AI Все включено</span>
                                                         </label>
-
                                                     </div>
                                                 </div>
                                                 <div class="form-dropdown-stars__item ">
@@ -1778,7 +1612,6 @@ $this->title = 'Tophotels';
                                                         <label class="label-cbx" for="8eat2-type2">
                                                             <span class="cbx-cnt">FB  Завтрак + обед + ужин</span>
                                                         </label>
-
                                                     </div>
                                                 </div>
                                                 <div class="form-dropdown-stars__item ">
@@ -1787,7 +1620,6 @@ $this->title = 'Tophotels';
                                                         <label class="label-cbx" for="8eat2-type3">
                                                             <span class="cbx-cnt">HB  Завтрак +  ужин</span>
                                                         </label>
-
                                                     </div>
                                                 </div>
                                                 <div class="form-dropdown-stars__item ">
@@ -1796,7 +1628,6 @@ $this->title = 'Tophotels';
                                                         <label class="label-cbx" for="8eat2-type4">
                                                             <span class="cbx-cnt"> BB Завтрак</span>
                                                         </label>
-
                                                     </div>
                                                 </div>
                                                 <div class="form-dropdown-stars__item ">
@@ -1805,27 +1636,19 @@ $this->title = 'Tophotels';
                                                         <label class="label-cbx" for="8eat2-type5">
                                                             <span class="cbx-cnt">RO Без питания</span>
                                                         </label>
-
                                                     </div>
                                                 </div>
                                                 <div class="formDirections__static-btn js-close-formDirections">Применить
                                                 </div>
-
-
                                             </div>
-
                                         </div>
-
-
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                         <div class="tour-selection-wrap-in tour-selection-wrap-flex ">
                             <div class="tour-selection-field tour-selection-field--740">
                                 <div class="bth__inp-block js-show-formDirections js-formDirections--big-mobile">
-
                                     <span class="bth__inp-lbl ">Добавить отель</span>
                                     <span class="bth__inp"></span>
                                 </div>
@@ -1833,7 +1656,6 @@ $this->title = 'Tophotels';
                                 <div class="formDirections formDirections--big-mobile w100p">
                                     <div class="formDirections__wrap w100p">
                                         <div class="formDirections__top formDirections__top--white">
-
                                             <i class="formDirections__bottom-close"></i>
                                             <div class="formDirections__top-tab super-grey">
                                                 Добавить отель
@@ -1842,12 +1664,10 @@ $this->title = 'Tophotels';
 
 
                                         <div class="formDirections__bottom">
-
                                             <div class="formDirections__search">
                                                 <input class="bth__inp" type="text" placeholder="Поиск отеля">
                                             </div>
                                             <div class="formDirections__wrap  formDirections__bottom-blocks-cut">
-
                                                 <div class="formDirections__bottom-item">
                                                     <div class="formDirections__city">
                                                         <div class=" lsfw-flag lsfw-flag--30w lsfw-flag-1">
@@ -1880,9 +1700,7 @@ $this->title = 'Tophotels';
                                                         <div class=" lsfw-flag lsfw-flag--30w lsfw-flag-1">
                                                             <div class="hint">Россия</div>
                                                         </div>
-
                                                         <span class="formDirections__cut"> Resort &amp; Spa Mriya</span> 5*
-
                                                     </div>
                                                     <span class="formDirections__count">Никитари</span>
                                                 </div>
@@ -1918,13 +1736,10 @@ $this->title = 'Tophotels';
                                                         <div class=" lsfw-flag lsfw-flag--30w lsfw-flag-1">
                                                             <div class="hint">Россия</div>
                                                         </div>
-
                                                         <span class="formDirections__cut"> Resort &amp; Spa Mriya</span> 5*
-
                                                     </div>
                                                     <span class="formDirections__count">Никитари</span>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -1938,28 +1753,22 @@ $this->title = 'Tophotels';
                              style="display: none">
                             <div class="tour-selection-field tour-selection-field--740">
                                 <div class="bth__inp-block js-show-formDirections js-formDirections--big-mobile">
-
                                     <span class="bth__inp-lbl ">Добавить отель</span>
                                     <span class="bth__inp"></span>
                                 </div>
                                 <div class="formDirections formDirections--big-mobile w100p">
                                     <div class="formDirections__wrap w100p">
                                         <div class="formDirections__top formDirections__top--white">
-
                                             <i class="formDirections__bottom-close"></i>
                                             <div class="formDirections__top-tab super-grey">
                                                 Добавить отель
                                             </div>
                                         </div>
-
-
                                         <div class="formDirections__bottom">
-
                                             <div class="formDirections__search">
                                                 <input class="bth__inp" type="text" placeholder="Поиск отеля">
                                             </div>
                                             <div class="formDirections__wrap  formDirections__bottom-blocks-cut">
-
                                                 <div class="formDirections__bottom-item">
                                                     <div class="formDirections__city">
                                                         <div class=" lsfw-flag lsfw-flag--30w lsfw-flag-1">
@@ -1992,9 +1801,7 @@ $this->title = 'Tophotels';
                                                         <div class=" lsfw-flag lsfw-flag--30w lsfw-flag-1">
                                                             <div class="hint">Россия</div>
                                                         </div>
-
                                                         <span class="formDirections__cut"> Resort &amp; Spa Mriya</span> 5*
-
                                                     </div>
                                                     <span class="formDirections__count">Никитари</span>
                                                 </div>
@@ -2030,35 +1837,26 @@ $this->title = 'Tophotels';
                                                         <div class=" lsfw-flag lsfw-flag--30w lsfw-flag-1">
                                                             <div class="hint">Россия</div>
                                                         </div>
-
                                                         <span class="formDirections__cut"> Resort &amp; Spa Mriya</span> 5*
-
                                                     </div>
                                                     <span class="formDirections__count">Никитари</span>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                             <span class=" tour-selection-plus  js-del-hotel"><i class="fas fa-minus"></i></span>
                         </div>
-
-
                     </div>
                     <div class="tour-selection-wrap-in">
                         <div class="bth__ta-resizable-wrap">
                             <div class="bth__ta-resizable" contenteditable=""></div>
-
                             <span class="bth__ta-resizable-hint">Дополнительные пожелания</span>
-
                         </div>
                     </div>
                     <div class="tour-selection-wrap-in">
-                        <div class=" bth__btn  bth__btn--fill bth__loader">
+                        <div id="createLead" class=" bth__btn  bth__btn--fill bth__loader">
                             Сформировать заявку
                             <div class=" bth__loader-spin">
                                 <i class="fas fa-circle"></i>
@@ -2066,19 +1864,13 @@ $this->title = 'Tophotels';
                                 <i class="fas fa-circle"></i>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
-
+                <?php ActiveForm::end();?>
             </div>
             <!--Кастомный тур-->
             <div class="panel" id="formPanel" style="display: none">
-                <?php $form = ActiveForm::begin([
-                    'method' => 'post',
-                    //'action' => ['tophotels/help-selection#form'],
-                    'id' => 'CustomTourForm'
-                ]) ?>
+                <?php $form = ActiveForm::begin(['method' => 'post', 'id' => 'CustomTourForm']) ?>
                 <div class="bth__cnt uppercase">Пожалуйста, укажите параметры вашей поездки</div>
                 <div class="tour-selection-wrap">
                     <div class="tour-selection-wrap-in">

@@ -19,6 +19,7 @@ mytour.searchTours.formNights = function() {
     this.dates = $("div[data-d]");
     this.startNum =  parseInt(this.start.attr('data-d'));
     this.endNum = parseInt(this.end.attr('data-d'));
+    this.nightsRange = null;
     this.selecting = false;
 
     var self = this;
@@ -37,9 +38,10 @@ mytour.searchTours.formNights = function() {
         for(var i = this.startNum + 1; i < this.endNum; i++)
             $('div[data-d='+i+']').addClass('selected');
 
-        $('#nightsAmount').val(this.startNum + " - " + this.endNum);
+        self.nightsRange = this.startNum + " - " + this.endNum;
+        $('#nightsAmount').val(self.nightsRange);
         $('#nights-lbl').addClass('active');
-        $('#nights-spn').text(this.startNum + " - " + this.endNum)
+        $('#nights-spn').text(self.nightsRange)
     };
 
     this.setNights();

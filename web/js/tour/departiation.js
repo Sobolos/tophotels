@@ -43,6 +43,8 @@ mytour.searchTours.formDate = function(params, searchReq) {
     this.datepicker = $('#datePicker');
     this.pickerBlock = null;
 
+    this.departiarionDate = null;
+
     // Загрузка параметров
     if (typeof params !== 'undefined') {
         for (var p in params) {
@@ -70,6 +72,7 @@ mytour.searchTours.formDate = function(params, searchReq) {
             $('#departDates').val(newValue.newDate);
             $('#dates-lbl').addClass('active');
             $('#dates-spn').text(newValue.newDate);
+            self.departiarionDate = newValue.newDate;
             self.popupBlock.removeClass('d-ib');
             self.popupLabel.removeClass('focus');
         }

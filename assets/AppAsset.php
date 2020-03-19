@@ -59,12 +59,13 @@ class AppAsset extends AssetBundle
 
         "js/tour/date-function.js",
         "js/tour/main.js",
-        "js/tour/tour.js",
         "js/tour/departiation.js",
         "js/tour/guests.js",
         "js/tour/price.js",
         "js/tour/nights.js",
+        "js/tour/direction.js",
         "js/tour/tour_inputs.js",
+        "js/tour/tour.js",
 
         "js/custom_tour/custom_tour.js",
         "js/custom_tour/formHints.js",

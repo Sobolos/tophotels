@@ -2,6 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$commonDB = require __DIR__ . '/commonDB.php';
 
 $config = [
     'id' => 'basic',
@@ -57,6 +58,7 @@ $config = [
             ],
         ],
         'db' => $db,
+        'commonDB' => $commonDB,
 
         'urlManager' => [
             'enablePrettyUrl' => true,

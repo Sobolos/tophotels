@@ -1,3 +1,5 @@
+var TourParams = {};
+
 $(document).ready(function () {
     $('.formDirections__bottom-close, .formDirections__close-red, .js-close-formDirections, .formDirections__close-abs').on('click', function () {
         $(this).closest('.formDirections').hide();
@@ -18,21 +20,6 @@ $(document).ready(function () {
     });
 
     /*контрол параметров*/
-    $('.js-show-currencys').on('click', function () {
-        $(this).closest('.formDirections').find('.js-hide-price-inputs').hide();
-        $(this).closest('.formDirections').find('.js-act-currencys').show();
-    });
-
-    $('.js-act-currencys .formDirections__price-currency').on('click', function () {
-        $(this).closest('.formDirections').find('.js-hide-price-inputs').show();
-        $(this).closest('.formDirections__price-wrap').hide();
-
-    });
-    $('.formDirections__price-currency').on('click', function () {
-        var valCurrency = $(this).find('.formDirections__price-currency-lb .formDirections__price-currency-sign').text();
-        $(this).closest('.formDirections').find('.formDirections__price-input-bbl').text(valCurrency);
-
-    });
 
     $('.formDirections .js-act-country').on('click', function () {
         $(this).closest('.formDirections').find('.js-search-country').show();
@@ -196,7 +183,7 @@ $(document).ready(function () {
     });
 
     //Направление города
-    var sumoDirectionCity= $('select[id="sumo-direction-city"]');
+    var sumoDirectionCity= $('select[class="sumo-direction-city"]');
     sumoDirectionCity.SumoSelect({
         search: true,
         forceCustomRendering: true
@@ -205,16 +192,20 @@ $(document).ready(function () {
     sumoDirectionCity.next().next().css('top', '0').css('position', 'relative');
 
     //Направление
-    var sumoDirection= $('select[id="sumo-direction"]');
+    var sumoDirection= $('select[class="sumo-direction"]');
     sumoDirection.SumoSelect({
         search: true,
         forceCustomRendering: true
     });
     sumoDirection.parent().addClass('open');
     sumoDirection.next().next().css('top', '0').css('position', 'relative');
+    sumoDirection.on('sumo:closed', function() {
+        // Do stuff here
+        console.log("Drop down opened")
+    });
 
     //Список городов вылета
-    var sumoListCity = $('select[id="sumo-list-city"]');
+    var sumoListCity = $('select[class="sumo-list-city"]');
     sumoListCity.SumoSelect({
         search: true,
         forceCustomRendering: true
@@ -224,7 +215,7 @@ $(document).ready(function () {
 
 
     //Город вылета
-    var sumoDepartment = $('select[id="sumo-department"]');
+    var sumoDepartment = $('select[class="sumo-department"]');
     sumoDepartment.SumoSelect({
         search: true,
         forceCustomRendering: true
@@ -232,15 +223,16 @@ $(document).ready(function () {
     sumoDepartment.parent().addClass('open');
     sumoDepartment.next().next().css('top', '0').css('position', 'relative');
 
-    var formDateHelp1 = new mytour.searchTours.formDate({
+    TourParams.formDateHelp1 = new mytour.searchTours.formDate({
         pickerBlockId: 'js-mt-filter-dtHelp1',
         popupBlockId: 'mtIdxFormDatePPHelp1',
         popupBlock: $('#mtIdxFormDatePPHelp1'),
         datepicker: $('#mtIdxDateHelp1')
     }, mytour.searchTours.main.request);
-
-    var formNights = new mytour.searchTours.formNights();
-    var formGuests = new mytour.searchTours.formGuests();
+    TourParams.formNights = new mytour.searchTours.formNights();
+    TourParams.formGuests = new mytour.searchTours.formGuests();
+    TourParams.formPrices = new mytour.searchTours.formPrices();
+    TourParams.formDirections = new mytour.searchTours.formDirections();
 });
 $(document).on('click', function (e) {
     var $target = $(e.target);
