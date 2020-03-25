@@ -10,10 +10,10 @@ class Leads extends ActiveRecord
 {
     public function getAllLeads($pagination)
     {
-        return self::find()->orderBy('leadId')
+        return self::find()->orderBy('Id')
             ->offset($pagination->offset)
             ->limit($pagination->limit)
-            ->orderBy('leadId DESC')
+            ->orderBy('Id DESC')
             ->all();
     }
 }

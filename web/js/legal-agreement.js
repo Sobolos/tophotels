@@ -13,14 +13,12 @@ $(function () {
 
     $('#usage-role').click(function () {
         line($(this));
-        _hashState('#usage-role');
         $('#usage-rolePanel').show();
         $('#confidentialityPanel').hide();
     });
 
     $('#confidentiality').click(function () {
         line($(this));
-        _hashState('#confidentiality');
         $('#usage-rolePanel').hide();
         $('#confidentialityPanel').show();
     });
@@ -29,13 +27,11 @@ $(function () {
 
     $('#agreement').click(function () {
         line($(this));
-        _hashState('#agreement');
         $('#agreementPanel').show();
         $('#siteRolePanel').hide();
     });
     $('#siteRole').click(function () {
         line($(this));
-        _hashState('#siteRole');
         $('#agreementPanel').hide();
         $('#siteRolePanel').show();
     });
@@ -52,23 +48,6 @@ $(function () {
         }, 300);
     };
 
-    var _hashState = function (_hash) {
-        if (history.pushState) {
-            history.pushState(null, null, _hash);
-        }
-        else {
-            location.hash = _hash;
-        }
-    };
-
-    if (!window.location.hash)
-        $('.agreement-pp__tab.active').first().click();
-    else
-        $(window.location.hash).click();
-    $(window).bind('hashchange', function () {
-        $(window.location.hash).click();
-    });
-
     $('.p-agreement-pp').magnificPopup({
         type: 'inline',
         preloader: false,
@@ -84,8 +63,9 @@ $(function () {
         focus: '#username',
         modal: true
     });
+
     $('.legal-information-pp').on('click', function () {
-        $('html').css('overflow', 'hidden');
+        $('html').css('overflow');
     });
 
     $('.p-agreement-pp.agree').on('click', function () {
@@ -95,4 +75,10 @@ $(function () {
     $('.p-agreement-pp.site-role').on('click', function () {
         $('#siteRole').click();
     });
+
+    $('#agreed').on('click', function (e) {
+        "use strict";
+        e.preventDefault();
+        $.magnificPopup.close();
+    })
 });

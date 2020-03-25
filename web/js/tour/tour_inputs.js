@@ -12,11 +12,15 @@ $(document).ready(function () {
     $('.js-type2').on('click', function () {
         $('.js-types-search-tours-blocks').hide();
         $('.js-types-search-hotel-blocks').show();
+        $('#InputTourType').val('0');
+        TourParams.tourType = 0;
     });
 
     $('.js-type1').on('click', function () {
         $('.js-types-search-tours-blocks').show();
         $('.js-types-search-hotel-blocks').hide();
+        $('#InputTourType').val('1');
+        TourParams.tourType = 1;
     });
 
     /*контрол параметров*/
@@ -123,24 +127,57 @@ $(document).ready(function () {
     });
 
     //Добавляем и удаляем контролы
+    ////добавить контролы тура
     $('.js-add-field').on('click', function () {
-        $('.js-show-added-field').show();
+        var blok2 = $(this).parent().parent().next();
+        var blok3 = $(this).parent().parent().next().next();
+        if(blok2.is(':visible')){
+            blok3.show();
+            TourParams.selectTour3 = new mytour.searchTours.formDirectionsTour($('#selectTour3'));
+            console.log(TourParams);
+        }
+        else{
+            blok2.show();
+            TourParams.selectTour2 = new mytour.searchTours.formDirectionsTour($('#selectTour2'));
+        }
     });
+    ////удалить контролы тура
     $('.js-del-field').on('click', function () {
-        $('.js-show-added-field').hide();
+        var parent = $(this).parent().parent();
+        parent.hide();
+        parent.find('input[type=hidden]').val("");
+        if(parent.id === "selectTour2")
+            TourParams.selectTour2 = null;
+        if(parent.id === "selectTour3")
+            TourParams.selectTour3 = null;
     });
 
+    ////добавить контролы отеля
     $('.js-add-hotel ').on('click', function () {
-        $('.js-show-add-hotel').show();
+        var blok2 = $(this).parent().parent().next();
+        var blok3 = $(this).parent().parent().next().next();
+        if(blok2.is(':visible')){
+            blok3.show();
+            TourParams.selectHotel3 = new mytour.searchTours.formDirectionsHotel($('#selectHotel3'));
+        }
+        else{
+            blok2.show();
+            TourParams.selectHotel2 = new mytour.searchTours.formDirectionsHotel($('#selectHotel2'));
+        }
     });
 
     $('.js-del-hotel ').on('click', function () {
-        $('.js-show-add-hotel').hide();
+        var parent = $(this).parent().parent();
+        parent.hide();
+        parent.find('input[type=hidden]').val("");
+        if(parent.id === "selectTour2")
+            TourParams.selectHotel2 = null;
+        if(parent.id === "selectTour3")
+            TourParams.selectHotel3 = null;
     });
 
 
     // Большие контролы
-
     var windowWidth = Math.max($(window).width(), window.innerWidth);
     if (windowWidth <= 509) {
         // При открытии закрыть табы
@@ -151,17 +188,8 @@ $(document).ready(function () {
             $('html, body').css('overflow', 'auto')
         });
     }
-    $('.bth__ta-resizable').focus(function () {
-        $('.bth__ta-resizable-hint').addClass('active');
-        $(this).addClass('focus');
-    });
-    $('.bth__ta-resizable').blur(function () {
-        if (!$(this).text()) {
 
-            $('.bth__ta-resizable-hint').removeClass('active');
-            $(this).removeClass('focus');
-        }
-    });$('.formDirections_plus-circle').on('click', function () {
+    $('.formDirections_plus-circle').on('click', function () {
         $(this).toggleClass('active');
         $(this).closest('.formDirections__bottom-item').next().toggle()
     });
@@ -180,6 +208,22 @@ $(document).ready(function () {
 
     $(document).on('click', '.js-lsfw-ppdb-close', function(){
         $(this).closest('.formDirections').removeClass('d-ib');
+    });
+
+    $('#countryDirection1').focus(function () {
+        $('.bth__ta-resizable-hint').addClass('active');
+        $(this).addClass('focus');
+    });
+
+    $('#countryDirection1').blur(function () {
+        if (!$(this).text()) {
+            $('.bth__ta-resizable-hint').removeClass('active');
+            $(this).removeClass('focus');
+        }
+    });
+
+    $('#countryDirection1').on('input', function () {
+        TourParams.additionalWishes = $(this).val();
     });
 
     //Направление города
@@ -223,7 +267,27 @@ $(document).ready(function () {
     sumoDepartment.parent().addClass('open');
     sumoDepartment.next().next().css('top', '0').css('position', 'relative');
 
-    TourParams.formDateHelp1 = new mytour.searchTours.formDate({
+    var sumoDepartmentHotel = $('select[class="sumo-hotel"]');
+    sumoDepartment.SumoSelect({
+        search: true,
+        forceCustomRendering: true
+    });
+    sumoDepartmentHotel.parent().addClass('open');
+    sumoDepartmentHotel.next().next().css('top', '0').css('position', 'relative');
+
+    $('#tourParametrs').focus(function () {
+        $('.bth__ta-resizable-hint').addClass('active');
+        $(this).addClass('focus');
+    });
+    $('#tourParametrs').blur(function () {
+        if (!$(this).text()) {
+
+            $('.bth__ta-resizable-hint').removeClass('active');
+            $(this).removeClass('focus');
+        }
+    });
+
+    TourParams.formDate = new mytour.searchTours.formDate({
         pickerBlockId: 'js-mt-filter-dtHelp1',
         popupBlockId: 'mtIdxFormDatePPHelp1',
         popupBlock: $('#mtIdxFormDatePPHelp1'),
@@ -232,7 +296,8 @@ $(document).ready(function () {
     TourParams.formNights = new mytour.searchTours.formNights();
     TourParams.formGuests = new mytour.searchTours.formGuests();
     TourParams.formPrices = new mytour.searchTours.formPrices();
-    TourParams.formDirections = new mytour.searchTours.formDirections();
+    TourParams.selectTour1 = new mytour.searchTours.formDirectionsTour($('#selectTour1'));
+    TourParams.selectHotel1 = new mytour.searchTours.formDirectionsHotel($('#selectHotel1'));
 });
 $(document).on('click', function (e) {
     var $target = $(e.target);

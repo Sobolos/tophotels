@@ -1,4 +1,13 @@
+//возвращает началтный период дат вылетов
 function makeRange() {
+
+    //ставим ноль в начале если дата однозначное число
+    function putZero(date) {
+        if(date.toString().length === 1)
+            return "0"+date;
+        else return date;
+    }
+
     var today = new Date();
 
     var year = today.getFullYear();
@@ -8,8 +17,56 @@ function makeRange() {
     var from = new Date(year, mounth + 1, day + 14);
     var to = new Date(year, mounth + 1, day + 21);
 
-    return from.getFullYear() + '-' + from.getMonth() + '-' + from.getDate() + ' - ' + to.getFullYear() + '-' + to.getMonth() + '-' + to.getDate();
+    var fromYear = from.getFullYear();
+    var fromMounth = putZero(from.getMonth());
+    var fromDay = putZero(from.getDate());
+
+    var toYear = to.getFullYear();
+    var toMounth = putZero(to.getMonth());
+    var toDay = putZero(to.getDate());
+
+    return fromYear + '-' + fromMounth + '-' + fromDay + ' - ' + toYear + '-' + toMounth + '-' + toDay;
 }
+
+function getWeekDay(date) {
+    var days = [
+        'вс',
+        'пн',
+        'вт',
+        'ср',
+        'чт',
+        'пт',
+        'сб'
+    ];
+    var d = new Date(date);
+    var n = d.getDay();
+    return days[n];
+}
+
+function getText(n) {
+    var lastFigure = n % 10;;
+    if (n >= 11 && n <= 15)
+    {
+        return 'Дней';
+    }
+    else
+    {
+        if (lastFigure === 1) return 'день';
+        if (lastFigure > 1 && lastFigure < 5) return 'дня';
+        if (lastFigure === 0 || lastFigure >= 5) return 'дней';
+    }
+}
+
+function getDifference(start, end) {
+    var startDate = new Date(start);
+    var endDate = new Date(end);
+
+    var diff =  Math.ceil((endDate.getTime() - startDate.getTime()) / 1000 / 60 / 60 / 24);
+    var text = getText(diff);
+
+    return  diff + " " + text;
+}
+
 "use strict";
 
 if (typeof mytour === "undefined") {
@@ -69,9 +126,16 @@ mytour.searchTours.formDate = function(params, searchReq) {
         pickerBlockId: self.pickerBlockId,
 
         onChange: function (newValue) {
-            $('#departDates').val(newValue.newDate);
+            var dates = newValue.newDate.split(' - ');
+            var weekDay = getWeekDay(dates[0]);
+
+            var diff = getDifference(dates[0], dates[1]);
+            var spanText = `${weekDay} ${dates[0].replace(/-/gi, '.')}`;
+
+            $('#departDates').val(spanText + " + " + diff);
             $('#dates-lbl').addClass('active');
-            $('#dates-spn').text(newValue.newDate);
+            $('#dates-spn').text(spanText).append(`<span class=\"fz13 normal\" id=\"dates-diff-spn\"> + ${diff}</span>`);
+
             self.departiarionDate = newValue.newDate;
             self.popupBlock.removeClass('d-ib');
             self.popupLabel.removeClass('focus');

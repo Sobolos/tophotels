@@ -18,6 +18,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+    <?php $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/png', 'href' => Url::to(['/favicon.png'])]); ?>
     <?php $this->head() ?>
 </head>
 <body>
@@ -27,14 +28,13 @@ AppAsset::register($this);
     <div class="headerMobile">
 
         <div class="headerMobile__flex js-serach-active-hide">
-            <a href="<?=Url::home()?>" class="headerMobile__logo">
+            <a href="<?=Url::to('@web/tophotels/help-selection#step1')?>" class="headerMobile__logo">
                 <?=Html::img('@web/i/th-logo.png')?>
             </a>
-
             <div class="headerMobile__right">
                 <div class="headerMobile__right-auth">
                     <i class="far fa-envelope"></i>
-                    <a href="#" class="headerMobile__msg-icon "><span>989</span></a>
+                    <a href="#" class="disabled grey headerMobile__msg-icon "><span>989</span></a>
                 </div>
 
                 <div class="headerMobile__right-noAuth" style="display: none">
@@ -47,8 +47,8 @@ AppAsset::register($this);
                 <div class="headerMobile__bth headerMobile__bth--auth mr10" style="display: none">
                     <div class="headerMobile__key"></div>
                 </div>
-                <a href="#" class="headerMobile__user js-show-key-block">
-                    <?=Html::img('@web/i/user-ava-cat.jpg')?>
+                <a href="#" class="disabled grey headerMobile__user js-show-key-block">
+                    <?=Html::img('@web/i/user-ava-cat.jpg', ["height" => "50px"])?>
                 </a>
                 <div class="headerMobile__bth mr5">
                     <div class="headerMobile__burger"></div>
@@ -195,15 +195,12 @@ AppAsset::register($this);
             </div>
 
         </div>
-
-
-
     </div>
 
     <header class="header">
 
         <div class="header-cnt header-cnt_index ">
-            <a href="<?=Url::home()?>" class="header-logo">
+            <a href="<?=Url::to('@web/tophotels/help-selection#step1')?>" class="header-logo">
                 <?=Html::img('@web/i/th-logo.png')?>
             </a>
             <div class="header-nav">
@@ -221,7 +218,7 @@ AppAsset::register($this);
                             <a href="" class="header-nav-link  disabled grey">Клуб ТопХотелс</a>
                         </li>
                         <li class="header-nav-item active">
-                            <a href="<?=Url::to('@web/tophotels/help-selection#form')?>" class="header-nav-link ">Помощь в подборе</a>
+                            <a href="<?=Url::to('@web/tophotels/help-selection#step1')?>" class="header-nav-link ">Помощь в подборе</a>
                         </li>
 
                         <li class="header-nav-item">
@@ -234,25 +231,25 @@ AppAsset::register($this);
 
 
                         <li class="header-nav-item">
-                            <a href="" class="header-nav-link  disabled">Мой профиль</a>
+                            <a href="" class="header-nav-link grey disabled">Мой профиль</a>
                         </li>
                         <li class="header-nav-item">
-                            <a href="" class="header-nav-link  disabled">Отели</a>
+                            <a href="" class="header-nav-link grey disabled">Отели</a>
                         </li>
                         <li class="header-nav-item">
-                            <a href="" class="header-nav-link  disabled">Клуб ТопХотелс</a>
+                            <a href="" class="header-nav-link grey disabled">Клуб ТопХотелс</a>
                         </li>
                         <li class="header-nav-item">
-                            <a href="" class="header-nav-link ">Помощь в подборе</a>
+                            <a href="<?=Url::to('@web/tophotels/help-selection#step1')?>" class="header-nav-link ">Помощь в подборе</a>
                         </li>
                         <li class="header-nav-item">
-                            <a href="" class="header-nav-link  disabled">Добавить отзыв</a>
+                            <a href="" class="header-nav-link grey disabled">Добавить отзыв</a>
                         </li>
                         <li class="header-nav-item">
-                            <a href="" class="header-nav-link  disabled">Отель</a>
+                            <a href="" class="header-nav-link grey disabled">Отель</a>
                         </li>
                         <li class="header-nav-item">
-                            <a href="" class="header-nav-link  disabled">Турист</a>
+                            <a href="" class="header-nav-link grey disabled">Турист</a>
                         </li>
 
 
@@ -260,7 +257,7 @@ AppAsset::register($this);
                 </div>
             </div>
             <div class="exit__block">
-                <div class="header__exit js-show-auth-link" id="jsExit">Выйти</div>
+                <div class="header__exit js-show-auth-link disabled" id="jsExit">Выйти</div>
             </div>
         </div>
 
@@ -279,8 +276,8 @@ AppAsset::register($this);
 
 
             <div class="header-profile auth " style="display:none;">
-                <a href="#">
-                    <?=Html::img('@web/i/user-ava-cat.jpg')?>
+                <a href="#" class="disabled">
+                    <?=Html::img('@web/i/user-ava-cat.jpg', ["height" => "50px"])?>
                 </a>
                 <span class="header-profile__msgs">
                 <span>989</span>
@@ -289,31 +286,31 @@ AppAsset::register($this);
                 <div class="header-profile__dropdown" style="display:none;">
                     <div class="header-profile__item">
                         <div  class="header-profile__link">
-                            <a href="#" class="header-profile__user-name">Юрковская Александра</a>
+                            <a href="#" class="header-profile__user-name disabled grey">Юрковская Александра</a>
                             <div class="bth__cnt fz13 mt5">Турист</div>
                         </div>
                     </div>
 
                     <div class="header-profile__item">
-                        <a href="#" class="header-profile__link">Мой профиль</a>
+                        <a href="#" class="header-profile__link disabled grey">Мой профиль</a>
                     </div>
                     <div class="header-profile__item">
-                        <a href="#" class="header-profile__link">Мои интересы</a>
+                        <a href="#" class="header-profile__link disabled grey">Мои интересы</a>
                     </div>
                     <div class="header-profile__item">
-                        <a href="#" class="header-profile__link">Мои действия</a>
+                        <a href="#" class="header-profile__link disabled grey">Мои действия</a>
                     </div>
                     <div class="header-profile__item">
-                        <a href="#" class="header-profile__link">Мои друзья</a>
+                        <a href="#" class="header-profile__link disabled grey">Мои друзья</a>
                     </div>
                     <div class="header-profile__item">
-                        <a href="#" class="header-profile__link">Избранные отели</a>
+                        <a href="#" class="header-profile__link disabled grey">Избранные отели</a>
                     </div>
                     <div class="header-profile__item">
-                        <a href="#" class="header-profile__link">Уведомления</a>
+                        <a href="#" class="header-profile__link disabled grey">Уведомления</a>
                     </div>
                     <div class="header-profile__item">
-                        <a href="#" class="header-profile__link red">Выйти</a>
+                        <a href="#" class="header-profile__link disabled red">Выйти</a>
                     </div>
                 </div>
             </div>
@@ -336,7 +333,7 @@ AppAsset::register($this);
 
 
     </header>
-        <?= $content ?>
+    <?= $content ?>
     <div class="container">
         <div id="leftbar" class="leftbar">
 
@@ -353,38 +350,38 @@ AppAsset::register($this);
                         <div class="side-nav">
                             <ul class="side-nav-ul">
                                 <li class="side-nav-li pt10">
-                                    <div class="side-nav-li-a side-nav-li-a--del-arr ">Главная</div>
+                                    <div class="side-nav-li-a side-nav-li-a--del-arr disabled grey">Главная</div>
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="#my-profile" class="side-nav-li-a  side-nav-li-a--del-arr js-left-menu-1023-anchor ">Мой
+                                    <a href="#my-profile" class="side-nav-li-a  disabled grey side-nav-li-a--del-arr js-left-menu-1023-anchor ">Мой
                                         профиль</a>
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="#catalog" class="side-nav-li-a side-nav-li-a--del-arr js-left-menu-1023-anchor  ">Каталог
+                                    <a href="#catalog" class="side-nav-li-a disabled grey side-nav-li-a--del-arr js-left-menu-1023-anchor  ">Каталог
                                         отелей</a>
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="#club-tx" class="side-nav-li-a  side-nav-li-a--del-arr  js-left-menu-1023-anchor">Клуб
+                                    <a href="#club-tx" class="side-nav-li-a disabled grey side-nav-li-a--del-arr  js-left-menu-1023-anchor">Клуб
                                         ТопХотелс</a>
                                 </li>
                                 <li class="side-nav-li">
                                     <a href="#help-selection"
-                                       class="side-nav-li-a  side-nav-li-a--del-arr js-left-menu-1023-anchor ">Помощь в
+                                       class="side-nav-li-a  side-nav-li-a--del-arr disabled grey js-left-menu-1023-anchor ">Помощь в
                                         подборе</a>
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="#add-review" class="side-nav-li-a  side-nav-li-a--del-arr  js-left-menu-1023-anchor">Добавить
+                                    <a href="#add-review" class="side-nav-li-a disabled grey side-nav-li-a--del-arr  js-left-menu-1023-anchor">Добавить
                                         отзыв</a>
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="#features" class="side-nav-li-a  side-nav-li-a--del-arr  js-left-menu-1023-anchor">О
+                                    <a href="#features" class="side-nav-li-a disabled grey side-nav-li-a--del-arr  js-left-menu-1023-anchor">О
                                         проекте</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="left-menu-1023__item">
-                        <a id="my-profile" class="left-menu-1023__ttl">Мой профиль</a>
+                        <a id="my-profile" class="left-menu-1023__ttl disabled grey">Мой профиль</a>
 
                         <div class="side-nav">
 
@@ -395,65 +392,65 @@ AppAsset::register($this);
 
                                     <ul class="side-nav-li__tabs-list">
                                         <li class="side-nav-li__tabs-li">
-                                            <a href="tophotels/profile-cutaway#authorization">Визитка</a>
+                                            <a href="tophotels/profile-cutaway#authorization disabled grey">Визитка</a>
                                         </li>
 
                                         <li class="side-nav-li__tabs-li">
-                                            <a href="tophotels/profile-cutaway#hotels"> Подборки и предложения</a>
+                                            <a href="tophotels/profile-cutaway#hotels disabled grey"> Подборки и предложения</a>
                                         </li>
                                         <li class="side-nav-li__tabs-li">
-                                            <a href="tophotels/profile-cutaway#recomend"> Меня рекомендуют</a>
+                                            <a href="tophotels/profile-cutaway#recomend disabled grey"> Меня рекомендуют</a>
                                         </li>
                                         <li class="side-nav-li__tabs-li">
-                                            <a href="tophotels/profile-cutaway#sertificate">Сертификаты</a>
+                                            <a href="tophotels/profile-cutaway#sertificate disabled grey">Сертификаты</a>
                                         </li>
                                     </ul>
                                 </li>
 
                                 <li class="side-nav-li">
-                                    <a href="tophotels/profile" class="side-nav-li-a">Профиль</a>
+                                    <a href="tophotels/profile" class="side-nav-li-a disabled grey">Профиль</a>
 
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="tophotels/tape-my-actions" class="side-nav-li-a ">Лента моих действий</a>
+                                    <a href="tophotels/tape-my-actions" class="side-nav-li-a disabled grey">Лента моих действий</a>
 
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="tophotels/my-travels" class="side-nav-li-a ">Мои путешествия</a>
+                                    <a href="tophotels/my-travels" class="side-nav-li-a disabled grey">Мои путешествия</a>
 
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="tophotels/my-progress" class="side-nav-li-a ">Достижения</a>
+                                    <a href="tophotels/my-progress" class="side-nav-li-a disabled grey">Достижения</a>
 
                                 </li>
                             </ul>
                             <ul class="side-nav-ul">
                                 <li class="side-nav-li side-nav-li-ttl">Коммуникации</li>
                                 <li class="side-nav-li ">
-                                    <a href="tophotels/log-all-messages" class="side-nav-li-a">Лог всех сообщений</a>
+                                    <a href="tophotels/log-all-messages" class="side-nav-li-a disabled grey">Лог всех сообщений</a>
 
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="tophotels/my-subscription-hotels" class="side-nav-li-a ">Мои подписки на отели</a>
+                                    <a href="tophotels/my-subscription-hotels" class="side-nav-li-a disabled grey">Мои подписки на отели</a>
 
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="tophotels/tape-communication" class="side-nav-li-a ">Лента общения</a>
+                                    <a href="tophotels/tape-communication" class="side-nav-li-a disabled grey">Лента общения</a>
 
                                 </li>
                             </ul>
                             <ul class="side-nav-ul">
                                 <li class="side-nav-li side-nav-li-ttl">Настройка интересов</li>
                                 <li class="side-nav-li ">
-                                    <a href="tophotels/personal-data" class="side-nav-li-a ">Персональные данные</a>
+                                    <a href="tophotels/personal-data" class="side-nav-li-a disabled grey">Персональные данные</a>
 
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="tophotels/my-preference" class="side-nav-li-a">Мои предпочтения</a>
+                                    <a href="tophotels/my-preference" class="side-nav-li-a disabled grey">Мои предпочтения</a>
 
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="tophotels/my-connections" class="side-nav-li-a ">Мои контакты</a>
+                                    <a href="tophotels/my-connections" class="side-nav-li-a disabled grey">Мои контакты</a>
 
                                 </li>
                             </ul>
@@ -462,27 +459,27 @@ AppAsset::register($this);
                     </div>
 
                     <div class="left-menu-1023__item">
-                        <a id="catalog" class="left-menu-1023__ttl">Каталог отелей</a>
+                        <a id="catalog" class="disabled grey left-menu-1023__ttl">Каталог отелей</a>
 
                         <div class="side-nav">
 
                             <ul class="side-nav-ul">
                                 <li class="side-nav-li pt10">
-                                    <a href="tophotels/hotels-catalog#hotelFilter" class="side-nav-li-a  side-nav-li-a--del-arr ">Фильтр</a>
+                                    <a href="tophotels/hotels-catalog#hotelFilter" class="side-nav-li-a disabled grey side-nav-li-a--del-arr ">Фильтр</a>
 
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="tophotels/hotels-catalog#hotelSearch" class="side-nav-li-a  side-nav-li-a--del-arr ">
+                                    <a href="tophotels/hotels-catalog#hotelSearch" class="side-nav-li-a disabled grey side-nav-li-a--del-arr ">
                                         Поиск отеля</a>
 
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="tophotels/hotels-catalog#myInterests" class="side-nav-li-a   side-nav-li-a--del-arr">
+                                    <a href="tophotels/hotels-catalog#myInterests" class="side-nav-li-a  disabled grey side-nav-li-a--del-arr">
                                         Мои интересы</a>
 
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="tophotels/hotels-catalog#hotelChains" class="side-nav-li-a   side-nav-li-a--del-arr">
+                                    <a href="tophotels/hotels-catalog#hotelChains" class="side-nav-li-a  disabled grey side-nav-li-a--del-arr">
                                         Сети отелей</a>
 
                                 </li>
@@ -501,63 +498,63 @@ AppAsset::register($this);
                             <ul class="side-nav-ul">
                                 <li class="side-nav-li side-nav-li-ttl">Сообщество</li>
                                 <li class="side-nav-li ">
-                                    <a href="#" class="side-nav-li-a grey">Лента клуба</a>
+                                    <a href="#" class="side-nav-li-a disabled grey">Лента клуба</a>
                                 </li>
                                 <li class="side-nav-li ">
-                                    <a href="tophotels/forum" class="side-nav-li-a">Форум по отелям </a>
+                                    <a href="tophotels/forum" class="side-nav-li-a disabled grey">Форум по отелям </a>
 
                                 </li>
                                 <li class="side-nav-li ">
-                                    <a href="tophotels/hotline" class="side-nav-li-a ">Спецакции отелей</a>
+                                    <a href="tophotels/hotline" class="side-nav-li-a disabled grey">Спецакции отелей</a>
 
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="tophotels/club-vote" class="side-nav-li-a ">Опросы</a>
+                                    <a href="tophotels/club-vote" class="side-nav-li-a disabled grey">Опросы</a>
 
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="#" class="side-nav-li-a grey">Конкурсы и игры</a>
+                                    <a href="#" class="side-nav-li-a grey disabled grey">Конкурсы и игры</a>
 
                                 </li>
                             </ul>
                             <ul class="side-nav-ul">
                                 <li class="side-nav-li side-nav-li-ttl">Рейтинги</li>
                                 <li class="side-nav-li ">
-                                    <a href="tophotels/ratings-nominations" class="side-nav-li-a ">Номинации отелей</a>
+                                    <a href="tophotels/ratings-nominations" class="side-nav-li-a disabled grey">Номинации отелей</a>
 
                                 </li>
                                 <li class="side-nav-li ">
-                                    <a href="#" class="side-nav-li-a ">Рейтинг номеров</a>
+                                    <a href="#" class="side-nav-li-a disabled grey">Рейтинг номеров</a>
                                 </li>
                                 <li class="side-nav-li ">
-                                    <a href="tophotels/top-users" class="side-nav-li-a ">ТОП участников </a>
+                                    <a href="tophotels/top-users" class="side-nav-li-a disabled grey">ТОП участников </a>
 
                                 </li>
                             </ul>
                             <ul class="side-nav-ul">
                                 <li class="side-nav-li side-nav-li-ttl">Участники</li>
                                 <li class="side-nav-li">
-                                    <a href="tophotels/who-where-when" class="side-nav-li-a ">Кто Где Когда</a>
+                                    <a href="tophotels/who-where-when" class="side-nav-li-a disabled grey">Кто Где Когда</a>
 
                                 </li>
                                 <li class="side-nav-li ">
-                                    <a href="tophotels/club-traveler-list" class="side-nav-li-a ">Путешественники</a>
+                                    <a href="tophotels/club-traveler-list" class="side-nav-li-a disabled grey">Путешественники</a>
 
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="tophotels/club-touragent-list" class="side-nav-li-a ">ПРО Турагенты</a>
+                                    <a href="tophotels/club-touragent-list" class="side-nav-li-a disabled grey">ПРО Турагенты</a>
 
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="#" class="side-nav-li-a grey">Индивидуальные гиды</a>
+                                    <a href="#" class="side-nav-li-a disabled grey">Индивидуальные гиды</a>
 
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="#" class="side-nav-li-a grey">Отельеры</a>
+                                    <a href="#" class="side-nav-li-a disabled grey">Отельеры</a>
 
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="tophotels/hotels-communities" class="side-nav-li-a ">Сообщества отелей</a>
+                                    <a href="tophotels/hotels-communities" class="side-nav-li-a disabled grey">Сообщества отелей</a>
 
                                 </li>
                             </ul>
@@ -568,23 +565,23 @@ AppAsset::register($this);
                     </div>
 
                     <div class="left-menu-1023__item">
-                        <a id="help-selection" class="left-menu-1023__ttl">Помощь в подборе</a>
+                        <a href="<?=Url::to('@web/tophotels/help-selection#step1')?>" id="help-selection" class="left-menu-1023__ttl">Помощь в подборе</a>
 
                         <div class="side-nav">
 
                             <ul class="side-nav-ul">
                                 <li class="side-nav-li pt10">
-                                    <a href="tophotels/help-selection#step1" class="side-nav-li-a  side-nav-li-a--del-arr ">Параметры
+                                    <a href="tophotels/help-selection#step1" class="side-nav-li-a disabled grey side-nav-li-a--del-arr ">Параметры
                                         тура</a>
 
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="tophotels/help-selection#form" class="side-nav-li-a  side-nav-li-a--del-arr"> Простая
+                                    <a href="tophotels/help-selection#form" class="side-nav-li-a disabled grey side-nav-li-a--del-arr"> Простая
                                         форма</a>
 
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="tophotels/help-selection#formStep2" class="side-nav-li-a  side-nav-li-a--del-arr ">Рега</a>
+                                    <a href="tophotels/help-selection#formStep2" class="side-nav-li-a disabled grey side-nav-li-a--del-arr ">Рега</a>
 
                                 </li>
 
@@ -600,18 +597,18 @@ AppAsset::register($this);
 
                             <ul class="side-nav-ul">
                                 <li class="side-nav-li pt10">
-                                    <a href="tophotels/review#search" class="side-nav-li-a   side-nav-li-a--del-arr">Добавление
+                                    <a href="tophotels/review#search" class="side-nav-li-a disabled grey  side-nav-li-a--del-arr">Добавление
                                         отзыва</a>
 
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="tophotels/review#older" class="side-nav-li-a  side-nav-li-a--del-arr">Черновики
+                                    <a href="tophotels/review#older" class="side-nav-li-a disabled grey side-nav-li-a--del-arr">Черновики
                                         (14)</a>
 
                                 </li>
 
                                 <li class="side-nav-li">
-                                    <a href="tophotels/review#no-hotel" class="side-nav-li-a  side-nav-li-a--del-arr">Нет отеля на
+                                    <a href="tophotels/review#no-hotel" class="side-nav-li-a disabled grey side-nav-li-a--del-arr">Нет отеля на
                                         ТопХотелс</a>
 
                                 </li>
@@ -621,21 +618,21 @@ AppAsset::register($this);
                     </div>
 
                     <div class="left-menu-1023__item">
-                        <a id="features" class="left-menu-1023__ttl">О проекте</a>
+                        <a id="features" class="left-menu-1023__ttl disabled grey">О проекте</a>
 
                         <div class="side-nav">
                             <ul class="side-nav-ul">
                                 <li class="side-nav-li side-nav-li-ttl">Путешественникам</li>
                                 <li class="side-nav-li">
-                                    <a href="#" class="side-nav-li-a ">Отдых с ТопХотелс</a>
+                                    <a href="#" class="side-nav-li-a disabled grey">Отдых с ТопХотелс</a>
 
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="#" class="side-nav-li-a ">Полезные фишки</a>
+                                    <a href="#" class="side-nav-li-a disabled grey">Полезные фишки</a>
 
                                 </li>
                                 <li class="side-nav-li">
-                                    <a href="#" class="side-nav-li-a ">Все возможности</a>
+                                    <a href="#" class="side-nav-li-a disabled grey">Все возможности</a>
 
                                 </li>
 
@@ -646,19 +643,19 @@ AppAsset::register($this);
                                 <li class="side-nav-li side-nav-li-ttl">Для бизнеса</li>
 
                                 <li class="side-nav-li ">
-                                    <a href="tophotels/api-services" class="side-nav-li-a ">API сервисы</a>
+                                    <a href="tophotels/api-services" class="side-nav-li-a disabled grey">API сервисы</a>
 
                                 </li>
                                 <li class="side-nav-li ">
-                                    <a href="tophotels/promotion-hotel" class="side-nav-li-a ">Продвижение отеля</a>
+                                    <a href="tophotels/promotion-hotel" class="side-nav-li-a disabled grey">Продвижение отеля</a>
 
                                 </li>
                                 <li class="side-nav-li ">
-                                    <a href="tophotels/touragent-profile" class="side-nav-li-a ">Профиль турагента</a>
+                                    <a href="tophotels/touragent-profile" class="side-nav-li-a disabled grey">Профиль турагента</a>
 
                                 </li>
                                 <li class="side-nav-li ">
-                                    <a href="tophotels/media-ad" class="side-nav-li-a ">Медийная реклама</a>
+                                    <a href="tophotels/media-ad" class="side-nav-li-a disabled grey">Медийная реклама</a>
 
                                 </li>
 
@@ -667,22 +664,22 @@ AppAsset::register($this);
                                 <li class="side-nav-li side-nav-li-ttl">Информация</li>
 
                                 <li class="side-nav-li ">
-                                    <a href="tophotels/about-project" class="side-nav-li-a ">О проекте</a>
+                                    <a href="tophotels/about-project" class="side-nav-li-a disabled grey">О проекте</a>
 
                                 </li>
 
                                 <li class="side-nav-li ">
-                                    <a href="tophotels/terms-use" class="side-nav-li-a ">Правила пользования</a>
+                                    <a href="tophotels/terms-use" class="side-nav-li-a disabled grey">Правила пользования</a>
 
                                 </li>
 
                                 <li class="side-nav-li ">
-                                    <a href="tophotels/job-and-career" class="side-nav-li-a ">Работа и карьера </a>
+                                    <a href="tophotels/job-and-career" class="side-nav-li-a disabled grey">Работа и карьера </a>
 
                                 </li>
 
                                 <li class="side-nav-li ">
-                                    <a href="tophotels/feedback" class="side-nav-li-a">Обратная связь</a>
+                                    <a href="tophotels/feedback" class="side-nav-li-a disabled grey">Обратная связь</a>
 
                                 </li>
 
@@ -698,10 +695,7 @@ AppAsset::register($this);
 
 
         </div>
-
         <div id="p-agreement-pp" class="agreement-pp mfp-hide">
-
-
             <div class="agreement-pp__mdl">
                 <div class="agreement-pp__section">
 
@@ -715,7 +709,6 @@ AppAsset::register($this);
                         </div>
                         <div class="panel" id="agreementPanel">
                             <div class="agreement-pp__cols ">
-
                                 <div class="agreement-pp__right">
                                     <div class="agreement-pp__white-field">
                                         <div class="mb5 bold fz13">Текст соглашения</div>
@@ -760,8 +753,7 @@ AppAsset::register($this);
                                         <p>* Авторизованным пользователям согласие на обработку данных необходимо дать только
                                             один раз.</p>
                                     </div>
-
-                                    <button class="bth__btn agreement-pp__btn ">Согласен</button>
+                                    <button id="agreed" class="bth__btn agreement-pp__btn ">Согласен</button>
                                 </div>
                                 <div class="agreement-pp__left">
 
@@ -784,18 +776,10 @@ AppAsset::register($this);
                                     </div>
 
                                 </div>
-
-
                             </div>
-
-
                         </div>
-
-
                         <div class="panel" id="siteRolePanel" style="display: none">
-
                             <div class="agreement-pp__role-site">
-
                                 <div class="content-cnt">
                                     <p class="about-project-text"><strong>ПРАВОВАЯ ОГОВОРКА </strong></p>
                                     <p class="about-project-text">Используя сервисы, предлагаемые www.tophotels.ru, Вы выражаете
@@ -806,7 +790,6 @@ AppAsset::register($this);
                                         Вами сервиса) или «Зарегистрированным пользователем» (что подразумевает регистрацию на
                                         интернет-ресурсе www.tophotels.ru), а так же, вне зависимости от цели и субъекта
                                         использования.</p>
-
                                     <p class="about-project-text"><strong>СОГЛАШЕНИЕ ОБ УСЛОВИЯХ ПОЛЬЗОВАНИЯ РЕСУРСА</strong>
                                     </p>
                                     <p class="about-project-text"><u>в редакции от 29 декабря 2014г.</u></p>
@@ -1079,7 +1062,7 @@ AppAsset::register($this);
                                         <br>
                                         Администраторы ресурса<br>
                                         www.tophotels.ru<span id="ctrlcopy"><br><br>Читать полностью на&nbsp;<a
-                                                href="https://www.tophotels.ru/about/agreement">https://www.tophotels.ru/about/agreement</a></span>
+                                                    href="https://www.tophotels.ru/about/agreement">https://www.tophotels.ru/about/agreement</a></span>
                                     </p></div>
 
 
@@ -1089,12 +1072,10 @@ AppAsset::register($this);
                 </div>
 
             </div>
-        </div><div id="legal-information-pp" class="agreement-pp mfp-hide">
-
-
+        </div>
+        <div id="legal-information-pp" class="agreement-pp mfp-hide">
             <div class="agreement-pp__mdl">
                 <div class="agreement-pp__section">
-
                     <div class="tabs-block">
                         <div class="tabs-bar">
                             <div id="usage-role" class="agreement-pp__tab active"> Правила пользования</div>
@@ -1103,11 +1084,8 @@ AppAsset::register($this);
 
                             <div class=" js-modal-close  agreement-pp__close"></div>
                         </div>
-
                         <div class="panel" id="usage-rolePanel">
-
                             <div class="agreement-pp__role-site">
-
                                 <div class="content-cnt">
                                     <p class="about-project-text"><strong>ПРАВОВАЯ ОГОВОРКА </strong></p>
                                     <p class="about-project-text">Используя сервисы, предлагаемые www.tophotels.ru, Вы выражаете
@@ -1118,7 +1096,6 @@ AppAsset::register($this);
                                         Вами сервиса) или «Зарегистрированным пользователем» (что подразумевает регистрацию на
                                         интернет-ресурсе www.tophotels.ru), а так же, вне зависимости от цели и субъекта
                                         использования.</p>
-
                                     <p class="about-project-text"><strong>СОГЛАШЕНИЕ ОБ УСЛОВИЯХ ПОЛЬЗОВАНИЯ РЕСУРСА</strong>
                                     </p>
                                     <p class="about-project-text"><u>в редакции от 29 декабря 2014г.</u></p>
@@ -1391,7 +1368,7 @@ AppAsset::register($this);
                                         <br>
                                         Администраторы ресурса<br>
                                         www.tophotels.ru<span id="ctrlcopy"><br><br>Читать полностью на&nbsp;<a
-                                                href="https://www.tophotels.ru/about/agreement">https://www.tophotels.ru/about/agreement</a></span>
+                                                    href="https://www.tophotels.ru/about/agreement">https://www.tophotels.ru/about/agreement</a></span>
                                     </p></div>
 
 

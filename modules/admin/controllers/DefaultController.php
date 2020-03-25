@@ -35,9 +35,4 @@ class DefaultController extends Controller
             'pagination' => $pagination,
         ]);
     }
-
-    public function actionLogin()
-    {
-
-    }
 }

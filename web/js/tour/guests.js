@@ -52,6 +52,10 @@ mytour.searchTours.formGuests = function() {
         $('.adult').removeClass('hidden');
     };
 
+    this.showNextChild = function(element){
+        element.next().next().removeClass('hidden').next().removeClass('hidden');
+    };
+
     /*контрол готсей (выделение при наведении)*/
     $('.formDirections__guest-btn .formDirections__guest-btn-icon').hover(function () {
             $(this).prevAll().addClass('hover-active');
@@ -60,15 +64,27 @@ mytour.searchTours.formGuests = function() {
         }
     );
 
-    $('.formDirections__guest-btn').hover( function () {
-            $('.formDirections__guest-btn-icon').removeClass('hover-active');
-        });
-
-    //при клике устанавливаем значение
-    $('.formDirections__guest-btn-icon').on('click', function () {
+    $('.adult').on('click', function () {
         $(this).prevAll().addClass('selected');
         $(this).nextAll().removeClass('selected');
 
+        if ($(this).index() === 0 && $(this).is('.selected')) {
+            $(this).removeClass('selected');
+        } else {
+            $(this).addClass('selected');
+        }
+    });
+
+    $('.formDirections__guest-btn').hover( function () {
+            $('.formDirections__guest-btn-icon').removeClass('hover-active');
+    });
+
+    $('.guestChild').on('click', function () {
+        $(this).prevAll().addClass('selected');
+        $(this).nextAll().removeClass('selected');
+
+        //$(this).next().next().removeClass('hidden').next().removeClass('hidden');
+        self.showNextChild($(this));
         if ($(this).is('.selected')) {
             $(this).removeClass('selected');
         } else {
@@ -77,38 +93,50 @@ mytour.searchTours.formGuests = function() {
 
         self.adultsAmount = $('.adult.selected').length;
         self.childrenAmount = $('.guestChild.selected').length;
-        $('#adultsAmount-inpt').val(self.adultsAmount);
         $('#childrenAmount-inpt').val(self.childrenAmount);
+        $('#adultsAmount-inpt').val(self.adultsAmount);
     });
 
     var child = null;
 
-    $('.test').on('click', '.showAges', function () {
+    $('.ages').on('click', '.showAges', function () {
         child = $(this).attr('data-child');
 
-        if($(this).prev().hasClass('selected')){
-            $(this).closest('.formDirections__bottom-item ').hide();
-            $('.childAges').show();
-        }
+        $(this).closest('.formDirections__bottom-item ').hide();
+        $('.childAges').show();
     });
 
     this.setAgeBlok.on('click', function () {
         $('.childAges').hide();
         $('.guests').show();
-       var childAge = $(this).text();
+        var icon;
+        var childAge = $(this).text();
        if(child === "1"){
-           $('.js-added-show2 ').removeClass('hidden');
            self.child1Age = parseInt(childAge);
            $('#chid1Age-spn').text(self.child1Age);
+           $('#child1Age-inpt').val(self.child1Age);
+
+           icon = $('i.js-added-show1');
+           self.showNextChild(icon);
+           icon.addClass('selected');
        }
        else if(child === "2"){
-           $('.js-added-show3 ').removeClass('hidden');
            self.child2Age = parseInt(childAge);
            $('#chid2Age-spn').text(self.child2Age);
+           $('#child2Age-inpt').val(self.child1Age);
+
+           icon = $('i.js-added-show2');
+           self.showNextChild(icon);
+           icon.addClass('selected');
        }
        else if(child === "3") {
            self.child3Age = parseInt(childAge);
            $('#chid3Age-spn').text(self.child3Age);
+           $('#child3Age-inpt').val(self.child1Age);
+
+           icon = $('i.js-added-show3');
+           self.showNextChild(icon);
+           icon.addClass('selected');
        }
     });
 

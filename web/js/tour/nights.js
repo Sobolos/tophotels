@@ -41,7 +41,7 @@ mytour.searchTours.formNights = function() {
         self.nightsRange = this.startNum + " - " + this.endNum;
         $('#nightsAmount').val(self.nightsRange);
         $('#nights-lbl').addClass('active');
-        $('#nights-spn').text(self.nightsRange)
+        $('#nights-spn').text(self.nightsRange + " нч")
     };
 
     this.setNights();
