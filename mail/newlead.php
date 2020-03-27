@@ -19,8 +19,7 @@
                                 <tbody>
                                 <tr>
                                     <td style="padding: 20px 0 20px 30px;">
-                                        <img src="http://i.lightsoft.ru/th/logo0001.png" alt="" border="0"
-                                             style="width: 141px;height: 53px;">
+                                        <img src="http://i.lightsoft.ru/th/logo0001.png" alt="" border="0" style="width: 141px;height: 53px;">
                                     </td>
                                     <td style="padding: 0 30px 25px 10px;font-family:Arial,sans-serif;font-size: 16px; text-align: right; vertical-align: bottom; color: #292d96; font-weight: 700;">
                                         Welcome.TopHotels.team
@@ -33,29 +32,23 @@
 
                     <tr>
                         <td style="font: 16px Arial, sans-serif;line-height: 20px;padding: 35px 30px 20px;text-align: center;">
-                            Здравствуйте!
+                            Здравствуйте <?= $model['consultant_name']?> !
                         </td>
                     </tr>
 
                     <tr>
                         <td style="font: 16px Arial, sans-serif;line-height: 20px;padding: 0 30px 10px;">
                             Вы получили новую заявку на подбор тура от пользователя -
-                            <a href="http://localhost/admin" target="_blank" style="-webkit-text-size-adjust:none;font: 16px Arial, sans-serif;line-height: 20px;color: #318cc6;text-decoration: none;">
-                                <?= $data['name']?>
-                            </a>.
+                            <a href="http://localhost/admin" target="_blank" style="-webkit-text-size-adjust:none;font: 16px Arial, sans-serif;line-height: 20px;color: #318cc6;text-decoration: none;"><?= $model['name']?></a>.
                             Рекомендуем Вам скорее ее обработать и связаться с туристом.
                         </td>
                     </tr>
 
-
                     <tr>
                         <td style="padding-bottom: 20px;padding-top: 20px">
-                            <a href="http://localhost/admin" style="-webkit-text-size-adjust:none;font: 16px Arial, sans-serif;line-height: 20px;display: block;width: 230px;text-align: center;text-transform: uppercase;text-decoration: none;font-weight: bold;color: #ffffff;background-color: #00a551;margin: 0 auto;padding: 14px 0;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;">
-                                Посмотреть заявку
-                            </a>
+                            <a href="http://localhost/admin" style="-webkit-text-size-adjust:none;font: 16px Arial, sans-serif;line-height: 20px;display: block;width: 230px;text-align: center;text-transform: uppercase;text-decoration: none;font-weight: bold;color: #ffffff;background-color: #00a551;margin: 0 auto;padding: 14px 0;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;">Посмотреть заявку</a>
                         </td>
                     </tr>
-
                     </tbody>
                 </table>
 
@@ -74,19 +67,15 @@
                                 <tr>
                                     <td style="font: 15px Arial, sans-serif;line-height: 20px;padding: 0 15px 5px;">
                                         Ваш клиент:
-                                        <a href="http://localhost/admin" target="_blank">
-                                        <?= $data['name']?>
-                                        </a>
+                                        <a href="http://localhost/admin" target="_blank"><?= $model['name']?></a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="font: 15px Arial, sans-serif;line-height: 20px;padding: 0 15px 5px;">
                                         Телефон:
-                                        <a href="http://localhost/admin" target="_blank" style="-webkit-text-size-adjust:none;font: 15px Arial, sans-serif;line-height: 20px;color: #000000;text-decoration: none;"><?=$data['phone']?></a>
+                                        <a href="http://localhost/admin" target="_blank" style="-webkit-text-size-adjust:none;font: 15px Arial, sans-serif;line-height: 20px;color: #000000;text-decoration: none;"><?=$model['phone']?></a>
                                     </td>
                                 </tr>
-
-
                                 </tbody>
                             </table>
                         </td>
@@ -109,32 +98,27 @@
                                     <tr>
                                         <td align="center">
                                             <a href="https://vk.com/tophotels">
-                                                <img src="http://i.lightsoft.ru/th/soc-vk2.png" alt=""
-                                                     style="width: 38px;height: 38px;">
+                                                <img src="http://i.lightsoft.ru/th/soc-vk2.png" alt="" style="width: 38px;height: 38px;">
                                             </a>
                                         </td>
                                         <td align="center">
                                             <a href="https://www.facebook.com/TopHotels">
-                                                <img src="http://i.lightsoft.ru/th/soc-fb2.png" alt=""
-                                                     style="width: 38px;height: 38px;">
+                                                <img src="http://i.lightsoft.ru/th/soc-fb2.png" alt="" style="width: 38px;height: 38px;">
                                             </a>
                                         </td>
                                         <td align="center">
                                             <a href="https://ok.ru/tophotels">
-                                                <img src="http://i.lightsoft.ru/th/soc-ok2.png" alt=""
-                                                     style="width: 38px;height: 38px;">
+                                                <img src="http://i.lightsoft.ru/th/soc-ok2.png" alt="" style="width: 38px;height: 38px;">
                                             </a>
                                         </td>
                                         <td align="center">
                                             <a href="https://twitter.com/tophotels">
-                                                <img src="http://i.lightsoft.ru/th/soc-tw2.png" alt=""
-                                                     style="width: 38px;height: 38px;">
+                                                <img src="http://i.lightsoft.ru/th/soc-tw2.png" alt="" style="width: 38px;height: 38px;">
                                             </a>
                                         </td>
                                         <td align="center">
                                             <a href="https://www.instagram.com/tophotels/">
-                                                <img src="http://i.lightsoft.ru/th/soc-in2.png" alt=""
-                                                     style="width: 38px;height: 38px;">
+                                                <img src="http://i.lightsoft.ru/th/soc-in2.png" alt="" style="width: 38px;height: 38px;">
                                             </a>
                                         </td>
                                     </tr>

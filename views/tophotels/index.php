@@ -1517,6 +1517,7 @@ $this->title = 'Tophotels';
                                 </div>
                                 <?= Html::activeHiddenInput($tourForm, 'hotel1Country', ['class'=>'hiddenInputHotelCountry'])?>
                                 <?= Html::activeHiddenInput($tourForm, 'hotel1City', ['class'=>'hiddenInputHotelCity'])?>
+                                <?= Html::activeHiddenInput($tourForm, 'hotel1Rating', ['class'=>'hiddenInputHotelRating'])?>
                                 <?= Html::activeHiddenInput($tourForm, 'hotel1', ['class'=>'hiddenInputHotel'])?>
                                 <span class="tour-selection-plus hide-1023 js-add-hotel">
                                     <i class="fas fa-plus"></i>
@@ -1552,6 +1553,7 @@ $this->title = 'Tophotels';
                                 </div>
                                 <?= Html::activeHiddenInput($tourForm, 'hotel2Country', ['class'=>'hiddenInputHotelCountry'])?>
                                 <?= Html::activeHiddenInput($tourForm, 'hotel2City', ['class'=>'hiddenInputHotelCity'])?>
+                                <?= Html::activeHiddenInput($tourForm, 'hotel2Rating', ['class'=>'hiddenInputHotelRating'])?>
                                 <?= Html::activeHiddenInput($tourForm, 'hotel2', ['class'=>'hiddenInputHotel'])?>
                                 <span class="tour-selection-plus hide-1023 js-del-hotel">
                                     <i class="fas fa-minus"></i>
@@ -1587,6 +1589,7 @@ $this->title = 'Tophotels';
                                 </div>
                                 <?= Html::activeHiddenInput($tourForm, 'hotel3Country', ['class'=>'hiddenInputHotelCountry'])?>
                                 <?= Html::activeHiddenInput($tourForm, 'hotel3City', ['class'=>'hiddenInputHotelCity'])?>
+                                <?= Html::activeHiddenInput($tourForm, 'hotel3Rating', ['class'=>'hiddenInputHotelRating'])?>
                                 <?= Html::activeHiddenInput($tourForm, 'hotel3', ['class'=>'hiddenInputHotel'])?>
                                 <span class="tour-selection-plus hide-1023 js-del-hotel">
                                     <i class="fas fa-minus"></i>

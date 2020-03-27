@@ -7,7 +7,6 @@ use yii\web\Controller;
 use app\models\CustomTour;
 use app\models\Tour;
 use app\models\Hotels;
-use yii2tech\crontab\CronTab;
 
 class TophotelsController extends Controller
 {
@@ -42,15 +41,13 @@ class TophotelsController extends Controller
         if($tourForm->load(Yii::$app->request->post())) {
             if ($tourForm->tType === "1"){
                 $tourForm->insertDataTourDB();
-                $this->setCron($tourForm->name, $tourForm->phone);
             }
-
             if ($tourForm->tType === "0"){
                 $tourForm->insertDataHotelDB();
-                $this->setCron($tourForm->name, $tourForm->phone);
             }
             if ($tourForm->tType === "2")
                 $tourForm->updateDataTour();
+                $this->sendMail();
         }
     }
 
@@ -85,20 +82,5 @@ class TophotelsController extends Controller
         }
 
         return $formedArr;
-    }
-
-    public function setCron($name, $phone)
-    {
-
-        $cronTab = new CronTab();
-        $cronTab->setJobs([
-            [
-                'min' => '1',
-                'hour' => '0',
-                'weekDay' => '0',
-                'command' => "php /mnt/c/Users/gerso/Documents/Projects/tophotels/html/cron/Mail.php $name $phone",
-            ],
-        ]);
-        $cronTab->apply();
     }
 }

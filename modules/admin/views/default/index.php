@@ -1,11 +1,19 @@
 <?php
 
 /* @var $this yii\web\View */
+
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\LinkPager;
 
 $this->title = 'Tophotels';
 ?>
+<header>
+    <a href="<?= Url::toRoute(['/admin/']);?>">Все заявки</a>
+    <?php foreach ($consultants as $consultant): ?>
+        <a href="<?= Url::toRoute(['/admin/', 'id' => $consultant['id']]);?>"><?= $consultant['name']?></a>
+    <?php endforeach;?>
+</header>
 <div class="tour-selection-box">
     <div class="panel">
         <h1>Admin</h1>
@@ -14,6 +22,7 @@ $this->title = 'Tophotels';
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Дата</th>
+                <th scope="col">Назначена: </th>
                 <th scope="col">Направление</th>
                 <th scope="col">Имя клиента</th>
                 <th scope="col">Телефон клиента</th>
@@ -29,17 +38,18 @@ $this->title = 'Tophotels';
 
                 <?php foreach ($leads as $lead): ?>
                 <tr>
-                    <td><?= $lead->Id ?></td>
-                    <td><?= $lead->AddDate ?></td>
-                    <td><?= $lead->Route ?></td>
-                    <td><?= $lead->CustomerName ?></td>
-                    <td><?= $lead->CustomerPhone ?></td>
-                    <td><?= $lead->CustomerEmail ?></td>
-                    <td><?= $lead->CustomerCity ?></td>
-                    <td><?= $lead->DepartiationDate?> / <?= $lead->AmountNights?></td>
-                    <td>Взрослых: <?= $lead->Adults?> / Детей: <?= $lead->Children?>(<?= $lead->Child1Age?>;<?= $lead->Child2Age?>;<?= $lead->Child3Age?>)</td>
-                    <td>Комфортный бюджет: <?= $lead->PriceComfort ?> / Максимальный бюджет: <?= $lead->PriceMax ?></td>
-                    <td><?= $lead->Wishes ?></td>
+                    <td><?= $lead['Id'] ?></td>
+                    <td><?= $lead['AddDate'] ?></td>
+                    <td><?= $lead['name'] ?></td>
+                    <td><?= $lead['Route'] ?></td>
+                    <td><?= $lead['CustomerName'] ?></td>
+                    <td><?= $lead['CustomerPhone'] ?></td>
+                    <td><?= $lead['CustomerEmail'] ?></td>
+                    <td><?= $lead['CustomerCity'] ?></td>
+                    <td><?= $lead['DepartiationDate']?> / <?= $lead['AmountNights']?></td>
+                    <td>Взрослых: <?= $lead['Adults']?> / Детей: <?= $lead['Children']?>(<?= $lead['Child1Age']?>;<?= $lead['Child2Age']?>;<?= $lead['Child3Age']?>)</td>
+                    <td>Комфортный бюджет: <?= $lead['PriceComfort'] ?> / Максимальный бюджет: <?= $lead['PriceMax'] ?></td>
+                    <td><?= $lead['Wishes'] ?></td>
                 </tr>
 
                 <?php endforeach; ?>

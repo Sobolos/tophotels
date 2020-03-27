@@ -45,16 +45,15 @@ mytour.searchTours.formDirectionsHotel = function(rootNode) {
                 name: name,
             },
             success: function (res) {
-                console.log(res);
                 self.searchBlockResult.empty();
                 var div;
                 $.each(res, function (key, value) {
-                    div = `<div data-country="${value.country_name}" data-city="${value.resort_name}" class="search-result-item formDirections__bottom-item">
+                    div = `<div data-category="${value.cat_name}" data-country="${value.country_name}" data-city="${value.resort_name}" class="search-result-item formDirections__bottom-item">
                                 <div class="formDirections__city">
                                     <div class=" lsfw-flag lsfw-flag--30w lsfw-flag-${value.country_id}"></div>
-                                    <span class="formDirections__cut">${value.hotel_name}</span>
+                                    <span class="formDirections__cut">${value.hotel_name} ${value.cat_name}</span>
                                 </div>
-                                <span class="formDirections__count">${value.country_name}, ${value.resort_name}</span>
+                                <span class="formDirections__count">Расположение: ${value.country_name}, ${value.resort_name}</span>
                             </div>`;
 
                     self.searchBlockResult.append(div);

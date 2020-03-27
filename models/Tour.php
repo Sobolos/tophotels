@@ -5,6 +5,7 @@ namespace app\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use app\modules\admin\models\Consultants;
 
 
 class Tour extends ActiveRecord
@@ -68,9 +69,9 @@ class Tour extends ActiveRecord
     //отель: спиок отелей
     public $hotel1, $hotel2, $hotel3;
 
-    public $hotel1Country, $hotel1City;
-    public $hotel2Country, $hotel2City;
-    public $hotel3Country, $hotel3City;
+    public $hotel1Country, $hotel1City, $hotel1Rating;
+    public $hotel2Country, $hotel2City, $hotel2Rating;
+    public $hotel3Country, $hotel3City, $hotel3Rating;
 
     public $tripParams;
     public $tType;
@@ -151,10 +152,13 @@ class Tour extends ActiveRecord
             ['hotel3', 'string'],
 
             ['hotel1Country', 'string'],
+            ['hotel1Rating', 'string'],
             ['hotel1City', 'string'],
             ['hotel2Country', 'string'],
+            ['hotel21Rating', 'string'],
             ['hotel2City', 'string'],
             ['hotel3Country', 'string'],
+            ['hotel3Rating', 'string'],
             ['hotel3City', 'string'],
 
             ['tripParams', 'string'],
@@ -163,8 +167,17 @@ class Tour extends ActiveRecord
         ];
     }
 
-    public function sendMail($data)
+    public function sendMail($id)
     {
+        $consultant_name = Consultants::getConsultantName($id);
+
+        $data = [
+            'name' => $this->name,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'consultant_name' => 'name'
+        ];
+
         Yii::$app->mailer->htmlLayout = "layouts/html";
         Yii::$app->mailer->compose('newlead', ['model' => $data])
             ->setTo('germansobol@yandex.ru')
@@ -190,10 +203,40 @@ class Tour extends ActiveRecord
             'Child1Age' => $this->child1Age,
             'Child2Age' => $this->child2Age,
             'Child3Age' => $this->child3Age,
-            'Wishes' => $this->getWishes()
+            'Wishes' => $this->getWishes(),
+            'consultant_id' => $this->getConsultant()
         ])->execute();
 
         echo Yii::$app->db->getLastInsertID();
+    }
+
+    public function getConsultant()
+    {
+        $ann = false;
+        $olga = false;
+        $alexandr = false;
+        $max = false;
+
+        if(($this->directionCountry1 === "Турция" || $this->hotel1Country === "Турция") && $this->directionHotelStars1 === "5*")
+            $olga = true;
+        else if(($this->directionCountry1 === "Египет" || $this->hotel1Country === "Египет") && $this->hotel1City === "Шарм-Эль-Шейх")
+            $alexandr = true;
+        else if(($this->directionCountry1 === "Египет" || $this->hotel1Country === "Египет") && (strpos($this->hotel1Rating, "2*") || strpos($this->hotel1Rating, "3*") || strpos($this->hotel1Rating, "4*")))
+            $max = true;
+
+        if($olga && $ann && $max)
+            return 4;
+        else if($olga)
+            return 1;
+        else if($alexandr)
+            return 2;
+        else if($max)
+            return 3;
+
+        if($this->directionCountry1 === "" || $this->hotel1Country === "")
+            return 0;
+
+        return 0;
     }
 
     public function insertDataHotelDB()
