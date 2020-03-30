@@ -32,7 +32,11 @@ order by place asc;')
 
     public static function getHotelsType()
     {
-        return Yii::$app->commonDB->createCommand('select id, name, nick, name_eng, description, weight from dict_alloccat order by weight desc;')->queryAll();
+        return Yii::$app->commonDB->createCommand('
+select id, name, nick, name_eng, description, weight 
+from dict_alloccat 
+where trash <> true  and name <> \'No Category\' 
+order by weight desc;')->queryAll();
     }
 
     public static function getHotels($name)

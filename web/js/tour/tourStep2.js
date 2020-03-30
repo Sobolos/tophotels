@@ -10,9 +10,7 @@ jQuery(document).ready(function () {
     this.SendButton = $('.metro-valid-pp');
 
     var self = this;
-
-    console.log(self.SendButton);
-
+    
     function validateEmail(emailVal) {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -66,8 +64,6 @@ jQuery(document).ready(function () {
                 console.log('Телефон верный: ', phoneValaid)
             }
 
-            console.log(self.myCity);
-
             if(self.myCity === '' || self.myCity === null || self.myCity === "Не указан"){
                 self.SendButton.removeClass('bth__loader--animate');
                 $('#myCityBlock').addClass('has-error');
@@ -75,7 +71,6 @@ jQuery(document).ready(function () {
 
                 console.log('Город верный: ', cityValid)
             }else {
-                self.SendButton.removeClass('bth__loader--animate');
                 $('#myCityBlock').removeClass('has-error');
                 cityValid = true;
 
@@ -115,21 +110,8 @@ jQuery(document).ready(function () {
                 data: data,
                 success: function (res) {
                     console.log(res);
-                    //очистка формы
-                    $('#nameInput').val('');
-                    $('#phoneInput').val('');
-                    $('#emailInput').val('');
                     self.SendButton.removeClass('bth__loader--animate');
-
-                    $('#emailLbl').removeClass('has-error');
-                    $('#phoneLbl').removeClass('has-error');
-                    $('#nameLbl').removeClass('has-error');
-
-                    location.hash = '#formStep2';
-                    if(location.hash){
-                        $(location.hash).siblings().hide();
-                        $(location.hash).show();
-                    }
+                    window.location.hash = '#formStep2';
                 },
                 error: function () {
                     self.SendButton.removeClass('bth__loader--animate');

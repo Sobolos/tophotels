@@ -172,6 +172,7 @@ $(document).ready(function () {
         parent.find('input[type=hidden]').val("");
         if(parent.id === "selectTour2")
             TourParams.selectHotel2 = null;
+
         if(parent.id === "selectTour3")
             TourParams.selectHotel3 = null;
     });

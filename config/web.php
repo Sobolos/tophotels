@@ -63,13 +63,10 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-                'tophotels/help-selection' => 'tophotels/helpselection'
-            ],
         ],
     ],
     'params' => $params,
-    'defaultRoute' => 'tophotels/helpselection'
+    'defaultRoute' => 'tophotels/index'
 ];
 
 if (YII_ENV_DEV) {

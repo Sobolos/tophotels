@@ -102,7 +102,7 @@ jQuery(document).ready(function () {
                     $('#phoneLbl').removeClass('has-error');
                     $('#nameLbl').removeClass('has-error');
 
-                    location.hash = '#formStep2';
+                    window.location.hash = '#formStep2';
                     if(location.hash){
                         $(location.hash + "Panel").siblings().hide();
                         $(location.hash + "Panel").show();

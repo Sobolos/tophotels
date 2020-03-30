@@ -4,6 +4,7 @@
 namespace app\modules\admin\models;
 
 use yii\db\ActiveRecord;
+use yii\log\EmailTarget;
 
 class Consultants extends ActiveRecord
 {
@@ -12,8 +13,8 @@ class Consultants extends ActiveRecord
         return self::find()->orderBy('Id')->all();
     }
 
-    public static function getConsultantName($id)
+    public static function getConsultant($id)
     {
-        return self::find()->select('name')->where(['id' => $id])->one();
+        return self::find()->select(['name', 'email'])->where(['id' => $id])->one();
     }
 }

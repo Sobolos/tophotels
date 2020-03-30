@@ -35,11 +35,7 @@ $(document).ready(function () {
                 $('#step2Panel').show();
                 $('#LeadID').val(res);
 
-                location.hash = '#step2';
-                if(location.hash){
-                    $(location.hash).siblings().hide();
-                    $(location.hash).show();
-                }
+                window.location.hash = '#step2';
 
                 btnLoader.removeClass('bth__loader--animate');
             },

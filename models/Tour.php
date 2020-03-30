@@ -3,10 +3,10 @@
 
 namespace app\models;
 
+use Codeception\PHPUnit\Constraint\Page;
 use Yii;
 use yii\db\ActiveRecord;
 use app\modules\admin\models\Consultants;
-
 
 class Tour extends ActiveRecord
 {
@@ -167,28 +167,32 @@ class Tour extends ActiveRecord
         ];
     }
 
-    public function sendMail($id)
+    public function sendMail()
     {
-        $consultant_name = Consultants::getConsultantName($id);
+        $consultant_id = Yii::$app->session->get('consultant');
+        $consultant = Consultants::getConsultant($consultant_id);
 
-        $data = [
-            'name' => $this->name,
-            'email' => $this->email,
-            'phone' => $this->phone,
-            'consultant_name' => 'name'
-        ];
+        if ($consultant_id != 0){
+            $data = [
+                'name' => $this->name,
+                'email' => $this->email,
+                'phone' => $this->phone,
+                'consultant_name' => $consultant['name']
+            ];
 
-        Yii::$app->mailer->htmlLayout = "layouts/html";
-        Yii::$app->mailer->compose('newlead', ['model' => $data])
-            ->setTo('germansobol@yandex.ru')
-            ->setFrom([ 'test.th.welcome@gmail.com'])
-            ->setSubject('Добавлена новая заявка')
-            ->send();
+            Yii::$app->mailer->htmlLayout = "layouts/html";
+            Yii::$app->mailer->compose('newlead', ['model' => $data])
+                ->setTo($consultant['email'])
+                ->setFrom([ 'test.th.welcome@gmail.com'])
+                ->setSubject('Добавлена новая заявка')
+                ->send();
+            return true;
+        }else return false;
     }
 
     public function insertDataTourDB()
     {
-        echo $this->directionHotelEating1;
+        $this->getConsultant($this->directionCountry1);
 
         Yii::$app->db->createCommand()->insert('leads', [
             'AddDate' => date("d-m-Y H:i:s"),
@@ -204,43 +208,64 @@ class Tour extends ActiveRecord
             'Child2Age' => $this->child2Age,
             'Child3Age' => $this->child3Age,
             'Wishes' => $this->getWishes(),
-            'consultant_id' => $this->getConsultant()
+            'consultant_id' => Yii::$app->session->get('consultant')
         ])->execute();
 
         echo Yii::$app->db->getLastInsertID();
     }
 
-    public function getConsultant()
+    public function getConsultant($checkCountry)
     {
         $ann = false;
         $olga = false;
         $alexandr = false;
         $max = false;
 
-        if(($this->directionCountry1 === "Турция" || $this->hotel1Country === "Турция") && $this->directionHotelStars1 === "5*")
+        if (($this->directionCountry1 === "Турция" || $this->hotel1Country === "Турция") && ($this->directionCountry1 === "Тунис" || $this->hotel1Country === "Тунис") && ($this->directionCountry1 === "Египет" || $this->hotel1Country === "Египет"))
+        {
+            Yii::$app->session->set('consultant', 4);
+            return true;
+        } else if($checkCountry === ""){
+            Yii::$app->session->set('consultant', 0);
+            return true;
+        }
+
+        if(($this->directionCountry1 === "Турция" || $this->hotel1Country === "Турция") && ($this->directionHotelStars1 === "5*" || $this->hotel1Rating === "5*"))
             $olga = true;
-        else if(($this->directionCountry1 === "Египет" || $this->hotel1Country === "Египет") && $this->hotel1City === "Шарм-Эль-Шейх")
+        else if(($this->directionCountry1 === "Египет" || $this->hotel1Country === "Египет") && ($this->hotel1City === "Шарм-Эль-Шейх" || $this->directionCity1 === "Шарм-Эль-Шейх"))
             $alexandr = true;
-        else if(($this->directionCountry1 === "Египет" || $this->hotel1Country === "Египет") && (strpos($this->hotel1Rating, "2*") || strpos($this->hotel1Rating, "3*") || strpos($this->hotel1Rating, "4*")))
+        else if(($this->directionCountry1 === "Тунис" || $this->hotel1Country === "Тунис") && (strpos($this->hotel1Rating, "2*") === 0 || strpos($this->hotel1Rating, "3*") === 0 || strpos($this->hotel1Rating, "4*") === 0))
+            $max = true;
+        else if(($this->directionCountry1 === "Тунис" || $this->hotel1Country === "Тунис") && (strpos($this->directionHotelRating1, "2*") === 0 || strpos($this->directionHotelRating1, "3*") === 0 || strpos($this->directionHotelRating1, "4*") === 0))
             $max = true;
 
-        if($olga && $ann && $max)
-            return 4;
-        else if($olga)
-            return 1;
-        else if($alexandr)
-            return 2;
-        else if($max)
-            return 3;
+        if($olga && $ann && $max){
+            Yii::$app->session->set('consultant', 4);
+            return true;
+        }
 
-        if($this->directionCountry1 === "" || $this->hotel1Country === "")
-            return 0;
+        else if($olga){
+            Yii::$app->session->set('consultant', 1);
+            return true;
+        }
 
-        return 0;
+        else if($alexandr){
+            Yii::$app->session->set('consultant', 2);
+            return true;
+        }
+
+        else if($max){
+            Yii::$app->session->set('consultant', 3);
+            return true;
+        }
+
+        Yii::$app->session->set('consultant', 4);
+        return true;
     }
 
     public function insertDataHotelDB()
     {
+        $this->getConsultant($this->hotel1Country);
         Yii::$app->db->createCommand()->insert('leads', [
             'AddDate' => date("d-m-Y H:i:s"),
             'DepartiationDate' => $this->departDates,
@@ -254,13 +279,15 @@ class Tour extends ActiveRecord
             'Child2Age' => $this->child2Age,
             'Child3Age' => $this->child3Age,
             'Route' => $this->getRouteTextHotel(),
-            'Wishes' => $this->getWishesHotel()
+            'Wishes' => $this->getWishesHotel(),
+            'consultant_id' => Yii::$app->session->get('consultant')
         ])->execute();
         echo Yii::$app->db->getLastInsertID();
     }
 
     public function updateDataTour()
     {
+
         Yii::$app->db->createCommand('
         UPDATE leads SET CustomerName=:name, CustomerPhone=:phone, CustomerEmail=:email, CustomerCity=:city WHERE id=:id'
         )->bindValues(
@@ -280,7 +307,7 @@ class Tour extends ActiveRecord
         return Yii::$app->commonDB->createCommand('
             select id, name, name_eng, nick, "label", region, name_genitive 
             from dict_country 
-            where active = :active
+            where active = :active and (select count(*) from dict_city where country = dict_country.id) <> 0
             order by "name" asc')
             ->bindValue(':active', true)
             ->queryAll();
@@ -288,7 +315,7 @@ class Tour extends ActiveRecord
 
     private function getRouteText()
     {
-        $text = "Направление 1: <br>";
+        $text = "Направление 1: ";
         $text = $text.$this->directionCountry1.'/'.$this->directionCity1;
         $text = $text."<br>Направление 2: ".$this->directionCountry2.'/'.$this->directionCity2;
         $text = $text."<br>Направление 3: ".$this->directionCountry3.'/'.$this->directionCity3;
@@ -341,16 +368,16 @@ class Tour extends ActiveRecord
     }
 
     public function formText($param, $text){
-        if($param !== "Не важно" && $param !== '' && $param !== null)
+        if($param !== "" && $param !== null)
             return "<br>$text: $param";
-        else return "<br>$text: Не указано";
+        else return "<br>$text: Не важно";
     }
 
     public function formAllocation($location)
     {
         $text = "";
         if($location === '0' || $location === '' || $location === null){
-            $text = $text."Не важно";
+            $text = $text."<br>Расположение: Не важно";
             return $text;
         }else{
             $locations = explode(';', $location);
@@ -358,7 +385,7 @@ class Tour extends ActiveRecord
             $allocationType = explode('-', $locations[0]);
             if($allocationType[0] === "1")
             {
-                $text = $text."Пляжный: ";
+                $text = $text."<br>Расположение: Пляжный: ";
                 foreach ($locations as $allocation)
                 {
                     $hotelLocation = explode('-', $allocation);
@@ -374,7 +401,7 @@ class Tour extends ActiveRecord
             }
             if($allocationType[0] === "2")
             {
-                $text = $text."Городской: ";
+                $text = $text."<br>Расположение: Городской: ";
                 foreach ($locations as $allocation)
                 {
                     $hotelLocation = explode('-', $allocation);
@@ -388,7 +415,7 @@ class Tour extends ActiveRecord
             }
             if($allocationType[0] === "3")
             {
-                $text = $text."Горнолыжный";
+                $text = $text."<br>Расположение: Горнолыжный";
                 foreach ($locations as $allocation)
                 {
                     $hotelLocation = explode('-', $allocation);
@@ -403,7 +430,7 @@ class Tour extends ActiveRecord
             }
             if($allocationType[0] === "4")
             {
-                $text = $text."Загородный";
+                $text = $text."<br>Расположение: Загородный";
                 foreach ($locations as $allocation)
                 {
                     $hotelLocation = explode('-', $allocation);

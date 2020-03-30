@@ -20,6 +20,7 @@ mytour.searchTours.formDirectionsHotel = function(rootNode) {
     this.hotel = "";
     this.hotelCountry = "";
     this.hotelCity = "";
+    this.hotelRating = "";
 
     //выбор отеля: блоки
     this.paramHotelEating = $('.hotel-param-eating');
@@ -91,12 +92,14 @@ mytour.searchTours.formDirectionsHotel = function(rootNode) {
         self.hotel = $(this).find('.formDirections__cut').text();
         self.hotelCountry = $(this).data('country');
         self.hotelCity = $(this).data('city');
+        self.hotelRating = $(this).data('category');
         var addr = $(this).find('.formDirections__count').text();
         rootNode.find('.bth__inp-spn').text(self.hotel + ", " + addr);
         rootNode.find('.inp-spn-addr').text(addr);
         rootNode.find('.bth__inp-lbl').addClass('active');
         rootNode.find('.hiddenInputHotelCountry').val( self.hotelCountry);
         rootNode.find('.hiddenInputHotelCity').val(self.hotelCity);
+        rootNode.find('.hiddenInputHotelRating').val(self.hotelRating);
         self.hiddenInputHotel.val(self.hotel);
         self.searchHotelBlock.slideUp();
     });

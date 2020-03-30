@@ -13,16 +13,16 @@ mytour.searchTours.formDirectionsTour = function(rootNode) {
     "use strict";
     this.rootNode = rootNode;
 
-    //свойства обхекта: параметры направления
+    //свойства объекта: параметры направления
     this.directionCountry = null;
     this.directionCity  = null;
     this.directionFlyCity  = null;
 
     //свойства объекта: параметры отеля
     this.directionHotelStars = "";
-    this.directionHotelRating = "";
-    this.directionHotelEating = "";
-    this.directionHotelAllocation = "";
+    this.directionHotelRating = "Не важно";
+    this.directionHotelEating = "Любое питание";
+    this.directionHotelAllocation = "0";
     this.directionHotelChildren = "";
     this.directionHotelOther = "";
     this.hotelResortType = 0;
@@ -55,6 +55,8 @@ mytour.searchTours.formDirectionsTour = function(rootNode) {
     this.inputHotelChildren = rootNode.find('.hotelChildren');
     this.inputHotelOther = rootNode.find('.hotelOther');
 
+    //скрытые инпуты со значениями селектов
+
     //кнопка применить параметры отеля
     this.applyParamHotel = rootNode.find('.hotel-params-apply');
 
@@ -63,7 +65,7 @@ mytour.searchTours.formDirectionsTour = function(rootNode) {
 
     var self = this;
 
-    this.initSelect = function () {
+    this.updateSelect = function () {
         //Направление города
 
         //Извиняюсь за костыль, я знаю про метод sumo.reload но он срабоатывает некорректно, список отображается не сразу
@@ -78,6 +80,20 @@ mytour.searchTours.formDirectionsTour = function(rootNode) {
 
     };
 
+    this.initHotelParams = function () {
+        self.inputHotelOther.val(self.directionHotelOther);
+        self.inputHotelChildren.val(self.directionHotelChildren);
+        self.inputHotelAllocation.val(self.directionHotelAllocation);
+        self.inputHotelEating.val(self.directionHotelEating);
+        self.inputHotelRating.val(self.directionHotelRating);
+        self.inputHotelType.val(self.directionHotelStars);
+
+        self.hotelParamLbl.addClass('active');
+        self.hotelParamSpn.text("Выбрано: "+rootNode.find('input[type=checkbox]:checked,[type=radio]:checked.hotel-param').length);
+    };
+
+    this.initHotelParams();
+
     this.getCities = function(id){
         $.ajax({
             url: '/tophotels/getcities',
@@ -90,14 +106,12 @@ mytour.searchTours.formDirectionsTour = function(rootNode) {
             success: function (res) {
                 self.sumoDirectionCityBlock.empty();
                 self.sumoDirectionCityBlock[0].sumo.unload();
-                self.sumoDirectionCityBlock.append("<option selected>Не важно</option>");
                 $.each(res, function (key, value) {
                     var option = "<option>"+value.name+"</option>";
                     self.sumoDirectionCityBlock.append(option);
                 });
-                //Направление города
 
-                self.initSelect();
+                self.updateSelect();
             },
             error: function (jqXHR, exception) {
                 var msg = '';
@@ -149,6 +163,7 @@ mytour.searchTours.formDirectionsTour = function(rootNode) {
         } else {
             self.directionHotelStars = self.directionHotelStars.replace($(this).data('attr'),'');
         }
+        self.initHotelParams();
     });
 
     $(this.paramHotelRating).on('change', function () {
@@ -158,6 +173,7 @@ mytour.searchTours.formDirectionsTour = function(rootNode) {
         } else {
             self.directionHotelRating = self.directionHotelRating.replace($(this).data('attr'),'');
         }
+        self.initHotelParams();
     });
 
     $(this.paramHotelEating).on('change', function () {
@@ -166,6 +182,7 @@ mytour.searchTours.formDirectionsTour = function(rootNode) {
         } else {
             self.directionHotelEating = self.directionHotelEating.replace($(this).data('attr'),'');
         }
+        self.initHotelParams();
     });
 
     $(this.paramHotelAllocation).on('change', function () {
@@ -181,35 +198,26 @@ mytour.searchTours.formDirectionsTour = function(rootNode) {
         } else {
             self.directionHotelAllocation = self.directionHotelAllocation.replace($(this).data('attr'),'');
         }
+        self.initHotelParams();
     });
 
     $(this.paramHotelChildren).on('change', function () {
         if ($(this).is(':checked')){
-            self.directionHotelChildren += $(this).data('attr');//self.inputHotelChildren.val(self.directionHotelChildren);
+            self.directionHotelChildren += $(this).data('attr');
         } else {
             self.directionHotelChildren = self.directionHotelChildren.replace($(this).data('attr'),'');
         }
+        self.initHotelParams();
     });
 
     $(this.paramHotelOther).on('change', function () {
         if ($(this).is(':checked')){
             self.directionHotelOther += $(this).data('attr');
-            //self.inputHotelOther.val(self.directionHotelOther);
         } else {
             self.directionHotelOther = self.directionHotelOther.replace($(this).data('attr'),'');
-            //self.inputHotelOther.val(self.directionHotelOther);
         }
+        self.initHotelParams();
     });
 
-    $(this.applyParamHotel).on('click', function () {
-        self.inputHotelOther.val(self.directionHotelOther);
-        self.inputHotelChildren.val(self.directionHotelChildren);
-        self.inputHotelAllocation.val(self.directionHotelAllocation);
-        self.inputHotelEating.val(self.directionHotelEating);
-        self.inputHotelRating.val(self.directionHotelRating);
-        self.inputHotelType.val(self.directionHotelStars);
-
-        self.hotelParamLbl.addClass('active');
-        self.hotelParamSpn.text("Выбрано: "+rootNode.find('input[type=checkbox]:checked.hotel-param').length);
-    })
+    $(this.applyParamHotel).on('click', self.initHotelParams)
 };

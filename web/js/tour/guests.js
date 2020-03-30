@@ -22,15 +22,31 @@ mytour.searchTours.formGuests = function() {
     var self = this;
 
     this.initGuests = function () {
+        var adultsText;
+        var childrenText;
+
         self.adultsAmount = $('.adult.selected').length;
         self.childrenAmount = $('.guestChild.selected').length;
 
-        if(self.childrenAmount === 2) self.child3Age = null;
+        console.log(self.adultsAmount, self.childrenAmount);
+
+        if(self.childrenAmount === 3){
+            childrenText = self.getChildrenText(self.child1Age, self.child2Age, self.child3Age);
+        }
+
+        if(self.childrenAmount === 2){
+            childrenText = self.getChildrenText(self.child1Age, self.child2Age);
+            self.child3Age = null;
+        }
+
         if(self.childrenAmount === 1){
+            childrenText = self.getChildrenText(self.child1Age);
             self.child3Age = null;
             self.child2Age = null;
         }
+
         if(self.childrenAmount === 0){
+            childrenText = "";
             self.child3Age = null;
             self.child2Age = null;
             self.child1Age = null;
@@ -44,7 +60,26 @@ mytour.searchTours.formGuests = function() {
 
         $('#adultsAmount-spn').text(self.adultsAmount + " взрослых");
         $('#guests-lbl').addClass('active');
-        $('#guests-spn').text(self.adultsAmount + " взрослых " + self.childrenAmount + " детей");
+        $('#guests-spn').text(self.adultsAmount + " взрослых " + childrenText);
+    };
+
+    this.getChildrenText = function (age1, age2, age3) {
+
+        var agesText =" (";
+        for(var i = 0; i < arguments.length; i++){
+            if(i + 1 === arguments.length && arguments[i] !== null)
+                agesText += (arguments[i]);
+            else if(arguments[i] !== null)
+                agesText += (arguments[i] + ", ");
+            else agesText += "0";
+        }
+        agesText += ")";
+
+        if(self.childrenAmount === 1)
+            return self.childrenAmount + " ребенок" + agesText;
+        else{
+            return self.childrenAmount + "детей" + agesText;
+        }
     };
 
     this.showPeople = function(){

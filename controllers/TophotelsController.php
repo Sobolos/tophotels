@@ -10,7 +10,7 @@ use app\models\Hotels;
 
 class TophotelsController extends Controller
 {
-    public function actionHelpselection()
+    public function actionIndex()
     {
         $customTourForm = new CustomTour();
         $tourForm = new Tour();
@@ -38,16 +38,21 @@ class TophotelsController extends Controller
     public function actionInserttour(){
 
         $tourForm = new Tour();
-        if($tourForm->load(Yii::$app->request->post())) {
-            if ($tourForm->tType === "1"){
+        if($tourForm->load(Yii::$app->request->post()))
+        {
+            if ($tourForm->tType === "1")
+            {
                 $tourForm->insertDataTourDB();
             }
-            if ($tourForm->tType === "0"){
+            if ($tourForm->tType === "0")
+            {
                 $tourForm->insertDataHotelDB();
             }
             if ($tourForm->tType === "2")
+            {
                 $tourForm->updateDataTour();
-                $this->sendMail();
+                $tourForm->sendMail();
+            }
         }
     }
 

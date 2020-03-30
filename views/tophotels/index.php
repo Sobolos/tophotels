@@ -419,7 +419,7 @@ $this->title = 'Tophotels';
                                             <div>
                                                 <label for="opt-price2" class="formDirections__price-lb active">Комфортный бюджет</label>
                                                 <div class="formDirections__price">
-                                                    <?= Html::activeTextInput($tourForm, 'optPrice', ['class'=>'opt-price bth__inp', 'value'=>'не важно'])?>
+                                                    <?= Html::activeTextInput($tourForm, 'optPrice', ['class'=>'opt-price opt-price-text bth__inp', 'value'=>'не важно'])?>
                                                     <div class="formDirections__price-input-bbl js-show-currencys">₽</div>
                                                 </div>
                                                 <div class="bth__inp-range-block">
@@ -429,7 +429,7 @@ $this->title = 'Tophotels';
                                             <div>
                                                 <label for="max-price2" class="formDirections__price-lb active">Максимальный бюджет</label>
                                                 <div class="formDirections__price">
-                                                    <?= Html::activeTextInput($tourForm, 'maxPrice', ['class'=>'max-price bth__inp', 'id'=>'max-price2', 'value'=>'не важно'])?>
+                                                    <?= Html::activeTextInput($tourForm, 'maxPrice', ['class'=>'max-price max-price-text bth__inp', 'id'=>'max-price2', 'value'=>'не важно'])?>
                                                     <div class="formDirections__price-input-bbl js-show-currencys">₽</div>
                                                 </div>
                                                 <div class="bth__inp-range-block">
@@ -482,7 +482,7 @@ $this->title = 'Tophotels';
                                                 </div>
                                                 <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
                                                     <select id="directionCountry" name="Tour[directionCountry1]" class="sumo-direction">
-                                                        <option data-id="null" selected>Не важно</option>
+                                                        <option selected data-id=""></option>
                                                         <?php foreach ($parameters['countries'] as $country): ?>
                                                             <option data-id="<?=$country['id']?>"><?=$country['name']?></option>
                                                         <?php endforeach;?>
@@ -525,7 +525,6 @@ $this->title = 'Tophotels';
 
                                             <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
                                                 <select id="directionFlyCity" name="Tour[directionFlyCity1]" class="sumo-department">
-                                                    <option data-id="null" selected>Не важно</option>
                                                     <?php foreach ($parameters['flyCities'] as $flyCity): ?>
                                                         <option data-id="<?=$flyCity['id']?>"><?=$flyCity['name']?></option>
                                                     <?php endforeach;?>
@@ -665,9 +664,6 @@ $this->title = 'Tophotels';
                                                                         <?php for ($i = 0; $i < $stars; $i++):?>
                                                                             <i class="fa fa-star"></i>
                                                                         <?php endfor;?>
-                                                                        <?php if(strpos($type['name'], "luxe") or strpos($type['name'], "lux")):?>
-                                                                            <span>luxe</span>
-                                                                        <?php endif;?>
                                                                     <?php else: ?>
                                                                         <?=$type['name']?>
                                                                     <?php endif;?>
@@ -681,7 +677,7 @@ $this->title = 'Tophotels';
                                                     <div class="formDirections__bottom-blocks js-search-rating" style="display: none">
                                                         <div class="form-dropdown-stars__item ">
                                                             <div class="rbt-block  ">
-                                                                <input data-attr="Не важно" type="radio" name="333rating" class="rbt hotel-param hotel-param-rating" id="331rating1">
+                                                                <input data-attr="Не важно" checked type="radio" name="331rating" class="rbt hotel-param hotel-param-rating" id="331rating1">
                                                                 <label class="label-rbt" for="331rating1">
                                                                     <span class="rbt-cnt  uppercase">Не важно</span>
                                                                 </label>
@@ -690,7 +686,7 @@ $this->title = 'Tophotels';
                                                         <?php for($i = 5.0; $i >= 3.25; $i = $i-0.25): ?>
                                                             <div class="form-dropdown-stars__item ">
                                                                 <div class="rbt-block  ">
-                                                                    <input data-attr="<?=$i?>;" type="radio" name="333rating" class="rbt hotel-param hotel-param-rating" id="331rating<?=$i?>">
+                                                                    <input data-attr="<?=$i?>;" type="radio" name="331rating" class="rbt hotel-param hotel-param-rating" id="331rating<?=$i?>">
                                                                     <label class="label-rbt" for="331rating<?=$i?>">
                                                                         <span class="rbt-cnt  uppercase"> Не ниже <?= $i?></span>
                                                                     </label>
@@ -790,7 +786,7 @@ $this->title = 'Tophotels';
                                                 </div>
                                                 <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
                                                     <select id="directionCountry" name="Tour[directionCountry2]" class="sumo-direction">
-                                                        <option data-id="null" selected>Не важно</option>
+                                                        <option selected data-id=""></option>
                                                         <?php foreach ($parameters['countries'] as $country): ?>
                                                             <option data-id="<?=$country['id']?>"><?=$country['name']?></option>
                                                         <?php endforeach;?>
@@ -833,7 +829,6 @@ $this->title = 'Tophotels';
 
                                             <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
                                                 <select id="directionFlyCity" name="Tour[directionFlyCity2]" class="sumo-department">
-                                                    <option data-id="null" selected>Не важно</option>
                                                     <?php foreach ($parameters['flyCities'] as $flyCity): ?>
                                                         <option data-id="<?=$flyCity['id']?>"><?=$flyCity['name']?></option>
                                                     <?php endforeach;?>
@@ -989,7 +984,7 @@ $this->title = 'Tophotels';
                                                     <div class="formDirections__bottom-blocks js-search-rating" style="display: none">
                                                         <div class="form-dropdown-stars__item ">
                                                             <div class="rbt-block  ">
-                                                                <input data-attr="Не важно" type="radio" name="332rating" class="rbt hotel-param hotel-param-rating" id="332rating1">
+                                                                <input data-attr="Не важно" checked type="radio" name="332rating" class="rbt hotel-param hotel-param-rating" id="332rating1">
                                                                 <label class="label-rbt" for="332rating1">
                                                                     <span class="rbt-cnt  uppercase">Не важно</span>
                                                                 </label>
@@ -1098,7 +1093,7 @@ $this->title = 'Tophotels';
                                                 </div>
                                                 <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
                                                     <select id="directionCountry" name="Tour[directionCountry3]" class="sumo-direction">
-                                                        <option data-id="null" selected>Не важно</option>
+                                                        <option selected data-id=""></option>
                                                         <?php foreach ($parameters['countries'] as $country): ?>
                                                             <option data-id="<?=$country['id']?>"><?=$country['name']?></option>
                                                         <?php endforeach;?>
@@ -1141,7 +1136,6 @@ $this->title = 'Tophotels';
 
                                             <div class="SumoSelect formDirections__SumoSelect formDirections__SumoSelect-search">
                                                 <select id="directionFlyCity" name="Tour[directionFlyCity3]" class="sumo-department">
-                                                    <option data-id="null" selected>Не важно</option>
                                                     <?php foreach ($parameters['flyCities'] as $flyCity): ?>
                                                         <option data-id="<?=$flyCity['id']?>"><?=$flyCity['name']?></option>
                                                     <?php endforeach;?>
@@ -1297,7 +1291,7 @@ $this->title = 'Tophotels';
                                                     <div class="formDirections__bottom-blocks js-search-rating" style="display: none">
                                                         <div class="form-dropdown-stars__item ">
                                                             <div class="rbt-block  ">
-                                                                <input data-attr="Не важно" type="radio" name="333rating" class="rbt hotel-param hotel-param-rating" id="333rating1">
+                                                                <input data-attr="Не важно" checked type="radio" name="333rating" class="rbt hotel-param hotel-param-rating" id="333rating1">
                                                                 <label class="label-rbt" for="333rating1">
                                                                     <span class="rbt-cnt  uppercase">Не важно</span>
                                                                 </label>
@@ -1479,7 +1473,7 @@ $this->title = 'Tophotels';
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <?= Html::activeHiddenInput($tourForm, 'hotelEating', ['class'=>'hiddenInputEating'])?>
+                                                <?= Html::activeHiddenInput($tourForm, 'hotelEating', ['class'=>'hiddenInputEating', 'value'=>'Любое питание'])?>
                                                 <div class="formDirections__static-btn js-close-formDirections">Применить
                                                 </div>
                                             </div>
@@ -1700,7 +1694,7 @@ $this->title = 'Tophotels';
                 <?php ActiveForm::end() ?>
             </div>
             <!--Спасибо-->
-            <div class="panel" id="formStep2" style="display: none">
+            <div class="panel" id="formStep2Panel" style="display: none">
                 <div class="bth__cnt fz18 bold">Спасибо, Ваша заявка отправлена и будет обработана в ближайшее время.</div>
             </div>
             <!--Подбор тура Ш2-->

@@ -1,4 +1,11 @@
 $(document).ready(function () {
+    $(window).bind('hashchange', function () {
+        console.log('hash changed');
+        $(window.location.hash  + "Panel").click();
+        $(location.hash  + "Panel").siblings().hide();
+        $(location.hash  + "Panel").show();
+    });
+
     var line = function (obj) {
         var w = obj.width();
         var p = obj.position().left;
@@ -25,7 +32,6 @@ $(document).ready(function () {
     else
         $(window.location.hash).click();
 
-    line($(location.hash));
     $(location.hash + "Panel").show();
     $(location.hash + "Panel").siblings().hide();
 //Табы

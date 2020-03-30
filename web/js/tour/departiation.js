@@ -44,7 +44,7 @@ function getWeekDay(date) {
 }
 
 function getText(n) {
-    var lastFigure = n % 10;;
+    var lastFigure = n % 10;
     if (n >= 11 && n <= 15)
     {
         return 'Дней';
