@@ -105,7 +105,7 @@ jQuery(document).ready(function () {
         if(validateAll()===true){
             var data = $('#TourFormStep2').serialize();
             $.ajax({
-                url: '/tophotels/inserttour',
+                url: '/tophotels/insert-tour',
                 type: 'POST',
                 data: data,
                 success: function (res) {

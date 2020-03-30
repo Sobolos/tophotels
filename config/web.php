@@ -25,10 +25,6 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'authManager' => [
-            'class' => 'yii\rbac\DbManager',
-            'cache' => 'cache' //Включаем кеширование
-        ],
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
@@ -66,7 +62,7 @@ $config = [
         ],
     ],
     'params' => $params,
-    'defaultRoute' => 'tophotels/index'
+    'defaultRoute' => 'tophotels/'
 ];
 
 if (YII_ENV_DEV) {

@@ -3,10 +3,10 @@
 
 namespace app\models;
 
-use Codeception\PHPUnit\Constraint\Page;
 use Yii;
 use yii\db\ActiveRecord;
 use app\modules\admin\models\Consultants;
+use yii\helpers\Console;
 
 class Tour extends ActiveRecord
 {
@@ -167,11 +167,17 @@ class Tour extends ActiveRecord
         ];
     }
 
+    /*
+     * Отправка почты
+     */
     public function sendMail()
     {
         $consultant_id = Yii::$app->session->get('consultant');
         $consultant = Consultants::getConsultant($consultant_id);
 
+        var_dump($consultant);
+
+        //если не распределена то не отправляем
         if ($consultant_id != 0){
             $data = [
                 'name' => $this->name,
@@ -192,7 +198,7 @@ class Tour extends ActiveRecord
 
     public function insertDataTourDB()
     {
-        $this->getConsultant($this->directionCountry1);
+        $this->getConsultantTour($this->directionCountry1, $this->directionHotelStars1, $this->directionCity1);
 
         Yii::$app->db->createCommand()->insert('leads', [
             'AddDate' => date("d-m-Y H:i:s"),
@@ -214,58 +220,188 @@ class Tour extends ActiveRecord
         echo Yii::$app->db->getLastInsertID();
     }
 
-    public function getConsultant($checkCountry)
+    /*
+     * определяем id консультанта и пишем его в сессию для доступа в функции обновления
+     * @param string country - поле для проверки страны (турпакет, отель)
+     * @param string rating - поле для проверки рейтинга (турпакет, отель)
+     */
+    public function getConsultantTour($pCountry, $pType, $pResort = null)
     {
-        $ann = false;
-        $olga = false;
-        $alexandr = false;
-        $max = false;
+        $consultant_id = "";
 
-        if (($this->directionCountry1 === "Турция" || $this->hotel1Country === "Турция") && ($this->directionCountry1 === "Тунис" || $this->hotel1Country === "Тунис") && ($this->directionCountry1 === "Египет" || $this->hotel1Country === "Египет"))
+        $rules = Consultants::getRules();
+        $checking_array = [];
+
+        $country1 = false;
+        $country2 = false;
+        $country3 = false;
+
+        foreach ($rules as $rule)
         {
+            $checking_array[$rule['id']]['rules']['country'][] = $rule['country'];
+            $checking_array[$rule['id']]['rules']['resort'][] = $rule['resort'];
+            $checking_array[$rule['id']]['rules']['type'][] = $rule['hotel_type'];
+            $checking_array[$rule['id']]['data']['email'] = $rule['email'];
+            $checking_array[$rule['id']]['data']['name'] = $rule['name'];
+        }
+
+        foreach ($checking_array as $cons_id=>$rule)
+        {
+            $countries = '(';
+            $types = '(';
+            $resorts = '(';
+
+            foreach($rule['rules']['country'] as $country)
+                $countries .= $country."|";
+            foreach($rule['rules']['type'] as $type)
+                $types .= $type."|";
+            foreach($rule['rules']['resort'] as $resort)
+                $resorts .= $resort."|";
+
+            $countries = mb_substr($countries, 0, -1);
+            $countries .= ')';
+
+            $types = mb_substr($types, 0, -1);
+            $types .= ')';
+
+            $resorts = mb_substr($resorts, 0, -1);
+            $resorts .= ')';
+
+            if (in_array($this->directionCountry1, $rule['rules']['country']))
+                $country1 = true;
+            else
+                $country1 = false;
+
+            if (in_array($this->directionCountry2, $rule['rules']['country']))
+                $country2 = true;
+            else
+                $country2 = false;
+            if (in_array($this->directionCountry3, $rule['rules']['country']))
+                $country3 = true;
+            else
+                $country3 = false;
+
+            if($pCountry === '')
+            {
+                Yii::$app->session->set('consultant', 0);
+                return true;
+            }
+
+            if(preg_match($countries, $pCountry) === 1 && preg_match($types, $pType) === 1 && preg_match($resorts, $pResort) === 1 )
+            {
+                $consultant_id = $cons_id;
+                break;
+            }else
+                $consultant_id = 4;
+        }
+
+        $two_coincidences = ($country1 && $country2);
+        $three_coincidences = ($country1 && $country2 && $country3);
+
+        if($two_coincidences || $three_coincidences){
             Yii::$app->session->set('consultant', 4);
             return true;
-        } else if($checkCountry === ""){
-            Yii::$app->session->set('consultant', 0);
+        }else{
+            Yii::$app->session->set('consultant', $consultant_id);
             return true;
         }
 
-        if(($this->directionCountry1 === "Турция" || $this->hotel1Country === "Турция") && ($this->directionHotelStars1 === "5*" || $this->hotel1Rating === "5*"))
-            $olga = true;
-        else if(($this->directionCountry1 === "Египет" || $this->hotel1Country === "Египет") && ($this->hotel1City === "Шарм-Эль-Шейх" || $this->directionCity1 === "Шарм-Эль-Шейх"))
-            $alexandr = true;
-        else if(($this->directionCountry1 === "Тунис" || $this->hotel1Country === "Тунис") && (strpos($this->hotel1Rating, "2*") === 0 || strpos($this->hotel1Rating, "3*") === 0 || strpos($this->hotel1Rating, "4*") === 0))
-            $max = true;
-        else if(($this->directionCountry1 === "Тунис" || $this->hotel1Country === "Тунис") && (strpos($this->directionHotelRating1, "2*") === 0 || strpos($this->directionHotelRating1, "3*") === 0 || strpos($this->directionHotelRating1, "4*") === 0))
-            $max = true;
-
-        if($olga && $ann && $max){
-            Yii::$app->session->set('consultant', 4);
-            return true;
-        }
-
-        else if($olga){
-            Yii::$app->session->set('consultant', 1);
-            return true;
-        }
-
-        else if($alexandr){
-            Yii::$app->session->set('consultant', 2);
-            return true;
-        }
-
-        else if($max){
-            Yii::$app->session->set('consultant', 3);
-            return true;
-        }
-
-        Yii::$app->session->set('consultant', 4);
-        return true;
     }
 
+    /*
+     * определяем id консультанта и пишем его в сессию для доступа в функции обновления
+     * @param string country - поле для проверки страны (турпакет, отель)
+     * @param string rating - поле для проверки рейтинга (турпакет, отель)
+     */
+    public function getConsultantHotel($pCountry, $pType, $pResort = null)
+    {
+        $consultant_id = "";
+
+        $rules = Consultants::getRules();
+        $checking_array = [];
+
+        $country1 = false;
+        $country2 = false;
+        $country3 = false;
+
+        foreach ($rules as $rule)
+        {
+            $checking_array[$rule['id']]['rules']['country'][] = $rule['country'];
+            $checking_array[$rule['id']]['rules']['resort'][] = $rule['resort'];
+            $checking_array[$rule['id']]['rules']['type'][] = $rule['hotel_type'];
+            $checking_array[$rule['id']]['data']['email'] = $rule['email'];
+            $checking_array[$rule['id']]['data']['name'] = $rule['name'];
+        }
+
+        foreach ($checking_array as $cons_id=>$rule)
+        {
+            $countries = '(';
+            $types = '(';
+            $resorts = '(';
+
+            foreach($rule['rules']['country'] as $country)
+                $countries .= $country."|";
+            foreach($rule['rules']['type'] as $type)
+                $types .= $type."|";
+            foreach($rule['rules']['resort'] as $resort)
+                $resorts .= $resort."|";
+
+            $countries = mb_substr($countries, 0, -1);
+            $countries .= ')';
+
+            $types = mb_substr($types, 0, -1);
+            $types .= ')';
+
+            $resorts = mb_substr($resorts, 0, -1);
+            $resorts .= ')';
+
+            if (in_array($this->hotel1Country, $rule['rules']['country']))
+                $country1 = true;
+            else
+                $country1 = false;
+
+            if (in_array($this->hotel2Country, $rule['rules']['country']))
+                $country2 = true;
+            else
+                $country2 = false;
+            if (in_array($this->hotel3Country, $rule['rules']['country']))
+                $country3 = true;
+            else
+                $country3 = false;
+
+            if($pCountry === '')
+            {
+                Yii::$app->session->set('consultant', 0);
+                return true;
+            }
+
+            var_dump(preg_match($countries, $pCountry) === 1 && preg_match($types, $pType) === 1 && preg_match($resorts, $pResort) === 1 );
+            if(preg_match($countries, $pCountry) === 1 && preg_match($types, $pType) === 1 && preg_match($resorts, $pResort) === 1 )
+            {
+                $consultant_id = $cons_id;
+                break;
+            }else
+                $consultant_id = 4;
+        }
+
+        $two_coincidences = ($country1 && $country2);
+        $three_coincidences = ($country1 && $country2 && $country3);
+
+        if($two_coincidences || $three_coincidences){
+            Yii::$app->session->set('consultant', 4);
+            return true;
+        }else{
+            Yii::$app->session->set('consultant', $consultant_id);
+            return true;
+        }
+    }
+
+    /*
+     * вносит данные по отелю в БД
+     */
     public function insertDataHotelDB()
     {
-        $this->getConsultant($this->hotel1Country);
+        $this->getConsultantHotel($this->hotel1Country, $this->hotel1Rating, $this->hotel1City);
         Yii::$app->db->createCommand()->insert('leads', [
             'AddDate' => date("d-m-Y H:i:s"),
             'DepartiationDate' => $this->departDates,
@@ -285,9 +421,11 @@ class Tour extends ActiveRecord
         echo Yii::$app->db->getLastInsertID();
     }
 
+    /*
+     * Обновляет данные в БД по айди заявки
+     */
     public function updateDataTour()
     {
-
         Yii::$app->db->createCommand('
         UPDATE leads SET CustomerName=:name, CustomerPhone=:phone, CustomerEmail=:email, CustomerCity=:city WHERE id=:id'
         )->bindValues(
@@ -302,6 +440,9 @@ class Tour extends ActiveRecord
         echo "Updated";
     }
 
+    /*
+     * возвращает список стран
+     */
     public function getCountries()
     {
         return Yii::$app->commonDB->createCommand('
@@ -313,6 +454,9 @@ class Tour extends ActiveRecord
             ->queryAll();
     }
 
+    /*
+     * возвращает текст направления (по турпакету)
+     */
     private function getRouteText()
     {
         $text = "Направление 1: ";
@@ -323,6 +467,9 @@ class Tour extends ActiveRecord
         return $text;
     }
 
+    /*
+     * возвращает текст направления (по отелю)
+     */
     public function getRouteTextHotel()
     {
         $route = "";
@@ -334,11 +481,17 @@ class Tour extends ActiveRecord
         return $route;
     }
 
+    /*
+     * возвращает текст пожеланий (по отелю)
+     */
     public function getWishesHotel()
     {
         return $this->tripParams."<br>Питание: <br>".$this->hotelEating;
     }
 
+    /*
+     * возвращает текст пожеланий (по турпакету)
+     */
     private function getWishes()
     {
         $text = $this->tripParams."<br>Пакет 1:";
@@ -367,12 +520,20 @@ class Tour extends ActiveRecord
         return $text;
     }
 
+    /*
+     * ставит текст ключ: текст
+     * @param string param - ключ
+     * @param string text -  текст
+     */
     public function formText($param, $text){
         if($param !== "" && $param !== null)
             return "<br>$text: $param";
         else return "<br>$text: Не важно";
     }
 
+    /*
+     * возвращает текст расположения (по турпакету)
+     */
     public function formAllocation($location)
     {
         $text = "";

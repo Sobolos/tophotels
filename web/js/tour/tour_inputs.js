@@ -146,8 +146,13 @@ $(document).ready(function () {
         var parent = $(this).parent().parent();
         parent.hide();
         parent.find('input[type=hidden]').val("");
-        if(parent.id === "selectTour2")
+        if(parent.id === "selectTour2"){
+            parent.find('input[type=hidden]').val("");
+            parent.find('input[type=checkbox]').prop("checked", false);
+            parent.find('input[type=radio]').prop("checked", false);
+            parent.find('select').prop('selectedIndex', 0);
             TourParams.selectTour2 = null;
+        }
         if(parent.id === "selectTour3")
             TourParams.selectTour3 = null;
     });
@@ -170,6 +175,7 @@ $(document).ready(function () {
         var parent = $(this).parent().parent();
         parent.hide();
         parent.find('input[type=hidden]').val("");
+        parent.find('select').prop('selectedIndex', 0);
         if(parent.id === "selectTour2")
             TourParams.selectHotel2 = null;
 

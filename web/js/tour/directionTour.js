@@ -96,7 +96,7 @@ mytour.searchTours.formDirectionsTour = function(rootNode) {
 
     this.getCities = function(id){
         $.ajax({
-            url: '/tophotels/getcities',
+            url: '/tophotels/get-cities',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -106,6 +106,9 @@ mytour.searchTours.formDirectionsTour = function(rootNode) {
             success: function (res) {
                 self.sumoDirectionCityBlock.empty();
                 self.sumoDirectionCityBlock[0].sumo.unload();
+
+                var option = "<option selected></option>";
+                self.sumoDirectionCityBlock.append(option);
                 $.each(res, function (key, value) {
                     var option = "<option>"+value.name+"</option>";
                     self.sumoDirectionCityBlock.append(option);

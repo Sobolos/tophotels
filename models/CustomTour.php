@@ -22,6 +22,9 @@ class CustomTour extends ActiveRecord
         ];
     }
 
+    /*
+     * Отправка почты
+     */
     public function sendMail($data)
     {
         $data = [
@@ -33,12 +36,15 @@ class CustomTour extends ActiveRecord
 
         Yii::$app->mailer->htmlLayout = "layouts/html";
         Yii::$app->mailer->compose('newlead', ['model' => $data])
-            ->setTo('germansobol@yandex.ru')
+            ->setTo('germansobol@bk.ru')
             ->setFrom([ 'test.th.welcome@gmail.com'])
             ->setSubject('Добавлена новая заявка')
             ->send();
     }
 
+    /*
+     * Внесение в БД
+     */
     public function insertDataDB()
     {
         Yii::$app->db->createCommand()->insert('leads', [

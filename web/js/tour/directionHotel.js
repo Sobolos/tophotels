@@ -39,7 +39,7 @@ mytour.searchTours.formDirectionsHotel = function(rootNode) {
     this.getHotels = function(name){
         console.log(name);
         $.ajax({
-            url: '/tophotels/gethotels',
+            url: '/tophotels/get-hotels',
             type: 'POST',
             dataType: 'json',
             data: {

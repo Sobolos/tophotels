@@ -16,15 +16,18 @@ class TophotelsController extends Controller
         $tourForm = new Tour();
         $parameters = [];
 
-        $parameters['countries']  = $tourForm->getCountries();
-        $parameters['flyCities'] = City::getFlyCities();
-        $parameters['hotelAlloc'] = $this->formHotelsAlloc(Hotels::getHotelAllocation());
-        $parameters['hotelTypes'] = Hotels::getHotelsType();
+        $parameters['countries']  = $tourForm->getCountries(); //получаем список стран
+        $parameters['flyCities'] = City::getFlyCities(); //получаем список городов вылета
+        $parameters['hotelAlloc'] = $this->formHotelsAlloc(Hotels::getHotelAllocation()); //получаем список расположений отелей
+        $parameters['hotelTypes'] = Hotels::getHotelsType(); //получаем список типов отелей
 
         return $this->render('index', compact('customTourForm', 'tourForm', 'parameters'));
     }
 
-    public function actionInsertcustomtour()
+    /*
+     * Вносим данные по нестандартному туру
+     */
+    public function actionInsertCustomTour()
     {
         $customTourForm = new CustomTour();
 
@@ -35,8 +38,14 @@ class TophotelsController extends Controller
         }
     }
 
-    public function actionInserttour(){
-
+    /*
+     * Вносим данные по подбору тура
+     * tType = 1 - турпакет
+     * tType = 0 - подбор отеля
+     * tType = 2 - дополнение данных из второго шага
+     */
+    public function actionInsertTour()
+    {
         $tourForm = new Tour();
         if($tourForm->load(Yii::$app->request->post()))
         {
@@ -56,7 +65,10 @@ class TophotelsController extends Controller
         }
     }
 
-    public function actionGetcities()
+    /*
+     * получение списка городов
+     */
+    public function actionGetCities()
     {
         if(Yii::$app->request->isPost && Yii::$app->request->isAjax)
         {
@@ -66,7 +78,10 @@ class TophotelsController extends Controller
         return true;
     }
 
-    public function actionGethotels()
+    /*
+     * получение списка отелей
+     */
+    public function actionGetHotels()
     {
         if(Yii::$app->request->isPost && Yii::$app->request->isAjax)
         {
@@ -76,6 +91,9 @@ class TophotelsController extends Controller
         return true;
     }
 
+    /*
+     * получение списка располодения отелей
+     */
     private function formHotelsAlloc($allocations)
     {
         $formedArr = [];

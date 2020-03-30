@@ -27,7 +27,7 @@ $(document).ready(function () {
         var btnLoader = $('#createLead');
         var data = $('#TourForm').serialize();
         $.ajax({
-            url: '/tophotels/inserttour',
+            url: '/tophotels/insert-tour',
             type: 'POST',
             data: data,
             success: function (res) {
